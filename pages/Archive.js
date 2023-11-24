@@ -61,8 +61,8 @@ const Archive = ({ headerFooter }) => {
             autoPlay
             muted
             loop
-            className="mx-auto md:w-1/2 w-full  object-fill h-full"
-            src="../assets/passone1.mp4"
+            className="mx-auto w-full  object-fill h-full"
+            src="../assets/kinki.mp4"
           ></video>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
