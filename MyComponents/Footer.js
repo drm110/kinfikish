@@ -67,18 +67,23 @@ const Footer = () => {
                 >
                   <i className="fab fa-facebook-square"></i>
                 </button>
+                <a href="https://www.instagram.com/kinki.fish/">
+
                 <button
                   className="bg-black text-white text-xl shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
                   type="button"
                 >
                   <i className="fab fa-instagram"></i>
                 </button>
+                </a>
+                <a href="https://www.tiktok.com/@kinki.fish">
                 <button
                   className="bg-black text-white text-xl shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
                   type="button"
                 >
                   <i className="fab fa-tiktok"></i>
                 </button>
+               </a>
                 <button
                   className="bg-black text-white text-xl shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
                   type="button"
