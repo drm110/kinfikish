@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import logo from "../public/assets/images/b02c1f10b5a65fb8c8cc58ae1c0a7231.png"
+import logo from "../public/assets/images/b02c1f10b5a65fb8c8cc58ae1c0a7231.png";
 import Link from "next/link";
 
 const Footer = () => {
@@ -12,9 +12,7 @@ const Footer = () => {
       ></link>
 
       <footer className="w-full relative bg-blueGray-200 pt-8 pb-6">
-        <div className="w-full flex justify-center py-12">
-          
-        </div>
+        <div className="w-full flex justify-center py-12"></div>
         <div className="container mx-auto">
           <div className="flex flex-wrap text-left lg:text-left">
             <div className="w-full lg:w-6/12 pl-3">
@@ -25,19 +23,13 @@ const Footer = () => {
                   </span>
                   <ul className="list-unstyled">
                     <li className="text-gray-500 hover:text-gray-700 font-medium block pb-2 text-md uppercase">
-                    <Link href="/Shop">
-                        Shop
-                    </Link>
+                      <Link href="/Shop">Shop</Link>
                     </li>
                     <li className="text-gray-500 hover:text-gray-700 font-medium block pb-2 text-md uppercase">
-                    <Link href="/Archive">
-                        Archive
-                    </Link>
+                      <Link href="/Archive">Archive</Link>
                     </li>
                     <li className="text-gray-500 hover:text-gray-700 font-medium block pb-2 text-md uppercase">
-                    <Link href="/MyCart">
-                        Cart
-                    </Link>
+                      <Link href="/MyCart">Cart</Link>
                     </li>
                   </ul>
                 </div>
@@ -47,9 +39,7 @@ const Footer = () => {
                   </span>
                   <ul className="list-unstyled">
                     <li className="text-gray-500 hover:text-gray-700 font-medium block pb-2 text-md uppercase">
-                    <Link href="/Contact">
-                        Contact us
-                    </Link>
+                      <Link href="/Contact">Contact us</Link>
                     </li>
                   </ul>
                 </div>
@@ -57,41 +47,36 @@ const Footer = () => {
             </div>
 
             <div className="w-full lg:w-6/12 px-4">
-            <h5 className="text-lg mt-0 mb-2 text-gray-900 font-bold">
+              <h5 className="text-lg mt-0 mb-2 text-gray-900 font-bold">
                 SOCIALS
-            </h5>
+              </h5>
               <div className="pb-6 lg:mb-0 mb-6">
-                <button
-                  className="bg-black text-white text-xl shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
-                  type="button"
-                >
-                  <i className="fab fa-facebook-square"></i>
-                </button>
                 <a href="https://www.instagram.com/kinki.fish/">
-
-                <button
-                  className="bg-black text-white text-xl shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
-                  type="button"
-                >
-                  <i className="fab fa-instagram"></i>
-                </button>
+                  <button
+                    className="bg-black text-white text-xl shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
+                    type="button"
+                  >
+                    <i className="fab fa-instagram"></i>
+                  </button>
                 </a>
                 <a href="https://www.tiktok.com/@kinki.fish">
-                <button
-                  className="bg-black text-white text-xl shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
-                  type="button"
-                >
-                  <i className="fab fa-tiktok"></i>
-                </button>
-               </a>
-                <button
-                  className="bg-black text-white text-xl shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
-                  type="button"
-                >
-                  <i className="fa fa-envelope"></i>
-                </button>
+                  <button
+                    className="bg-black text-white text-xl shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
+                    type="button"
+                  >
+                    <i className="fab fa-tiktok"></i>
+                  </button>
+                </a>
+                <a href="mailto:shop.kinkifish@gmail.com">
+                  <button
+                    className="bg-black text-white text-xl shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-4"
+                    type="button"
+                  >
+                    <i className="fa fa-envelope"></i>
+                  </button>
+                </a>
               </div>
-              
+
               <div>
                 <Image src={logo} height={60} alt="FooterLogo" />
               </div>
@@ -105,36 +90,23 @@ const Footer = () => {
               </div>
               <div className="w-full flex justify-between py-3 text-left lg:pl-4 lg:pr-4">
                 <span className="text-xs text-gray-700 font-medium underline">
-                <Link href="/Shippingpolicy">
-                  Shipping Policy
-                </Link>
+                  <Link href="/Shippingpolicy">Shipping Policy</Link>
                 </span>
                 <span className="text-xs text-gray-700 font-medium underline">
-                <Link href="/Exchangepolicy">
-                  Exchange Policy
-                </Link>
+                  <Link href="/Exchangepolicy">Exchange Policy</Link>
                 </span>
                 <span className="text-xs text-gray-700 font-medium underline">
-                <Link href="/Exchangepolicy">
-                  Refund
-                </Link>
+                  <Link href="/Exchangepolicy">Refund</Link>
                 </span>
               </div>
             </div>
             <div className="w-full lg:w-6/12 px-4">
               <div className="pt-3">
-              <h5 className="text-md italic mt-0 text-gray-700 font-medium w-6">
-                WE ACCEPT
-            </h5>
+                <h5 className="text-md italic mt-0 text-gray-700 font-medium w-6">
+                  WE ACCEPT
+                </h5>
               </div>
               <div className="w-full flex py-3">
-                <span>
-                  <img
-                    src="../assets/MasterCard.svg"
-                    className="w-16 mr-3"
-                    alt="mastercard"
-                  />
-                </span>
                 <span>
                   <img
                     src="../assets/PayPal.svg"
@@ -142,90 +114,12 @@ const Footer = () => {
                     alt="PayPal"
                   />
                 </span>
-                <span>
-                  <img
-                    src="../assets/eBay.svg"
-                    className="w-16 mr-3"
-                    alt="eBay"
-                  />
-                </span>
-                <span>
-                  <img
-                    src="../assets/GooglePay.svg"
-                    className="w-16 mr-3"
-                    alt="GooglePay"
-                  />
-                </span>
-                <span>
-                  <img
-                    src="../assets/monobank.svg"
-                    className="w-16 mr-3"
-                    alt="monobank"
-                  />
-                </span>
-                <span>
-                  <img
-                    src="../assets/Discover.svg"
-                    className="w-16 mr-3"
-                    alt="Discover"
-                  />
-                </span>
-                <span>
-                  <img
-                    src="../assets/WesternUnion.svg"
-                    className="w-16 mr-3"
-                    alt="WesternUnion"
-                  />
-                </span>
-                <span>
-                  <img
-                    src="../assets/Payoneer.svg"
-                    className="w-16 mr-3"
-                    alt="Payoneer"
-                  />
-                </span>
-              </div>
-              <div className="w-full flex py-3">
+
                 <span>
                   <img
                     src="../assets/ApplePay.svg"
                     className="w-16 mr-3"
                     alt="ApplePay"
-                  />
-                </span>
-                <span>
-                  <img
-                    src="../assets/AmericanExpress.svg"
-                    className="w-16 mr-3"
-                    alt="AmericanExpress"
-                  />
-                </span>
-                <span>
-                  <img
-                    src="../assets/Amazon.svg"
-                    className="w-16 mr-3"
-                    alt="Amazon"
-                  />
-                </span>
-                <span>
-                  <img
-                    src="../assets/AliPay.svg"
-                    className="w-16 mr-3"
-                    alt="AliPay"
-                  />
-                </span>
-                <span>
-                  <img
-                    src="../assets/BitPay.svg"
-                    className="w-16 mr-3"
-                    alt="BitPay"
-                  />
-                </span>
-                <span>
-                  <img
-                    src="../assets/Bitcoin.svg"
-                    className="w-16 mr-3"
-                    alt="Bitcoin"
                   />
                 </span>
               </div>
