@@ -34,7 +34,6 @@ export default function Home() {
     <NewTshirts/>
     <Productsbadgecustomizer/>
     <Customizae/>
-    <Collections/>  
     <Followinstagram/>
     <Followtiktok/>
     <Subscribekinki/>
