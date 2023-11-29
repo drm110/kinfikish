@@ -295,17 +295,37 @@ export default function Page() {
                   </p>
                 ))}
               {/* add */}
-              <button
+              {isShirt?.name === "shirt" ? (
+                <button
                 type="button"
                 className={`py-[10px] px-[20px] border border-[#323232] font-semibold bg-[#000000] hover:bg-[#3a3a3a] mt-4 text-white  ${
-                  (selectedBra === "Choose an option" &&
+                  selectedSize === "Choose an option"
+                    ||
+                  product?.stock_status !== "instock"
+                    ? "cursor-not-allowed"
+                    : ""
+                }`}
+                disabled={
+                  selectedSize === "Choose an option"
+                    ||
+                  product?.stock_status !== "instock"
+                }
+                onClick={() => handleAddingtoCart(product)}
+              >
+                Add to Cart
+              </button>
+              ) : (
+                <button
+                type="button"
+                className={`py-[10px] px-[20px] border border-[#323232] font-semibold bg-[#000000] hover:bg-[#3a3a3a] mt-4 text-white  ${
+                  (selectedBra === "Choose an option" ||
                     selectedBottom === "Choose an option") ||
                   product?.stock_status !== "instock"
                     ? "cursor-not-allowed"
                     : ""
                 }`}
                 disabled={
-                  (selectedBra === "Choose an option" &&
+                  (selectedBra === "Choose an option" ||
                     selectedBottom === "Choose an option") ||
                   product?.stock_status !== "instock"
                 }
@@ -313,6 +333,9 @@ export default function Page() {
               >
                 Add to Cart
               </button>
+              )}
+              {/* add */}
+             
               {/* divider */}
             </div>
           </div>
