@@ -17,9 +17,7 @@ import cx from 'classnames';
 const MyImage = ( props ) => {
 	const {altText, title, width, height, sourceUrl, className, layout, objectFit, containerClassNames, showDefault, ...rest} = props;
 	
-	if ( ! sourceUrl && ! showDefault ) {
-		return null;
-	}
+	
 	
 	/**
 	 * If we use layout = fill then, width and height of the image cannot be used.
