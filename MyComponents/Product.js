@@ -31,8 +31,8 @@ const Product = ({ product }) => {
         <div>
           {/* <img src={product.images[0].src ?? ''} className="h[23.125rem]" alt={product.slug ?? ''} /> */}
           <MyImage
-            sourceUrl={product?.yoast_head_json?.og_image[0]?.url}
-          altText="product image"
+            sourceUrl={product.images[0].src ?? ""}
+            altText={product.images[0].alt ?? ""}
             width={250}
             height={370}
             className="mx-auto"
@@ -40,16 +40,16 @@ const Product = ({ product }) => {
           <div className="flex items-center justify-center mt-3">
             <div>
               <p className="font-semibold text-center">
-                {product?.title?.rendered ?? "Product name here..."}
+                {product.name ?? "Product name here..."}
               </p>
               {/* <p className="text-center font-semibold pb-3"> */}
               {/* ${product.price ?? ''} */}
               <div
-                dangerouslySetInnerHTML={{ __html: product?.price_html ?? "" }}
+                dangerouslySetInnerHTML={{ __html: product.price_html ?? "" }}
                 className="text-center font-semibold pb-3"
               />
               <div className="text-center font-semibold text-red-700 pb-3">
-                {product?.stock_status}
+                {product.stock_status}
               </div>
               {/* </p> */}
             </div>

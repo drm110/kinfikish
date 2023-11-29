@@ -260,13 +260,13 @@ export async function getStaticProps() {
       `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
     );
     const { data: productsData } = await axios.get(
-      `https://kinkifish.com/api/get-products`
+      `http://kinkifish.com/api/get-products`
     );
 
     return {
       props: {
         headerFooter: headerFooterData.data ?? {},
-        products: productsData ?? {},
+        products: productsData.products ?? {},
       },
       revalidate: 1,
     };
