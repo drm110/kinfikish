@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CarouselProvider,
   Slider,
@@ -7,8 +7,20 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import axios from "axios";
 
-const Followinstagram = ({ media }) => {
+
+const Followinstagram = () => {
+  const [media, setMedia] = useState(null);
+
+  useEffect(async () => {
+    const res = await fetch('https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=IGQWRNbWc3LUlXRFQ1UHJKYUUtbEdRN0dFNktuSTFPVW9TWmE2M1lVbHoxX0JDSFoxUU5yQVdvZAHc3SnN5a2xTSFczdDdQdnhRLXlPNGpCd1JzaHpwT1ZAVTEpGYWxEcGNmd1FkME1ick9LMmtBLU1hSEpfOXRveFEZD')
+const data = await res.json()
+
+console.log("RUNNING CONSOLE IN getstaticprops:> ", data);
+    debugger
+    setMedia(data?.data)
+  }, []);
   return (
     <div className="mt-12">
       <div>
@@ -62,18 +74,20 @@ const Followinstagram = ({ media }) => {
                   id="slider"
                   className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                 >
-                  {media && media?.length > 0 && media?.map((image, index) => (
-                    <Slide key={index} index={index}>
-                      <div className="flex flex-shrink-0 relative w-full sm:w-auto h-[30rem]">
-                        <img
-                          key={index}
-                          src={image.media_url}
-                          alt={image.caption || "black chair and white table"}
-                          className={`relative w-full object-cover h-full`}
-                        />
-                      </div>
-                    </Slide>
-                  ))}
+                  {media &&
+                    media?.length > 0 &&
+                    media?.map((image, index) => (
+                      <Slide key={index} index={index}>
+                        <div className="flex flex-shrink-0 relative w-full sm:w-auto h-[30rem]">
+                          <img
+                            key={index}
+                            src={image.media_url}
+                            alt={image.caption || "black chair and white table"}
+                            className={`relative w-full object-cover h-full`}
+                          />
+                        </div>
+                      </Slide>
+                    ))}
                 </div>
               </Slider>
             </div>
@@ -143,18 +157,20 @@ const Followinstagram = ({ media }) => {
                   id="slider"
                   className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                 >
-                  {media && media?.length > 0 && media?.map((image, index) => (
-                    <Slide key={index} index={index}>
-                      <div className="flex flex-shrink-0 relative w-full sm:w-auto h-[30rem]">
-                        <img
-                          key={index}
-                          src={image.media_url}
-                          alt={image.caption || "black chair and white table"}
-                          className={`relative w-full object-cover h-full`}
-                        />
-                      </div>
-                    </Slide>
-                  ))}
+                  {media &&
+                    media?.length > 0 &&
+                    media?.map((image, index) => (
+                      <Slide key={index} index={index}>
+                        <div className="flex flex-shrink-0 relative w-full sm:w-auto h-[30rem]">
+                          <img
+                            key={index}
+                            src={image.media_url}
+                            alt={image.caption || "black chair and white table"}
+                            className={`relative w-full object-cover h-full`}
+                          />
+                        </div>
+                      </Slide>
+                    ))}
                 </div>
               </Slider>
             </div>
@@ -224,18 +240,20 @@ const Followinstagram = ({ media }) => {
                   id="slider"
                   className="h-full w-full flex lg:gap-8 md:gap-6 items-center justify-start transition ease-out duration-700"
                 >
-                  {media && media?.length > 0 && media?.map((image, index) => (
-                    <Slide key={index} index={index}>
-                      <div className="flex flex-shrink-0 relative w-full sm:w-auto h-[30rem]">
-                        <img
-                          key={index}
-                          src={image.media_url}
-                          alt={image.caption || "black chair and white table"}
-                          className={`relative w-full object-cover h-full`}
-                        />
-                      </div>
-                    </Slide>
-                  ))}
+                  {media &&
+                    media?.length > 0 &&
+                    media?.map((image, index) => (
+                      <Slide key={index} index={index}>
+                        <div className="flex flex-shrink-0 relative w-full sm:w-auto h-[30rem]">
+                          <img
+                            key={index}
+                            src={image.media_url}
+                            alt={image.caption || "black chair and white table"}
+                            className={`relative w-full object-cover h-full`}
+                          />
+                        </div>
+                      </Slide>
+                    ))}
                 </div>
               </Slider>
             </div>
