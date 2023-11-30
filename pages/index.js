@@ -56,10 +56,5 @@ export async function getServerSideProps() {
       },
       revalidate: 1,
     };
-    console.log("An error occured while fetching data from server", error);
-    return {
-      props: {
-        media: 0,
-      },
-  }
+   
 }
