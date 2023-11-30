@@ -13,7 +13,9 @@ import Layout from "@/componentss/layouts";
 import axios from "axios";
 
 // {headerFooter}
-export default function Home() {
+export default function Home({ media }) {
+  
+  console.log(media)
 
   let reload = false;
   useEffect(() => {
@@ -31,32 +33,27 @@ export default function Home() {
     {/* <div className="myloadingBody"></div> */}
     {/* <Header header={headerFooter}/> */}
     {/* <NewTshirts products={products} /> */}
-    <NewTshirts/>
-    <Productsbadgecustomizer/>
+    <NewTshirts />
+    <Productsbadgecustomizer />
     <Customizae/>
-    <Followinstagram/>
-    <Followtiktok/>
-    <Subscribekinki/>
+    <Followinstagram media={media} />
+    <Followtiktok />
+    <Subscribekinki />
     {/* <Footer/> */}
     </DndProvider>
     </Layout>
   )
 }
 
-// export async function getStaticProps() {
+export async function getStaticProps() {
 	
-  // Currently server is disabled so request cannot be full filled
-	// const { data: headerFooterData } = await axios.get(`${ process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL }/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`);
-	// const { data: productsData } = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL}/api/get-products`)
-	// console.log("RUNNING CONSOLE IN getstaticprops:> ", productsData)
+	const { data: media } = await axios.get(`https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=IGQWROa3oySG1sZA3hiM1lValdZAekpfcnlWQVh1Y0RGRjdvOTVJM3V3ZAnk2Q2E4WnZAhdkpkSVliWFRvTk9PZAm9MYnRKVlhWU0NQQzFBQ0FGekVGc3JoT1p3M1hLWXE4cEJ0VlIwYjNUMUItdVk4bGZAvUE94d1hCdm8ZD`)
+	console.log("RUNNING CONSOLE IN getstaticprops:> ", media)
 
-  // const data = { productsData }
-  
-	// return {
-	// 	props: {
-	// 		headerFooter: headerFooterData.data ?? {},
-	// },
-		
-	// 	revalidate: 1,
-	// };
-// }
+	return {
+    props: {
+      media: media?.data ?? {},
+    },
+    revalidate: 1,
+  };
+}
