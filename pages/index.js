@@ -60,8 +60,6 @@ export async function getStaticProps() {
     };
    
 
-  // console.log("RUNNING CONSOLE IN getstaticprops:> ", productsData)
-
-  // const data = { products: productsData.products ?? {} }
+ 
 }
 
