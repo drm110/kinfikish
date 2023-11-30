@@ -45,7 +45,6 @@ export default function Home({ media }) {
 }
 
 export async function getServerSideProps() {
-  try {
     const { data: media } = await axios.get(
       `https://v1.nocodeapi.com/tabish/instagram/JiXUmqEQCAemqDHu`
     );
@@ -57,12 +56,10 @@ export async function getServerSideProps() {
       },
       revalidate: 1,
     };
-  } catch (error) {
     console.log("An error occured while fetching data from server", error);
     return {
       props: {
         media: 0,
       },
-    };
   }
 }
