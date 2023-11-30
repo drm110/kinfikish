@@ -13,8 +13,8 @@ import Layout from "@/componentss/layouts";
 import axios from "axios";
 
 // {headerFooter}
-export default function Home({ media }) {
-  console.log(media);
+export default function Home() {
+
 
   let reload = false;
   useEffect(() => {
@@ -44,22 +44,4 @@ export default function Home({ media }) {
   );
 }
 
-
-
-export async function getStaticProps() {
-    const res = await fetch('https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=IGQWROekdDUGJnMGRTR0VlZAy1fVW1aTUdzeThaWnBDcW5KZA016Nnp6TFhOaW1ZAUFNRa1FGekQ3dWpkUWFXVWNkdUd3ZA0hyaWllbTNYV0xWd1JuZAGY0c2tpZAFdlUE8xVDhzUHRRcm03NDByeFRZAa2VLdi04bHhNWEUZD')
-  const data = await res.json()
-
-    console.log("RUNNING CONSOLE IN getstaticprops:> ", data);
-
-    return {
-      props: {
-        media: data?.data ?? {},
-      },
-      revalidate: 1,
-    };
-   
-
- 
-}
 
