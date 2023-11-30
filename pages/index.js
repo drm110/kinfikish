@@ -44,7 +44,7 @@ export default function Home({ media }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
     const { data: media } = await axios.get(
       `https://v1.nocodeapi.com/tabish/instagram/JiXUmqEQCAemqDHu`
