@@ -62,7 +62,7 @@ const Followinstagram = ({ media }) => {
                   id="slider"
                   className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                 >
-                  {media.map((image, index) => (
+                  {media && media?.length > 0 && media?.map((image, index) => (
                     <Slide key={index} index={index}>
                       <div className="flex flex-shrink-0 relative w-full sm:w-auto h-[30rem]">
                         <img
@@ -143,7 +143,7 @@ const Followinstagram = ({ media }) => {
                   id="slider"
                   className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700"
                 >
-                  {media.map((image, index) => (
+                  {media && media?.length > 0 && media?.map((image, index) => (
                     <Slide key={index} index={index}>
                       <div className="flex flex-shrink-0 relative w-full sm:w-auto h-[30rem]">
                         <img
@@ -224,7 +224,7 @@ const Followinstagram = ({ media }) => {
                   id="slider"
                   className="h-full w-full flex lg:gap-8 md:gap-6 items-center justify-start transition ease-out duration-700"
                 >
-                  {media.map((image, index) => (
+                  {media && media?.length > 0 && media?.map((image, index) => (
                     <Slide key={index} index={index}>
                       <div className="flex flex-shrink-0 relative w-full sm:w-auto h-[30rem]">
                         <img

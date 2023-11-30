@@ -6,54 +6,63 @@ import Followtiktok from "@/MyComponents/Followtiktok";
 import Subscribekinki from "@/MyComponents/Subscribekinki";
 import Productsbadgecustomizer from "@/MyComponents/Productsbadgecustomizer";
 import { useEffect } from "react";
-import { DndProvider } from 'react-dnd'
-import { MultiBackend } from 'react-dnd-multi-backend'
-import { HTML5toTouch } from 'rdndmb-html5-to-touch'
+import { DndProvider } from "react-dnd";
+import { MultiBackend } from "react-dnd-multi-backend";
+import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import Layout from "@/componentss/layouts";
 import axios from "axios";
 
 // {headerFooter}
 export default function Home({ media }) {
-  
-  console.log(media)
+  console.log(media);
 
   let reload = false;
   useEffect(() => {
-    reload = true
-  
+    reload = true;
+
     return () => {
-      reload = false
-    }
-  }, [])
-  
+      reload = false;
+    };
+  }, []);
+
   return (
     // headerFooter={headerFooter}
-    <Layout >
-    <DndProvider backend={MultiBackend} options={HTML5toTouch}>
-    {/* <div className="myloadingBody"></div> */}
-    {/* <Header header={headerFooter}/> */}
-    {/* <NewTshirts products={products} /> */}
-    <NewTshirts />
-    <Productsbadgecustomizer />
-    <Customizae/>
-    <Followinstagram media={media} />
-    <Followtiktok />
-    <Subscribekinki />
-    {/* <Footer/> */}
-    </DndProvider>
+    <Layout>
+      <DndProvider backend={MultiBackend} options={HTML5toTouch}>
+        {/* <div className="myloadingBody"></div> */}
+        {/* <Header header={headerFooter}/> */}
+        {/* <NewTshirts products={products} /> */}
+        <NewTshirts />
+        <Productsbadgecustomizer />
+        <Customizae />
+        <Followinstagram media={media} />
+        <Followtiktok />
+        <Subscribekinki />
+        {/* <Footer/> */}
+      </DndProvider>
     </Layout>
-  )
+  );
 }
 
 export async function getStaticProps() {
-	
-	const { data: media } = await axios.get(`https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=IGQWROa3oySG1sZA3hiM1lValdZAekpfcnlWQVh1Y0RGRjdvOTVJM3V3ZAnk2Q2E4WnZAhdkpkSVliWFRvTk9PZAm9MYnRKVlhWU0NQQzFBQ0FGekVGc3JoT1p3M1hLWXE4cEJ0VlIwYjNUMUItdVk4bGZAvUE94d1hCdm8ZD`)
-	console.log("RUNNING CONSOLE IN getstaticprops:> ", media)
+  try {
+    const { data: media } = await axios.get(
+      `https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=IGQWROa3oySG1sZA3hiM1lValdZAekpfcnlWQVh1Y0RGRjdvOTVJM3V3ZAnk2Q2E4WnZAhdkpkSVliWFRvTk9PZAm9MYnRKVlhWU0NQQzFBQ0FGekVGc3JoT1p3M1hLWXE4cEJ0VlIwYjNUMUItdVk4bGZAvUE94d1hCdm8ZD`
+    );
+    console.log("RUNNING CONSOLE IN getstaticprops:> ", media);
 
-	return {
-    props: {
-      media: media?.data ?? {},
-    },
-    revalidate: 1,
-  };
+    return {
+      props: {
+        media: media?.data ?? {},
+      },
+      revalidate: 1,
+    };
+  } catch (error) {
+    console.log("An error occured while fetching data from server", error);
+    return {
+      props: {
+        media: 0,
+      },
+    };
+  }
 }
