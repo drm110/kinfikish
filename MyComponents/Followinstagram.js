@@ -14,7 +14,7 @@ const Followinstagram = () => {
   const [media, setMedia] = useState(null);
 
   useEffect(async () => {
-    const res = await fetch(`https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`)
+    const res = await fetch(`https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=${process.env.NEXT_PUBLIC_NEW_TOKEN}`)
 const data = await res.json()
 
 console.log("RUNNING CONSOLE IN getstaticprops:> ", data);
