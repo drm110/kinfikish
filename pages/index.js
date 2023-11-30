@@ -44,16 +44,24 @@ export default function Home({ media }) {
   );
 }
 
-export async function getServerSideProps() {
-    const { data: media } = await axios.get(
-      `https://v1.nocodeapi.com/tabish/instagram/JiXUmqEQCAemqDHu`
-    );
-    console.log("RUNNING CONSOLE IN getstaticprops:> ", media);
+
+
+export async function getStaticProps() {
+    const res = await fetch('https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=IGQWROekdDUGJnMGRTR0VlZAy1fVW1aTUdzeThaWnBDcW5KZA016Nnp6TFhOaW1ZAUFNRa1FGekQ3dWpkUWFXVWNkdUd3ZA0hyaWllbTNYV0xWd1JuZAGY0c2tpZAFdlUE8xVDhzUHRRcm03NDByeFRZAa2VLdi04bHhNWEUZD')
+  const data = await res.json()
+
+    console.log("RUNNING CONSOLE IN getstaticprops:> ", data);
 
     return {
       props: {
-        media: media?.data ?? {},
+        media: data?.data ?? {},
       },
       revalidate: 1,
     };
+   
+
+  // console.log("RUNNING CONSOLE IN getstaticprops:> ", productsData)
+
+  // const data = { products: productsData.products ?? {} }
 }
+
