@@ -14,7 +14,7 @@ const Followinstagram = () => {
   const [media, setMedia] = useState(null);
 
   useEffect(async () => {
-    const res = await fetch('https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=IGQWRQNDhxTG5pR2V0S3JHc0xscm5ReUR0bHR4ZADhJR3Y1YVhVQ0pJR2VjQTlWczRCSWYxOEd4cUMyZADRNb05ONndqcjNyRWtHeU5TSS0yd3AtdGswWnR3aGlLd1dSbFF4RjdTdllzTkZAkOW9OaTM2TW9UTFlTVmMZD')
+    const res = await fetch('https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=IGQWRPZAWhiTTJ6Mm5wOURGc3gzOHZA4MnpJbnBlSDN6TWZADQnpQUkVqMEs2ZA3RwczQzY01FaXJHaU80a1BSRnRKUDQtUlN3QkM4X0NmWjQwYUpRSWpNT2VRRC1jRjluZAU1xR3Y5S1FYeTdOWmlQckxBLV9STjJZAWk0ZD')
 const data = await res.json()
 
 console.log("RUNNING CONSOLE IN getstaticprops:> ", data);
