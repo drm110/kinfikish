@@ -47,7 +47,7 @@ export default function Home({ media }) {
 export async function getStaticProps() {
   try {
     const { data: media } = await axios.get(
-      `https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=IGQWROa3oySG1sZA3hiM1lValdZAekpfcnlWQVh1Y0RGRjdvOTVJM3V3ZAnk2Q2E4WnZAhdkpkSVliWFRvTk9PZAm9MYnRKVlhWU0NQQzFBQ0FGekVGc3JoT1p3M1hLWXE4cEJ0VlIwYjNUMUItdVk4bGZAvUE94d1hCdm8ZD`
+      `https://v1.nocodeapi.com/tabish/instagram/JiXUmqEQCAemqDHu`
     );
     console.log("RUNNING CONSOLE IN getstaticprops:> ", media);
 
