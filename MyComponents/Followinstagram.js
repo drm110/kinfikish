@@ -17,7 +17,7 @@ const Followinstagram = () => {
     const res = await fetch(`https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=${process.env.NEXT_PUBLIC_FINAL_TOKEN}`)
 const data = await res.json()
 
-console.log("RUNNING CONSOLE IN getstaticprops:> ", data);
+console.log("RUNNING CONSOLE IN get=staticprops:> ", data);
     debugger
     setMedia(data?.data)
   }, []);
