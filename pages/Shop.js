@@ -131,68 +131,7 @@ const Shop = ({ headerFooter, products }) => {
     },
   ];
 
-  // const handleAddingtoCart = (shopItem)=>{
-  // const shopItemString = JSON.stringify(shopItem);
-  // console.log("Item added to cart:", shopItemString);
-  // localStorage.setItem('cartItem', shopItemString);
-  // router.push(`/addToCart/${shopItem.slug}`)
-  // }
-
-  // const handleAddingtoCart = (shopItem) => {
-  //   Check if 'cartItem' exists in localStorage
-  //   const existingCart = localStorage.getItem('forCart');
-
-  //   if (existingCart) {
-  //     Parse the existing cart data
-  //     const existingCartItems = JSON.parse(existingCart);
-
-  //     Add the new item to the cart
-  //     console.log("CHECKING shopItem being pushed:>> ", shopItem)
-  //     existingCartItems.push(shopItem);
-
-  //     Save the updated cart back to localStorage
-  //     localStorage.setItem('forCart', JSON.stringify(existingCartItems));
-  //   } else {
-  //     Create a new cart with the current item
-
-  //     const newCartObj = {
-  //       productTitle: shopItem.title,
-  //       slug: shopItem.slug,
-  //       image: shopItem.image,
-  //       price: shopItem.price,
-  //       quantity: 1,
-  //     }
-
-  //     setNewCart([...newCart, newCartObj])
-  //     console.log("HERE CHECKING NEW CART:>> ", newCart)
-
-  //     Save the new cart in localStorage
-  //     localStorage.setItem('forCart', JSON.stringify(newCart));
-
-  //     console.log("Item added to cart:", shopItem.title);
-  //   }
-  // }
-
-  const handleAddingtoCart = (product) => {
-    // If the item is not in the cart, add it to the cart
-    // const newCartObj = {
-    //   productTitle: shopItem.title,
-    //   desc: shopItem.desc,
-    //   slug: shopItem.slug,
-    //   image: shopItem.image,
-    //   price: shopItem.price,
-    //   size: shopItem.sizes,
-    // };
-
-    // Save the updated cart back to localStorage
-    localStorage.setItem("forAddToCart", JSON.stringify(product));
-
-    console.log("Item added to cart:", product);
-    router.push(`/product/${product.slug}`);
-  };
-
-  // console.log("CHECKING Header> ", products)
-
+ 
   return (
     <>
       <Layout headerFooter={headerFooter || ""}>
@@ -201,7 +140,7 @@ const Shop = ({ headerFooter, products }) => {
             <p className="uppercase text-3xl font-bold text-center py-6">
               Shop
             </p>
-            {products.length ? (
+            {products?.length ? (
               ""
             ) : (
               <p className="capitalize text-md font-semibold text-center px-5">
@@ -214,11 +153,11 @@ const Shop = ({ headerFooter, products }) => {
             <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6">
               {/* <!-- Product Tile Start --> */}
 
-              {products.length
-                ? products.map((product) => (
-                    <Product key={product.id} product={product} />
+              {products?.length
+                ? products?.map((product) => (
+                    <Product key={product?.id} product={product} />
                   ))
-                : shopItems.map((shopItems) => {
+                : shopItems?.map((shopItems) => {
                     return (
                       <button
                         className="bg-white cursor-pointer border-2 border-transparent rounded-xl duration-300 hover:border-gray-800"
@@ -226,17 +165,17 @@ const Shop = ({ headerFooter, products }) => {
                       >
                         {/* onClick={() => handleAddingtoCart(shopItems)} */}
                         <Image
-                          src={shopItems.image}
+                          src={shopItems?.image}
                           height={370}
-                          alt={shopItems.slug}
+                          alt={shopItems?.slug}
                         />
                         <div className="flex items-center justify-center mt-3">
                           <div>
                             <p className="font-semibold text-center">
-                              {shopItems.title}
+                              {shopItems?.title}
                             </p>
                             <p className="text-center font-semibold pb-3">
-                              ${shopItems.price}
+                              ${shopItems?.price}
                             </p>
                           </div>
                         </div>
@@ -265,8 +204,8 @@ export async function getStaticProps() {
 
     return {
       props: {
-        headerFooter: headerFooterData.data ?? {},
-        products: productsData.products ?? {},
+        headerFooter: headerFooterData?.data ?? {},
+        products: productsData?.products ?? {},
       },
       revalidate: 1,
     };
@@ -279,8 +218,4 @@ export async function getStaticProps() {
       },
     };
   }
-
-  // console.log("RUNNING CONSOLE IN getstaticprops:> ", productsData)
-
-  // const data = { products: productsData.products ?? {} }
 }

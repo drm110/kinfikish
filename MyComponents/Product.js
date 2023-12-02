@@ -13,13 +13,13 @@ const Product = ({ product }) => {
   }
 
   // const img = product.images?.[0] ?? {};
-  const productType = product.type ?? "";
+  const productType = product?.type ?? "";
 
   const handleAddingtoCart = (product) => {
     localStorage.setItem("forAddToCart", JSON.stringify(product));
 
     console.log("Item added to cart:", product);
-    router.push(`/product/${product.slug}`);
+    router.push(`/product/${product?.slug}`);
   };
 
   return (
@@ -31,8 +31,8 @@ const Product = ({ product }) => {
         <div>
           {/* <img src={product.images[0].src ?? ''} className="h[23.125rem]" alt={product.slug ?? ''} /> */}
           <MyImage
-            sourceUrl={product.images[0].src ?? ""}
-            altText={product.images[0].alt ?? ""}
+            sourceUrl={product?.images[0].src ?? ""}
+            altText={product?.images[0].alt ?? ""}
             width={250}
             height={370}
             className="mx-auto"
@@ -40,16 +40,16 @@ const Product = ({ product }) => {
           <div className="flex items-center justify-center mt-3">
             <div>
               <p className="font-semibold text-center">
-                {product.name ?? "Product name here..."}
+                {product?.name ?? "Product name here..."}
               </p>
               {/* <p className="text-center font-semibold pb-3"> */}
               {/* ${product.price ?? ''} */}
               <div
-                dangerouslySetInnerHTML={{ __html: product.price_html ?? "" }}
+                dangerouslySetInnerHTML={{ __html: product?.price_html ?? "" }}
                 className="text-center font-semibold pb-3"
               />
               <div className="text-center font-semibold text-red-700 pb-3">
-                {product.stock_status}
+                {product?.stock_status}
               </div>
               {/* </p> */}
             </div>
