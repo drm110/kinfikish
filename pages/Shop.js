@@ -18,8 +18,6 @@ import axios from "axios";
 import Product from "@/MyComponents/Product";
 
 const Shop = ({ headerFooter, products }) => {
-  console.log("CHECking products:>> ", products);
-  const router = useRouter();
   const shopItems = [
     {
       id: 1,
@@ -134,7 +132,6 @@ const Shop = ({ headerFooter, products }) => {
  
   return (
     <>
-      <Layout headerFooter={headerFooter || ""}>
         <div className="w-full px-3 py-20 overflow-hidden">
           <div>
             <p className="uppercase text-3xl font-bold text-center py-6">
@@ -186,7 +183,6 @@ const Shop = ({ headerFooter, products }) => {
           </div>
         </div>
         <Subscribekinki />
-      </Layout>
     </>
   );
 };
