@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import {
   CarouselProvider,
@@ -7,19 +8,35 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import axios from "axios";
 
 
 const Followinstagram = () => {
   const [media, setMedia] = useState(null);
 
-  useEffect(async () => {
-    const res = await fetch(`https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=${process.env.NEXT_PUBLIC_FINAL_TOKEN}`)
-const data = await res.json()
-
-console.log("RUNNING CONSOLE IN get=staticprops:> ", data);
-    debugger
-    setMedia(data?.data)
+  useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+  
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=${process.env.NEXT_PUBLIC_FINAL_TOKEN}`, {
+          signal: signal // Pass the signal to the fetch request
+        });
+  
+        const data = await res.json();
+        setMedia(data?.data);
+      } catch (error) {
+        // Handle fetch errors
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData();
+  
+    // Cleanup function
+    return () => {
+      abortController.abort(); // Abort the fetch request if the component unmounts
+    };
   }, []);
   return (
     <div className="mt-12">

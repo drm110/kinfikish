@@ -231,8 +231,8 @@ const Productsbadgecustomizer = () => {
           {PictureList.map((picture, index) => {
             if (index < 6) {
               return (
-                <div className="text-center w-28">
-                  <Dragpicstart url={picture.url} id={picture.id} key={index} />
+                <div className="text-center w-28" key={index}>
+                  <Dragpicstart url={picture.url} id={picture.id} />
                   <p className="w-full text-center overflow-x-auto mx-auto text-xs my-1 font-['Helvetica'] font-bold">
                     {picture.textDesc}
                   </p>
@@ -259,9 +259,10 @@ const Productsbadgecustomizer = () => {
             className="w-auto my-auto max-h-full 2xl:max-w-fit 2xl:mx-auto"
           />
 
-          {board.map((picture) => {
+          {board.map((picture, index) => {
             return (
               <Draggable
+                key={index}
                 className="drag-react"
                 style={{
                   position: "relative",
@@ -287,8 +288,8 @@ const Productsbadgecustomizer = () => {
               return "";
             } else {
               return (
-                <div className="text-center w-28">
-                  <Dragpicstart url={picture.url} id={picture.id} key={index} />
+                <div className="text-center w-28" key={index}>
+                  <Dragpicstart url={picture.url} id={picture.id}/>
                   <p className="w-full text-center overflow-x-auto mx-auto text-xs my-1 font-['Helvetica'] font-bold">
                     {picture.textDesc}
                   </p>
@@ -304,8 +305,8 @@ const Productsbadgecustomizer = () => {
         <div className="overflow-x-auto">
           <div className="lg:hidden md:grid sm:grid grid gap-6 grid-cols-5 space-x-5 place-items-center min-w-[500px] ">
             {PictureList.map((picture, index) => (
-              <div className="text-center w-28">
-                <Dragpicstart url={picture.url} id={picture.id} key={index} />
+              <div className="text-center w-28" key={index}>
+                <Dragpicstart url={picture.url} id={picture.id} />
                 <p className="w-full text-center overflow-x-auto mx-auto text-xs my-1 font-['Helvetica'] font-bold">
                   {picture.textDesc}
                 </p>
