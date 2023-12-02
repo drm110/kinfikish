@@ -252,7 +252,6 @@ const Productsbadgecustomizer = () => {
             drop(ref);
           }}
         >
-          {/* bg-[url("../public/assets/images/0f643d9a193a3d6b6bf1e6f9fe5898fb.png")] bg-contain bg-no-repeat bg-center */}
 
           <img
             src="../assets/images/naranopins.png"
