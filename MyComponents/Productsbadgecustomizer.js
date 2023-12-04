@@ -220,7 +220,7 @@ const Productsbadgecustomizer = () => {
   };
 
   return (
-    <div className="mt-10 w-full py-16 overflow-hidden animatePulse">
+    <div className="mt-10 w-full py-16 overflow-hidden">
       <div>
         <p className="uppercase text-3xl font-bold text-center pb-16">
           PIN IT YOUR WAY

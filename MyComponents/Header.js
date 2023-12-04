@@ -25,11 +25,11 @@ const Header = (header) => {
         <nav className="bg-white relative w-full z-20 top-0 left-0 border-b border-gray-100 dark:border-gray-600">
           <Image
             src={discountImg}
-            className="absolute top-7 hidden md:block animatePulse"
+            className="absolute top-7 hidden md:block"
             height={220}
             alt="discountIage"
           />
-          <ul className="navigation max-w-[95vw] flex flex-col flex-wrap justify-between items-center relative mx-auto py-5 animatePulse">
+          <ul className="navigation max-w-[95vw] flex flex-col flex-wrap justify-between items-center relative mx-auto py-5">
             <div className="flex justify-end items-center w-full">
               <div className="flex justify-between items-center w-full 2xl:w-11/12 xl:w-10/12 lg:w-10/12 md:w-7/12 sm:w-full">
                 <div className="mysearchbar 2xl:flex xl:flex lg:flex md:hidden hidden justify-center items-center text-sm border-b border-gray-400 font-light mr-36">

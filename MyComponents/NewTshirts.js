@@ -31,11 +31,11 @@ const NewTshirts = () => {
   return (
     <div className="mt-16">
       <div>
-        <p className="uppercase text-3xl font-bold text-center animatePulse">
+        <p className="uppercase text-3xl font-bold text-center">
           NEW
         </p>
       </div>
-      <div className="mt-16 animatePulse">
+      <div className="mt-16">
         <Carousel
           responsive={responsive}
           infinite={true}
