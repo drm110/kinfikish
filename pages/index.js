@@ -13,7 +13,7 @@ import Layout from "@/componentss/layouts";
 import axios from "axios";
 
 // {headerFooter}
-export default function Home() {
+export default function Home({headerFooter}) {
 
   let reload = false;
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     // headerFooter={headerFooter}
-    <Layout>
+    <Layout headerFooter={headerFooter}>
       <DndProvider backend={MultiBackend} options={HTML5toTouch}>
         {/* <div className="myloadingBody"></div> */}
         {/* <Header header={headerFooter}/> */}
@@ -45,22 +45,28 @@ export default function Home() {
 
 
 
-// export async function getStaticProps() {
-//     const res = await fetch('https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=IGQWROekdDUGJnMGRTR0VlZAy1fVW1aTUdzeThaWnBDcW5KZA016Nnp6TFhOaW1ZAUFNRa1FGekQ3dWpkUWFXVWNkdUd3ZA0hyaWllbTNYV0xWd1JuZAGY0c2tpZAFdlUE8xVDhzUHRRcm03NDByeFRZAa2VLdi04bHhNWEUZD')
-//   const data = await res.json()
-
-//     console.log("RUNNING CONSOLE IN getstaticprops:> ", data);
-
-//     return {
-//       props: {
-//         media: data?.data ?? {},
-//       },
-//       revalidate: 1,
-//     };
+export async function getStaticProps() {
+  try {
+    const { data: headerFooterData } = await axios.get(
+      `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
+    );
    
 
-//   // console.log("RUNNING CONSOLE IN getstaticprops:> ", productsData)
+    return {
+      props: {
+        headerFooter: headerFooterData.data ?? {},
+      },
+      revalidate: 1,
+    };
+  } catch (error) {
+    console.log("An error occured while fetching data from server", error);
+    return {
+      props: {
+        headerFooter: "Not found",
+      },
+    };
+  }
 
-//   // const data = { products: productsData.products ?? {} }
-// }
+ 
+}
 
