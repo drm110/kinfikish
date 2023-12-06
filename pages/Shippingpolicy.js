@@ -2,11 +2,12 @@ import React from 'react'
 import Header from "@/MyComponents/Header";
 import Footer from "@/MyComponents/Footer";
 import Subscribekinki from '@/MyComponents/Subscribekinki'
+import axios from 'axios';
 
-const Shippingpolicy = () => {
+const Shippingpolicy = ({headerFooter}) => {
   return (
     <>
-    <Header/>
+    <Header header={headerFooter} />
     <div className='w-full py-16'>
         <div className='mt-12'>
             <div className="flex flex-col justify-center items-center">
@@ -40,3 +41,26 @@ const Shippingpolicy = () => {
 }
 
 export default Shippingpolicy
+
+export async function getStaticProps() {
+    try {
+      const { data: headerFooterData } = await axios.get(
+        `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
+      );
+     
+  
+      return {
+        props: {
+          headerFooter: headerFooterData.data ?? {},
+        },
+        revalidate: 1,
+      };
+    } catch (error) {
+      console.log("An error occured while fetching data from server", error);
+      return {
+        props: {
+          headerFooter: "Not found",
+        },
+      };
+    }
+  }

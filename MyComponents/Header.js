@@ -8,10 +8,11 @@ import Link from "next/link";
 import Head from "next/head";
 import { AppContext } from "@/componentss/context";
 
-const Header = (header) => {
+const Header = ({ header } ) => {
+  console.log(header, "header")
   const [cart, setCart] = useContext(AppContext);
   const { headerMenuItems, siteDescription, siteLogoUrl, siteTitle, favicon } =
-    header.header || {};
+    header?.header || header || "";
   // const{headerMenuItems, siteDescription, siteLogoUrl, siteTitle, favicon} = headerFooter.header.header || {};
   // const{headerMenuItems, siteDescription, siteLogoUrl, siteTitle, favicon} = headerFooter.header.headerFooter.header || {};
   console.warn("Header COMPONENT", header);

@@ -112,6 +112,7 @@ export async function getStaticProps() {
     const { data: headerFooterData } = await axios.get(
       `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
     );
+   
 
     return {
       props: {
@@ -120,10 +121,7 @@ export async function getStaticProps() {
       revalidate: 1,
     };
   } catch (error) {
-    console.log(
-      "An error occured while fetching header in archive from server",
-      error
-    );
+    console.log("An error occured while fetching data from server", error);
     return {
       props: {
         headerFooter: "Not found",

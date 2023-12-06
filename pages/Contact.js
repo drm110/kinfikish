@@ -4,11 +4,12 @@ import Header from "@/MyComponents/Header";
 import Footer from "@/MyComponents/Footer";
 import logo from "../public/assets/images/b02c1f10b5a65fb8c8cc58ae1c0a7231.png"
 import Subscribekinki from '@/MyComponents/Subscribekinki'
+import axios from 'axios';
 
-const Contact = () => {
+const Contact = ({headerFooter}) => {
   return (
     <>
-    <Header/>
+    <Header header={headerFooter} />
     <div className='w-full py-16'>
         <div className=''>
             <div className="flex flex-col justify-center items-center">
@@ -69,4 +70,29 @@ const Contact = () => {
   )
 }
 
+
+
 export default Contact
+
+export async function getStaticProps() {
+    try {
+      const { data: headerFooterData } = await axios.get(
+        `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
+      );
+     
+  
+      return {
+        props: {
+          headerFooter: headerFooterData.data ?? {},
+        },
+        revalidate: 1,
+      };
+    } catch (error) {
+      console.log("An error occured while fetching data from server", error);
+      return {
+        props: {
+          headerFooter: "Not found",
+        },
+      };
+    }
+  }

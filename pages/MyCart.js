@@ -297,28 +297,19 @@ export async function getStaticProps() {
     const { data: headerFooterData } = await axios.get(
       `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
     );
+   
 
-    // const { data: productsData } = await axios.get(
-    //   `${process.env.NEXT_PUBLIC_SITE_URL}/api/get-products`
-    // );
-    // console.log("RUNNING CONSOLE IN getstaticprops:> ", productsData);
-    // const data = { productsData };
     return {
       props: {
         headerFooter: headerFooterData.data ?? {},
-        // products: productsData?.products ?? {},
       },
       revalidate: 1,
     };
   } catch (error) {
-    console.log(
-      "An error occured while fetching header and cart items from server",
-      error
-    );
+    console.log("An error occured while fetching data from server", error);
     return {
       props: {
         headerFooter: "Not found",
-        // products: 'Not found',
       },
     };
   }

@@ -12,12 +12,13 @@ import MyImage from "@/MyComponents/MyImage";
 import { toast } from "react-toastify";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
+import axios from "axios";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Page() {
+export default function Page({headerFooter}) {
   const router = useRouter();
 
   const [activeTab, setActiveTab] = useState("Description");
@@ -158,7 +159,7 @@ export default function Page() {
 
   return (
     <>
-      <Header />
+      <Header header={headerFooter} />
 
       <div className="container mx-auto px-2 sm:px-4 lg:px-5 py-8">
         <div className="border-r border-r-[#dddddd] md:pr-[60px] w-full md:w-[70%] my-4">
@@ -533,3 +534,26 @@ export const shopItems = [
     totalprice: 60,
   },
 ];
+
+export async function getStaticProps() {
+  try {
+    const { data: headerFooterData } = await axios.get(
+      `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
+    );
+   
+
+    return {
+      props: {
+        headerFooter: headerFooterData.data ?? {},
+      },
+      revalidate: 1,
+    };
+  } catch (error) {
+    console.log("An error occured while fetching data from server", error);
+    return {
+      props: {
+        headerFooter: "Not found",
+      },
+    };
+  }
+}
