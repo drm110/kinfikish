@@ -48,9 +48,7 @@ const Product = ({ product }) => {
                 dangerouslySetInnerHTML={{ __html: product?.price_html ?? "" }}
                 className="text-center font-semibold pb-3"
               />
-              <div className="text-center font-semibold text-red-700 pb-3">
-                {product?.stock_status}
-              </div>
+             
               {/* </p> */}
             </div>
           </div>
