@@ -5,7 +5,8 @@ import { addToCart } from "@/Utils";
 import { isEmpty } from "lodash";
 import { useRouter } from "next/navigation";
 
-const Product = ({ product }) => {
+const Product = ({ product, i }) => {
+  console.log(i, 'u gere')
   const router = useRouter();
 
   if (isEmpty(product)) {
@@ -37,7 +38,7 @@ const Product = ({ product }) => {
             height={370}
             className="mx-auto min-h-[225px]"
           />
-          <div className="flex items-center justify-center mt-3">
+          <div className={`flex items-center justify-center ${i === 0 ? "mb-6" : "mt-3"}`}>
             <div>
               <p className="font-semibold text-center">
                 {product?.name ?? "Product name here..."}

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import logo from "../public/assets/images/b02c1f10b5a65fb8c8cc58ae1c0a7231.png";
 import discountImg from "../public/assets/images/b8f12cd57f6510b368200966f67b526f.png";
@@ -8,7 +8,8 @@ import Link from "next/link";
 import Head from "next/head";
 import { AppContext } from "@/componentss/context";
 
-const Header = ({ header } ) => {
+const Header = ({ header }) => {
+  const [loading, setLoading] = useState(false)
   console.log(header, "header")
   const [cart, setCart] = useContext(AppContext);
   const { headerMenuItems, siteDescription, siteLogoUrl, siteTitle, favicon } =
@@ -16,6 +17,11 @@ const Header = ({ header } ) => {
   // const{headerMenuItems, siteDescription, siteLogoUrl, siteTitle, favicon} = headerFooter.header.header || {};
   // const{headerMenuItems, siteDescription, siteLogoUrl, siteTitle, favicon} = headerFooter.header.headerFooter.header || {};
   console.warn("Header COMPONENT", header);
+
+  useEffect(() => {
+  setLoading(true)
+}, [cart])
+
   return (
     <>
       <Head>

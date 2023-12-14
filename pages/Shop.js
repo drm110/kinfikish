@@ -215,8 +215,8 @@ const Shop = ({ headerFooter, products }) => {
               {/* <!-- Product Tile Start --> */}
 
               {products.length
-                ? products.map((product) => (
-                    <Product key={product.id} product={product} />
+                ? products.map((product, index) => (
+                    <Product key={product.id} product={product} i={index} />
                   ))
                 : shopItems.map((shopItems) => {
                     return (
