@@ -28,14 +28,14 @@ const Product = ({ product }) => {
         className="bg-white cursor-pointer border-2 border-transparent rounded-xl duration-300 hover:border-gray-800 text-center"
         onClick={() => handleAddingtoCart(product)}
       >
-        <div>
+        <div className="min-h-[330px] flex flex-col justify-between">
           {/* <img src={product.images[0].src ?? ''} className="h[23.125rem]" alt={product.slug ?? ''} /> */}
           <MyImage
             sourceUrl={product?.images[0].src ?? ""}
             altText={product?.images[0].alt ?? ""}
             width={250}
             height={370}
-            className="mx-auto"
+            className="mx-auto min-h-[225px]"
           />
           <div className="flex items-center justify-center mt-3">
             <div>
@@ -60,3 +60,6 @@ const Product = ({ product }) => {
 };
 
 export default Product;
+
+
+
