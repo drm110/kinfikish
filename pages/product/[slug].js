@@ -18,13 +18,23 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Page({headerFooter}) {
+export default function Page({ headerFooter }) {
   const router = useRouter();
 
   const [activeTab, setActiveTab] = useState("Description");
   const [selectedBra, setSelectedBra] = useState("Choose an option");
   const [selectedBottom, setSelectedBottom] = useState("Choose an option");
   const [selectedSize, setSelectedSize] = useState("Choose an option");
+  const [selectedAttributes, setSelectedAttributes] = useState({});
+
+  console.log(selectedAttributes, 'at')
+
+  const handleAttributeChange = (e, attributeName) => {
+    setSelectedAttributes({
+      ...selectedAttributes,
+      [attributeName]: e.target.value,
+    });
+  };
 
   const tabs = [
     { name: "Description", current: activeTab === "Description" },
@@ -52,10 +62,13 @@ export default function Page({headerFooter}) {
     fetchData();
   }, [router.query.slug]);
 
+  console.log(product);
+  debugger;
+
   const handleAddingtoCart = async (product) => {
     // Include selected sizes in the product object
-    product.selectedBra = selectedBra;
-    product.selectedBottom = selectedBottom;
+    product.selectedBra = selectedAttributes?.BRA;
+    product.selectedBottom = selectedAttributes?.BOTTOM;
     const existingCart = JSON.parse(localStorage.getItem("forCart") || null);
 
     if (existingCart) {
@@ -81,8 +94,8 @@ export default function Page({headerFooter}) {
           } else {
             product.stock_quantity = 1;
             product.totalPrice = parseInt(product.price);
-            product.selectedBra = selectedBra;
-            product.selectedBottom = selectedBottom;
+            product.selectedBra = selectedAttributes?.BRA;
+            product.selectedBottom = selectedAttributes?.BOTTOM;
             updatedCart.push(product);
 
             let newCartObj = {
@@ -104,8 +117,8 @@ export default function Page({headerFooter}) {
         } else {
           product.stock_quantity = 1;
           product.totalPrice = parseInt(product.price);
-          product.selectedBra = selectedBra;
-          product.selectedBottom = selectedBottom;
+          product.selectedBra = selectedAttributes?.BRA;
+          product.selectedBottom = selectedAttributes?.BOTTOM;
           updatedCart.push(product);
           let newCartObj = {
             cartItems: updatedCart,
@@ -120,8 +133,8 @@ export default function Page({headerFooter}) {
     } else {
       product.stock_quantity = 1;
       product.totalPrice = parseInt(product.price);
-      product.selectedBra = selectedBra;
-      product.selectedBottom = selectedBottom;
+      product.selectedBra = selectedAttributes?.BRA;
+      product.selectedBottom = selectedAttributes?.BOTTOM;
       console.log("CHECKING PRODUCT leNgth:> ", product, product.length);
       let newCartObj = {
         cartItems: [product],
@@ -133,16 +146,6 @@ export default function Page({headerFooter}) {
     }
   };
 
-  const handleBraChange = (e) => {
-    setSelectedBra(e.target.value);
-  };
-
-  const handleBottomChange = (e) => {
-    setSelectedBottom(e.target.value);
-  };
-  const handleSizeChange = (e) => {
-    setSelectedSize(e.target.value);
-  };
   const handleImageClick = (imageSrc) => {
     setSelectedImage(imageSrc);
   };
@@ -151,11 +154,9 @@ export default function Page({headerFooter}) {
     setActiveTab(tabName);
   };
 
-  let isBikni = product?.categories?.find((i) => i.name === "bikni");
-  let isShirt = product?.categories?.find((i) => i.name === "shirt");
-  let isSizeChart = product?.attributes?.find((i) => i.name === "SIZE CHART");
-
-  console.log(isSizeChart, "afafasdfasd");
+  let isBikni = product?.categories?.find((i) => i.name === "Swimwear");
+  let isShirt = product?.categories?.find((i) => i.name === "Tops");
+  let isSizeChart = product?.attributes?.find((i) => i.name === "Size");
 
   return (
     <>
@@ -199,88 +200,52 @@ export default function Page({headerFooter}) {
               <p className="text-[#4B4F58] text-[1.5rem] font-bold">
                 ${product != null ? product.price : "Loading.."}
               </p>
-              {isBikni && (
-                <>
-                  <div className="mt-4">
-                    <label
-                      htmlFor="bra"
-                      className="block font-bold !leading-[2em] text-gray-600"
-                    >
-                      BRA
-                    </label>
-                    <select
-                      id="bra"
-                      name="bra"
-                      className="mt-2 block w-full rounded-md border-0 py-4 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-gray-300 text-[1rem]"
-                      value={selectedBra}
-                      onChange={handleBraChange}
-                    >
-                      <option>Choose an option</option>
-                      {product?.attributes?.[0]?.options.map(
-                        (option, index) => (
-                          <option key={index} value={option}>
-                            {option}
-                          </option>
-                        )
-                      )}
-                    </select>
-                  </div>
-                  <div className="mt-4">
-                    <label
-                      htmlFor="bottom"
-                      className="block font-bold !leading-[2em] text-gray-600"
-                    >
-                      BOTTOM
-                    </label>
-                    <select
-                      id="bottom"
-                      name="bottom"
-                      className="mt-2 block w-full rounded-md border-0 py-4 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-gray-300 text-[1rem]"
-                      value={selectedBottom}
-                      onChange={handleBottomChange}
-                    >
-                      <option>Choose an option</option>
-                      {product?.attributes?.[0]?.options.map(
-                        (option, index) => (
-                          <option key={index} value={option}>
-                            {option}
-                          </option>
-                        )
-                      )}
-                    </select>
-                  </div>
-                </>
-              )}
-              {/* is shirt */}
-              {isShirt && (
-                <>
-                  <label
-                    htmlFor="size"
-                    className="block font-bold !leading-[2em] text-gray-600"
-                  >
-                    size
-                  </label>
-                  <select
-                    id="size"
-                    name="size"
-                    className="mt-2 block w-full rounded-md border-0 py-4 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-gray-300 text-[1rem]"
-                    value={selectedSize}
-                    onChange={handleSizeChange}
-                  >
-                    <option>Choose an option</option>
-                    {product?.attributes?.[0]?.options.map((option, index) => (
-                      <option key={index} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </>
-              )}
+
+              {product?.attributes?.map((item, index) => (
+            <div className="mt-4" key={index}>
+              <label
+                htmlFor={item?.name}
+                className="block font-bold !leading-[2em] text-gray-600"
+              >
+                {item?.name}
+              </label>
+              <select
+                id={item?.name}
+                name={item?.name}
+                className="mt-2 block w-full rounded-md border-0 py-4 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-gray-300 text-[1rem]"
+                value={selectedAttributes[item?.name] || ''}
+                onChange={(e) => handleAttributeChange(e, item?.name)}
+              >
+                <option>Choose an option</option>
+                {item.options.map((option, index) => (
+                  <option key={index} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+              ))}
+              
+              <button
+                  type="button"
+                  className={`py-[10px] px-[20px] border border-[#323232] font-semibold bg-[#000000] hover:bg-[#3a3a3a] mt-4 text-white  ${
+                    Object.keys(selectedAttributes).length === 0 ||
+                    product?.stock_status !== "instock"
+                      ? "cursor-not-allowed"
+                      : ""
+                  }`}
+                disabled={
+                  Object.keys(selectedAttributes).length === 0 ||
+                    product?.stock_status !== "instock"
+                  }
+                  onClick={() => handleAddingtoCart(product)}
+                >
+                  Add to Cart
+                </button>
+
+            
               {/* avbail */}
-              {(selectedBra !== "Choose an option" &&
-                selectedBottom !== "Choose an option") ||
-                (selectedSize !== "Choose an option" && (
-                  <p className="font-bold text-[1em] mt-4">
+              <p className="font-bold text-[1em] mt-4">
                     Availability:{" "}
                     <span
                       className={`${
@@ -294,49 +259,8 @@ export default function Page({headerFooter}) {
                         : "Out Of Stock"}
                     </span>
                   </p>
-                ))}
-              {/* add */}
-              {isShirt?.name === "shirt" ? (
-                <button
-                type="button"
-                className={`py-[10px] px-[20px] border border-[#323232] font-semibold bg-[#000000] hover:bg-[#3a3a3a] mt-4 text-white  ${
-                  selectedSize === "Choose an option"
-                    ||
-                  product?.stock_status !== "instock"
-                    ? "cursor-not-allowed"
-                    : ""
-                }`}
-                disabled={
-                  selectedSize === "Choose an option"
-                    ||
-                  product?.stock_status !== "instock"
-                }
-                onClick={() => handleAddingtoCart(product)}
-              >
-                Add to Cart
-              </button>
-              ) : (
-                <button
-                type="button"
-                className={`py-[10px] px-[20px] border border-[#323232] font-semibold bg-[#000000] hover:bg-[#3a3a3a] mt-4 text-white  ${
-                  (selectedBra === "Choose an option" ||
-                    selectedBottom === "Choose an option") ||
-                  product?.stock_status !== "instock"
-                    ? "cursor-not-allowed"
-                    : ""
-                }`}
-                disabled={
-                  (selectedBra === "Choose an option" ||
-                    selectedBottom === "Choose an option") ||
-                  product?.stock_status !== "instock"
-                }
-                onClick={() => handleAddingtoCart(product)}
-              >
-                Add to Cart
-              </button>
-              )}
-              {/* add */}
-             
+            
+
               {/* divider */}
             </div>
           </div>
@@ -534,5 +458,3 @@ export const shopItems = [
     totalprice: 60,
   },
 ];
-
-
