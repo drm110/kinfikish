@@ -164,7 +164,6 @@ const Productsbadgecustomizer = () => {
             };
 
             localStorage.setItem("forCart", JSON.stringify(newCartObj));
-            toast.success("Item has been added to cart!");
           } else {
             existingCartItem = updatedCart[0].slug === product.slug;
             if (existingCartItem === true) {
@@ -180,7 +179,6 @@ const Productsbadgecustomizer = () => {
                 totalPrice: updatedCart.length * product.price,
               };
               localStorage.setItem("forCart", JSON.stringify(newCartObj));
-              toast.success("Item has been added to cart!");
             }
           }
         } else {
@@ -200,7 +198,6 @@ const Productsbadgecustomizer = () => {
               totalPrice: updatedCart.length * product.price,
             };
             localStorage.setItem("forCart", JSON.stringify(newCartObj));
-            toast.success("Item has been added to cart!");
             router.push(`/MyCart`);
           }
         }
@@ -214,7 +211,6 @@ const Productsbadgecustomizer = () => {
           totalPrice: product.stock_quantity * product.price,
         };
         localStorage.setItem("forCart", JSON.stringify(newCartObj));
-        toast.success("Item has been added to cart!");
       }
     }
   };
@@ -252,7 +248,6 @@ const Productsbadgecustomizer = () => {
             drop(ref);
           }}
         >
-
           <img
             src="../assets/images/naranopins.png"
             className="w-auto my-auto max-h-full 2xl:max-w-fit 2xl:mx-auto"
@@ -288,7 +283,7 @@ const Productsbadgecustomizer = () => {
             } else {
               return (
                 <div className="text-center w-28" key={index}>
-                  <Dragpicstart url={picture.url} id={picture.id}/>
+                  <Dragpicstart url={picture.url} id={picture.id} />
                   <p className="w-full text-center overflow-x-auto mx-auto text-xs my-1 font-['Helvetica'] font-bold">
                     {picture.textDesc}
                   </p>

@@ -27,7 +27,7 @@ export default function Page({ headerFooter }) {
   const [selectedSize, setSelectedSize] = useState("Choose an option");
   const [selectedAttributes, setSelectedAttributes] = useState({});
 
-  console.log(selectedAttributes, 'at')
+  console.log(selectedAttributes, "at");
 
   const handleAttributeChange = (e, attributeName) => {
     setSelectedAttributes({
@@ -86,7 +86,6 @@ export default function Page({ headerFooter }) {
           };
 
           localStorage.setItem("forCart", JSON.stringify(newCartObj));
-          toast.success("Item has been added to cart!");
         } else {
           existingCartItem = updatedCart[0].slug === product.slug;
           if (existingCartItem === true) {
@@ -104,7 +103,6 @@ export default function Page({ headerFooter }) {
               totalPrice: updatedCart.length * product.price,
             };
             localStorage.setItem("forCart", JSON.stringify(newCartObj));
-            toast.success("Item has been added to cart!");
           }
         }
       } else {
@@ -126,7 +124,6 @@ export default function Page({ headerFooter }) {
             totalPrice: updatedCart.length * product.price,
           };
           localStorage.setItem("forCart", JSON.stringify(newCartObj));
-          toast.success("Item has been added to cart!");
           router.push(`/MyCart`);
         }
       }
@@ -142,7 +139,6 @@ export default function Page({ headerFooter }) {
         totalPrice: product.stock_quantity * product.price,
       };
       localStorage.setItem("forCart", JSON.stringify(newCartObj));
-      toast.success("Item has been added to cart!");
     }
   };
 
@@ -202,64 +198,62 @@ export default function Page({ headerFooter }) {
               </p>
 
               {product?.attributes?.map((item, index) => (
-            <div className="mt-4" key={index}>
-              <label
-                htmlFor={item?.name}
-                className="block font-bold !leading-[2em] text-gray-600"
-              >
-                {item?.name}
-              </label>
-              <select
-                id={item?.name}
-                name={item?.name}
-                className="mt-2 block w-full rounded-md border-0 py-4 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-gray-300 text-[1rem]"
-                value={selectedAttributes[item?.name] || ''}
-                onChange={(e) => handleAttributeChange(e, item?.name)}
-              >
-                <option>Choose an option</option>
-                {item.options.map((option, index) => (
-                  <option key={index} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
+                <div className="mt-4" key={index}>
+                  <label
+                    htmlFor={item?.name}
+                    className="block font-bold !leading-[2em] text-gray-600"
+                  >
+                    {item?.name}
+                  </label>
+                  <select
+                    id={item?.name}
+                    name={item?.name}
+                    className="mt-2 block w-full rounded-md border-0 py-4 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-gray-300 text-[1rem]"
+                    value={selectedAttributes[item?.name] || ""}
+                    onChange={(e) => handleAttributeChange(e, item?.name)}
+                  >
+                    <option>Choose an option</option>
+                    {item.options.map((option, index) => (
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               ))}
-              
+
               <button
-                  type="button"
-                  className={`py-[10px] px-[20px] border border-[#323232] font-semibold bg-[#000000] hover:bg-[#3a3a3a] mt-4 text-white  ${
-                    Object.keys(selectedAttributes).length === 0 ||
-                    product?.stock_status !== "instock"
-                      ? "cursor-not-allowed"
-                      : ""
-                  }`}
+                type="button"
+                className={`py-[10px] px-[20px] border border-[#323232] font-semibold bg-[#000000] hover:bg-[#3a3a3a] mt-4 text-white  ${
+                  Object.keys(selectedAttributes).length === 0 ||
+                  product?.stock_status !== "instock"
+                    ? "cursor-not-allowed"
+                    : ""
+                }`}
                 disabled={
                   Object.keys(selectedAttributes).length === 0 ||
-                    product?.stock_status !== "instock"
-                  }
-                  onClick={() => handleAddingtoCart(product)}
-                >
-                  Add to Cart
-                </button>
+                  product?.stock_status !== "instock"
+                }
+                onClick={() => handleAddingtoCart(product)}
+              >
+                Add to Cart
+              </button>
 
-            
               {/* avbail */}
               <p className="font-bold text-[1em] mt-4">
-                    Availability:{" "}
-                    <span
-                      className={`${
-                        product?.stock_status === "instock"
-                          ? "text-[#77a464]"
-                          : "text-red-400"
-                      } font-normal`}
-                    >
-                      {product?.stock_status === "instock"
-                        ? "In Stock"
-                        : "Out Of Stock"}
-                    </span>
-                  </p>
-            
+                Availability:{" "}
+                <span
+                  className={`${
+                    product?.stock_status === "instock"
+                      ? "text-[#77a464]"
+                      : "text-red-400"
+                  } font-normal`}
+                >
+                  {product?.stock_status === "instock"
+                    ? "In Stock"
+                    : "Out Of Stock"}
+                </span>
+              </p>
 
               {/* divider */}
             </div>

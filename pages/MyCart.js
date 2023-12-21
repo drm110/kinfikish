@@ -11,14 +11,12 @@ import { AppContext } from "@/componentss/context";
 
 import { toast } from "react-toastify";
 
-
 const MyCart = ({ headerFooter }) => {
   const [myCart, setMyCart] = useState([]);
   const [finalCost, setFinalCost] = useState(0);
   const [MyProducts, setMyProducts] = useState([]);
 
   const [cart, setCart] = useContext(AppContext);
-
 
   useEffect(() => {
     const existingCart = localStorage.getItem("forCart");
@@ -48,13 +46,13 @@ const MyCart = ({ headerFooter }) => {
   const removeItemFromCart = (itemIndex) => {
     const updatedCart = [...MyProducts];
     updatedCart.splice(itemIndex, 1);
-  
+
     let newCartObj = {
       cartItems: updatedCart,
       totalQty: updatedCart.length || 0, // Update the totalQty accordingly
       totalPrice: 0, // Reset totalPrice or recalculate it if needed
     };
-  
+
     setMyProducts(updatedCart); // Update MyProducts state with the modified cart
     setMyCart(newCartObj);
     localStorage.setItem("forCart", JSON.stringify(newCartObj));
@@ -102,7 +100,7 @@ const MyCart = ({ headerFooter }) => {
     } else {
       removeItemFromCart(itemIndex);
       toast.success("Item has been removed from the cart!");
-      window.location.href = "/MyCart"
+      window.location.href = "/MyCart";
     }
 
     // Update the cart in state and local storage
@@ -139,9 +137,9 @@ const MyCart = ({ headerFooter }) => {
 
   useEffect(() => {
     if (MyProducts?.length < 1) {
-  setCart(null)
-}
-  }, [MyProducts])
+      setCart(null);
+    }
+  }, [MyProducts]);
 
   return (
     <>
@@ -200,7 +198,7 @@ const MyCart = ({ headerFooter }) => {
                             </div>
                             <div className="flex flex-col justify-center items-start ml-4 flex-grow">
                               <span className="font-bold text-sm pb-3">
-                                {shopItems.slug}
+                                {shopItems.name}
                               </span>
                             </div>
                           </div>
@@ -314,7 +312,6 @@ export async function getStaticProps() {
     const { data: headerFooterData } = await axios.get(
       `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
     );
-   
 
     return {
       props: {
