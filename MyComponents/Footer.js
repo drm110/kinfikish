@@ -98,6 +98,12 @@ const Footer = () => {
                 <span className="text-xs text-gray-700 font-medium underline">
                   <Link href="/Exchangepolicy">Refund</Link>
                 </span>
+                <span className="text-xs text-gray-700 font-medium underline">
+                  <Link href="/PrivacyPolicy">Privacy Policy</Link>
+                </span>
+                <span className="text-xs text-gray-700 font-medium underline">
+                  <Link href="/Terms">Terms of service</Link>
+                </span>
               </div>
             </div>
             <div className="w-full lg:w-6/12 px-4">
