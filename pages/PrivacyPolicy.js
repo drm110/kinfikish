@@ -133,8 +133,10 @@ const PrivacyPolicy = ({ headerFooter }) => {
             </p>
             <p className="w-2/4 mx-auto text-gray-900 font-normal tracking-wider text-center mb-4">
               If you have any questions or concerns about our Privacy Policy,
-              please contact us at shop@kinkifish.com{" "}
-              <a href="mailto:shop@kinkifish.com">shop@kinkifish.com</a>
+              please contact us at contactus@kinkifish.com{" "}
+              <a href="mailto:contactus@kinkifish.com">
+                contactus@kinkifish.com
+              </a>
             </p>
           </div>
         </div>
