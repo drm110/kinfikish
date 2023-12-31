@@ -119,7 +119,6 @@ const PrivacyPolicy = ({ headerFooter }) => {
             <p className="w-2/4 mx-auto text-black underline font-bold tracking-wider text-2xl text-center mb-4">
               Changes to This Privacy Policy
             </p>
-            {/* info */}
             <p className="w-2/4 mx-auto text-gray-900 font-normal tracking-wider text-center mb-4">
               We may update this Privacy Policy periodically. The date of the
               latest revision will be indicated at the top of the page. Your
