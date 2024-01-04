@@ -13,7 +13,8 @@ import Layout from "@/componentss/layouts";
 import axios from "axios";
 
 // {headerFooter}
-export default function Home({ headerFooter }) {
+export default function Home({headerFooter}) {
+
   let reload = false;
   useEffect(() => {
     reload = true;
@@ -30,6 +31,11 @@ export default function Home({ headerFooter }) {
         {/* <div className="myloadingBody"></div> */}
         {/* <Header header={headerFooter}/> */}
         {/* <NewTshirts products={products} /> */}
+        <NewTshirts />
+        <Productsbadgecustomizer />
+        <Customizae />
+        <Followinstagram  />
+        <Followtiktok />
         <Subscribekinki />
         {/* <Footer/> */}
       </DndProvider>
@@ -37,11 +43,14 @@ export default function Home({ headerFooter }) {
   );
 }
 
+
+
 export async function getStaticProps() {
   try {
     const { data: headerFooterData } = await axios.get(
       `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
     );
+   
 
     return {
       props: {
@@ -57,4 +66,7 @@ export async function getStaticProps() {
       },
     };
   }
+
+ 
 }
+
