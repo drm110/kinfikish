@@ -54,7 +54,7 @@ const CheckoutForm = ({ countriesData }) => {
     createAccount: false,
     orderNotes: "",
     billingDifferentThanShipping: false,
-    paymentMethod: "cod",
+    paymentMethod: "paypal",
   };
 
   // const [ cart, setCart ] = useContext( AppContext )
