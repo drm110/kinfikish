@@ -14,7 +14,13 @@ const PaymentModes = ( { input, handleOnChange } ) => {
 					<span className="woo-next-payment-content">Direct Bank Transfer</span>
 				</label>
 			</div> */}
-			
+			{/*Pay with Apple pay*/}
+			<div className="form-check woo-next-payment-input-container mt-2">
+				<label className="form-check-label">
+					<input onChange={ handleOnChange } value="applepay" className="form-check-input mr-3" name="paymentMethod" type="radio" checked={'applepay' === paymentMethod}/>
+					<span className="woo-next-payment-content">Pay with Apple pay</span>
+				</label>
+			</div>
 			{/*Pay with Paypal*/}
 			<div className="form-check woo-next-payment-input-container mt-2">
 				<label className="form-check-label">
@@ -55,9 +61,9 @@ const PaymentModes = ( { input, handleOnChange } ) => {
 				</label>
 			</div> */}
 			{/*	Payment Instructions*/}
-			<div className="woo-next-checkout-payment-instructions mt-2">
+			{/* <div className="woo-next-checkout-payment-instructions mt-2">
 				Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.
-			</div>
+			</div> */}
 		</div>
 	);
 };
