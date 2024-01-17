@@ -4,8 +4,10 @@ import cx from "classnames";
 import Address from "./user-address";
 import {
   handleBillingDifferentThanShipping,
-	handleCreateAccount, handleOtherPaymentMethodCheckout, handleStripeCheckout,
-	setStatesForCountry,
+  handleCreateAccount,
+  handleOtherPaymentMethodCheckout,
+  handleStripeCheckout,
+  setStatesForCountry,
 } from "@/Utils/checkout";
 import CheckboxField from "./form-elements/checkbox-field";
 import validateAndSanitizeCheckoutForm from "@/MyComponents/Validator/checkout";
@@ -128,7 +130,14 @@ const CheckoutForm = ({ countriesData }) => {
     }
 
     // For Any other payment mode, create the order and redirect the user to payment url.
-    const createdOrderData = await handleOtherPaymentMethodCheckout( input, cart?.cartItems, setRequestError, setCart, setIsOrderProcessing, setCreatedOrderData );
+    const createdOrderData = await handleOtherPaymentMethodCheckout(
+      input,
+      cart?.cartItems,
+      setRequestError,
+      setCart,
+      setIsOrderProcessing,
+      setCreatedOrderData
+    );
 
     // if (createdOrderData.paymentUrl) {
     //   console.log("hey", createdOrderData);
@@ -191,7 +200,11 @@ const CheckoutForm = ({ countriesData }) => {
   return (
     <>
       {cart ? (
-        <form onSubmit={handleFormSubmit} className="woo-next-checkout-form">
+        <form
+          onSubmit={handleFormSubmit}
+          id="checkout-form"
+          className="woo-next-checkout-form"
+        >
           <div className="grid sm:px-10 lg:grid-cols-1 lg:px-20 xl:px-32">
             <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
               <p className="text-2xl font-medium pb-4">Payment Details</p>
@@ -419,20 +432,11 @@ const CheckoutForm = ({ countriesData }) => {
                 <h2 className="text-xl font-medium mb-4">
                   Select your mode of payment
                 </h2>
-                <PaymentModes input={input} handleOnChange={handleOnChange} />
-
-                <div className="woo-next-place-order-btn-wrap mt-5">
-                  <button
-                    disabled={isOrderProcessing}
-                    className={cx(
-                      "bg-blue-950 rounded-md text-white px-5 py-3 w-auto xl:w-full",
-                      { "opacity-50": isOrderProcessing }
-                    )}
-                    type="submit"
-                  >
-                    Place Order
-                  </button>
-                </div>
+                <PaymentModes
+                  input={input}
+                  handleOnChange={handleOnChange}
+                  onClick={handleFormSubmit}
+                />
 
                 {/* Checkout Loading*/}
                 {isOrderProcessing && <p>Processing Order...</p>}
@@ -440,7 +444,6 @@ const CheckoutForm = ({ countriesData }) => {
                   <p>Error : {requestError} :( Please try again</p>
                 )} */}
               </div>
-
             </div>
           </div>
         </form>

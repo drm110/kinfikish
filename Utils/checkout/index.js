@@ -151,10 +151,14 @@ const getStripeLineItems = (products) => {
   return products.map((product) => {
     return {
       quantity: product?.stock_quantity ?? 0,
-      name: product?.name ?? "",
-      images: [product?.images?.[0]?.src ?? "" ?? ""],
-      amount: Math.round((product?.price ?? 0) * 100),
-      currency: "usd",
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: product?.name ?? "",
+          images: [product?.images?.[0]?.src ?? "" ?? ""],
+        },
+        unit_amount: Math.round((product?.price ?? 0) * 100),
+      },
     };
   });
 };
