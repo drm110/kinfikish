@@ -17,7 +17,7 @@ const PaymentModes = ({ input, handleOnChange, onClick, handleFormSubmit }) => {
             <input
               onChange={handleOnChange}
               value="paypal"
-              className="form-check-input mr-3 "
+              className="form-check-input mr-3 opacity-0"
               name="paymentMethod"
               type="radio"
               checked={"paypal" === paymentMethod}
@@ -32,7 +32,7 @@ const PaymentModes = ({ input, handleOnChange, onClick, handleFormSubmit }) => {
             <input
               onChange={handleOnChange}
               value="cod"
-              className="form-check-input mr-3 "
+              className="form-check-input mr-3 opacity-0"
               name="paymentMethod"
               type="radio"
               checked={"cod" === paymentMethod}
@@ -46,7 +46,7 @@ const PaymentModes = ({ input, handleOnChange, onClick, handleFormSubmit }) => {
             <input
               onChange={handleOnChange}
               value="stripe"
-              className="form-check-input mr-3 "
+              className="form-check-input mr-3 opacity-0"
               name="paymentMethod"
               type="radio"
               checked={"stripe" === paymentMethod}
