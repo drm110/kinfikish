@@ -28,7 +28,7 @@ const InputField = ({
         type={type}
         name={name}
         id={inputId}
-        className="py-1 ml-2"
+        className="py-1 ml-0 w-full"
       />
       <Error errors={errors} fieldName={name} />
     </div>
