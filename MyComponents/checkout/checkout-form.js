@@ -375,7 +375,7 @@ const CheckoutForm = ({ countriesData }) => {
                   isShipping
                 />
               </div>
-              <div>
+              {/* <div>
                 <CheckboxField
                   name="billingDifferentThanShipping"
                   type="checkbox"
@@ -384,7 +384,7 @@ const CheckoutForm = ({ countriesData }) => {
                   label="Billing different than shipping"
                   containerClassNames="mb-4 pt-4"
                 />
-              </div>
+              </div> */}
 
               {/* Billing Details */}
               {input?.billingDifferentThanShipping ? (
