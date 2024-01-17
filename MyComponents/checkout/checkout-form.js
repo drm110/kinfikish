@@ -56,7 +56,7 @@ const CheckoutForm = ({ countriesData }) => {
     createAccount: false,
     orderNotes: "",
     billingDifferentThanShipping: false,
-    paymentMethod: "paypal",
+    paymentMethod: "cod",
   };
 
   // const [ cart, setCart ] = useContext( AppContext )
@@ -81,7 +81,7 @@ const CheckoutForm = ({ countriesData }) => {
   const [createdOrderData, setCreatedOrderData] = useState({});
 
   const handleFormSubmit = async (event) => {
-    event.preventDefault();
+    event?.preventDefault();
 
     /**
      * Validate Billing and Shipping Details
@@ -196,6 +196,11 @@ const CheckoutForm = ({ countriesData }) => {
       setIsFetchingBillingStates
     );
   };
+  const { errors, paymentMethod } = input || {};
+
+  useEffect(() => {
+    if (paymentMethod === "stripe") handleFormSubmit();
+  }, [paymentMethod]);
 
   return (
     <>
@@ -388,7 +393,7 @@ const CheckoutForm = ({ countriesData }) => {
                   isShipping
                 />
               </div>
-              {/* <div>
+              <div>
                 <CheckboxField
                   name="billingDifferentThanShipping"
                   type="checkbox"
@@ -397,7 +402,7 @@ const CheckoutForm = ({ countriesData }) => {
                   label="Billing different than shipping"
                   containerClassNames="mb-4 pt-4"
                 />
-              </div> */}
+              </div>
 
               {/* Billing Details */}
               {input?.billingDifferentThanShipping ? (
@@ -436,7 +441,10 @@ const CheckoutForm = ({ countriesData }) => {
                   input={input}
                   handleOnChange={handleOnChange}
                   onClick={handleFormSubmit}
+                  handleFormSubmit={handleFormSubmit}
                 />
+
+                <button type="submit">Place Order</button>
 
                 {/* Checkout Loading*/}
                 {isOrderProcessing && <p>Processing Order...</p>}
