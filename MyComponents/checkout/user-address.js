@@ -15,7 +15,7 @@ const Address = ({
 
   return (
     <>
-      <div className="flex flex-wrap overflow-hidden">
+      <div className="flex flex-wrap overflow-hidden px-0 w-full">
         <InputField
           name="firstName"
           inputValue={input?.firstName}
@@ -24,7 +24,7 @@ const Address = ({
           label="First name"
           errors={errors}
           isShipping={isShipping}
-          containerClassNames="w-full overflow-hidden sm:my-2 sm:px-2 md:w-1/2"
+          containerClassNames="w-full overflow-hidden sm:my-2 sm:pr-1 md:w-2/4"
         />
         <InputField
           name="lastName"
@@ -34,7 +34,7 @@ const Address = ({
           label="Last name"
           errors={errors}
           isShipping={isShipping}
-          containerClassNames="w-full overflow-hidden sm:my-2 sm:px-2 md:w-1/2"
+          containerClassNames="w-full overflow-hidden sm:my-2 md:w-2/4"
         />
       </div>
       <InputField
@@ -92,7 +92,7 @@ const Address = ({
         isShipping={isShipping}
         isFetchingStates={isFetchingStates}
       />
-      <div className="flex flex-wrap overflow-hidden sm:-mx-3">
+      <div className="flex flex-wrap overflow-hidden px-0 w-full">
         <InputField
           name="postcode"
           inputValue={input?.postcode}
@@ -101,7 +101,7 @@ const Address = ({
           label="Post code"
           errors={errors}
           isShipping={isShipping}
-          containerClassNames="w-full overflow-hidden sm:my-2 sm:px-2 md:w-1/2"
+          containerClassNames="w-full overflow-hidden sm:my-2 sm:pr-1 md:w-2/4"
         />
         <InputField
           name="phone"
@@ -111,7 +111,7 @@ const Address = ({
           label="Phone"
           errors={errors}
           isShipping={isShipping}
-          containerClassNames="w-full overflow-hidden sm:my-2 sm:px-2 md:w-1/2"
+          containerClassNames="w-full overflow-hidden sm:my-2 md:w-2/4"
         />
       </div>
       <InputField

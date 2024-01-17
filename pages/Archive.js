@@ -65,6 +65,30 @@ const Archive = ({ headerFooter }) => {
             src="../assets/kinki.mp4"
           ></video>
         </div>
+        <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[40rem] lg:h-[30rem] h-[30rem] relative overflow-hidden pb-1">
+          {/* <div className='bg-black w-full h-full opacity-30 bg-bgVideoPlayImg bg-no-repeat'>
+            </div> */}
+          {/* autoPlay muted loop */}
+          <video
+            autoPlay
+            muted
+            loop
+            className="mx-auto w-full  object-fill h-full"
+            src="../assets/bikinivideomain.mp4"
+          ></video>
+        </div>
+        <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[40rem] lg:h-[30rem] h-[30rem] relative overflow-hidden pb-1">
+          {/* <div className='bg-black w-full h-full opacity-30 bg-bgVideoPlayImg bg-no-repeat'>
+            </div> */}
+          {/* autoPlay muted loop */}
+          <video
+            autoPlay
+            muted
+            loop
+            className="mx-auto w-full  object-fill h-full"
+            src="../assets/refregrator.mp4"
+          ></video>
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div>
             <p className="uppercase text-3xl font-bold text-center pt-14">
