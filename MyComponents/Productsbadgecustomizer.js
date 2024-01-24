@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useContext, useState, useRef } from "react";
 import badge1 from "../public/assets/images/badges/1.png";
 import badge2 from "../public/assets/images/badges/2.png";
 import badge3 from "../public/assets/images/badges/3.png";
@@ -18,10 +18,16 @@ import Dragpicstart from "./Dragpicstart";
 import Draggable, { DraggableCore } from "react-draggable";
 import html2canvas from "html2canvas";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { AppContext } from "@/componentss/context";
 
 // import { useScreenshot } from 'use-react-screenshot'
 
 const Productsbadgecustomizer = () => {
+  const router = useRouter();
+
+  const [cart, setCart] = useContext(AppContext);
+
   const PictureList = [
     {
       id: 1,
@@ -118,13 +124,14 @@ const Productsbadgecustomizer = () => {
   }));
 
   const [product, setProduct] = useState({
-    name: "Customized Shirt",
+    name: "SMOKING GIRL BABY TEE",
     price: 100,
     description: "lorem lorem lorem",
     images: [{ src: finalImage }],
     slug: "customized_shirt",
     stock_quantity: 1,
     totalPrice: 100,
+    is_customized: true,
   });
 
   const addImageToBoard = (id) => {
@@ -164,6 +171,9 @@ const Productsbadgecustomizer = () => {
             };
 
             localStorage.setItem("forCart", JSON.stringify(newCartObj));
+            setCart(newCartObj);
+
+            toast.success("Item has been added to your cart!");
           } else {
             existingCartItem = updatedCart[0].slug === product.slug;
             if (existingCartItem === true) {
@@ -179,6 +189,9 @@ const Productsbadgecustomizer = () => {
                 totalPrice: updatedCart.length * product.price,
               };
               localStorage.setItem("forCart", JSON.stringify(newCartObj));
+              setCart(newCartObj);
+
+              toast.success("Item has been added to your cart!");
             }
           }
         } else {
@@ -198,7 +211,10 @@ const Productsbadgecustomizer = () => {
               totalPrice: updatedCart.length * product.price,
             };
             localStorage.setItem("forCart", JSON.stringify(newCartObj));
-            router.push(`/MyCart`);
+            setCart(newCartObj);
+
+            toast.success("Item has been added to your cart!");
+            // router.push(`/MyCart`);
           }
         }
       } else {
@@ -211,6 +227,9 @@ const Productsbadgecustomizer = () => {
           totalPrice: product.stock_quantity * product.price,
         };
         localStorage.setItem("forCart", JSON.stringify(newCartObj));
+        setCart(newCartObj);
+
+        toast.success("Item has been added to your cart!");
       }
     }
   };

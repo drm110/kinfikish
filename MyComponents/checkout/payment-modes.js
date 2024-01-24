@@ -9,8 +9,21 @@ const PaymentModes = ({ input, handleOnChange, onClick, handleFormSubmit }) => {
     <div className="mt-3">
       <Error errors={errors} fieldName={"paymentMethod"} />
 
-      {/*Pay with Paypal*/}
-      <div className="flex items-center gap-5">
+      <div className="form-check woo-next-payment-input-container mt-2 cursor-pointe md:w-1/3 w-full">
+        <button className="bg-gray-900 font-semibold hover:bg-black py-3 text-sm text-white uppercase w-full">
+          Proceed To Payment
+        </button>
+        <input
+          onChange={handleOnChange}
+          value="stripe"
+          className="form-check-input mr-3 opacity-0"
+          name="paymentMethod"
+          type="radio"
+          checked={"stripe" === paymentMethod}
+        />
+      </div>
+
+      {/* <div className="flex items-center gap-5">
         <label className="form-check-label">
           <div className="form-check woo-next-payment-input-container mt-2">
             <img src="../assets/PayPal.svg" alt="" className="h-16 w-24" />
@@ -24,8 +37,6 @@ const PaymentModes = ({ input, handleOnChange, onClick, handleFormSubmit }) => {
             />
           </div>
         </label>
-
-        {/*Pay with Stripe*/}
         <label className="form-check-label">
           <div className="form-check woo-next-payment-input-container mt-2">
             <img src="../assets/ApplePay.svg" alt="" className="h-16 w-24" />
@@ -53,7 +64,7 @@ const PaymentModes = ({ input, handleOnChange, onClick, handleFormSubmit }) => {
             />
           </div>
         </label>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 export const AppContext = React.createContext([{}, () => {}]);
 
-export const AppProvider = (props) => {
+const AppProvider = (props) => {
   const [cart, setCart] = useState(null);
 
   /**
@@ -38,3 +38,5 @@ export const AppProvider = (props) => {
     </AppContext.Provider>
   );
 };
+
+export default AppProvider;

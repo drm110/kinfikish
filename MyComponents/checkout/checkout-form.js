@@ -56,7 +56,7 @@ const CheckoutForm = ({ countriesData }) => {
     createAccount: false,
     orderNotes: "",
     billingDifferentThanShipping: false,
-    paymentMethod: "cod",
+    paymentMethod: "stripe",
   };
 
   // const [ cart, setCart ] = useContext( AppContext )
@@ -196,11 +196,11 @@ const CheckoutForm = ({ countriesData }) => {
       setIsFetchingBillingStates
     );
   };
-  const { errors, paymentMethod } = input || {};
+  // const { errors, paymentMethod } = input || {};
 
-  useEffect(() => {
-    if (paymentMethod === "stripe") handleFormSubmit();
-  }, [paymentMethod]);
+  // useEffect(() => {
+  //   if (paymentMethod === "stripe") handleFormSubmit();
+  // }, [paymentMethod]);
 
   return (
     <>
@@ -211,7 +211,7 @@ const CheckoutForm = ({ countriesData }) => {
           className="woo-next-checkout-form"
         >
           <div className="grid sm:px-10 lg:grid-cols-1 lg:px-20 xl:px-32">
-            <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
+            <div className="mt-10 shadow-md px-4 pt-8 lg:mt-0">
               <p className="text-2xl font-medium pb-4">Payment Details</p>
               <p className="text-gray-400">
                 Complete your order by providing your payment details.
@@ -434,9 +434,9 @@ const CheckoutForm = ({ countriesData }) => {
                 {/* <YourOrder/> */}
 
                 {/*Payment*/}
-                <h2 className="text-xl font-medium mb-4">
+                {/* <h2 className="text-xl font-medium mb-4">
                   Select your mode of payment
-                </h2>
+                </h2> */}
                 <PaymentModes
                   input={input}
                   handleOnChange={handleOnChange}
@@ -444,7 +444,7 @@ const CheckoutForm = ({ countriesData }) => {
                   handleFormSubmit={handleFormSubmit}
                 />
 
-                <button type="submit">Place Order</button>
+                {/* <button type="submit">Place Order</button> */}
 
                 {/* Checkout Loading*/}
                 {isOrderProcessing && <p>Processing Order...</p>}

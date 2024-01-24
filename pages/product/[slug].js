@@ -1,6 +1,7 @@
+import Layout from "@/componentss/layouts";
 import Subscribekinki from "@/MyComponents/Subscribekinki";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import MetallicDoublebikini from "../../public/assets/images/shopitems/MetallicDoublebikini.jpg";
 import MetallicShorts from "../../public/assets/images/shopitems/MetallicShorts.jpg";
@@ -13,6 +14,8 @@ import { toast } from "react-toastify";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 import axios from "axios";
+import { AppContext } from "@/componentss/context";
+import { isEmpty } from "lodash";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -20,6 +23,8 @@ function classNames(...classes) {
 
 export default function Page({ headerFooter }) {
   const router = useRouter();
+
+  const [cart, setCart] = useContext(AppContext);
 
   const [activeTab, setActiveTab] = useState("Description");
   const [selectedBra, setSelectedBra] = useState("Choose an option");
@@ -63,7 +68,6 @@ export default function Page({ headerFooter }) {
   }, [router.query.slug]);
 
   console.log(product);
-  debugger;
 
   const handleAddingtoCart = async (product) => {
     // Include selected sizes in the product object
@@ -71,7 +75,7 @@ export default function Page({ headerFooter }) {
     product.selectedBottom = selectedAttributes?.BOTTOM;
     const existingCart = JSON.parse(localStorage.getItem("forCart") || null);
 
-    if (existingCart) {
+    if (!isEmpty(existingCart)) {
       let existingCartItem;
 
       const updatedCart = existingCart.cartItems;
@@ -86,6 +90,9 @@ export default function Page({ headerFooter }) {
           };
 
           localStorage.setItem("forCart", JSON.stringify(newCartObj));
+          setCart(newCartObj);
+
+          toast.success("Item has been added to your cart!");
         } else {
           existingCartItem = updatedCart[0].slug === product.slug;
           if (existingCartItem === true) {
@@ -103,6 +110,9 @@ export default function Page({ headerFooter }) {
               totalPrice: updatedCart.length * product.price,
             };
             localStorage.setItem("forCart", JSON.stringify(newCartObj));
+            setCart(newCartObj);
+
+            toast.success("Item has been added to your cart!");
           }
         }
       } else {
@@ -124,7 +134,10 @@ export default function Page({ headerFooter }) {
             totalPrice: updatedCart.length * product.price,
           };
           localStorage.setItem("forCart", JSON.stringify(newCartObj));
-          router.push(`/MyCart`);
+          setCart(newCartObj);
+
+          toast.success("Item has been added to your cart!");
+          // router.push(`/MyCart`);
         }
       }
     } else {
@@ -139,6 +152,9 @@ export default function Page({ headerFooter }) {
         totalPrice: product.stock_quantity * product.price,
       };
       localStorage.setItem("forCart", JSON.stringify(newCartObj));
+      setCart(newCartObj);
+
+      toast.success("Item has been added to your cart!");
     }
   };
 
@@ -156,260 +172,265 @@ export default function Page({ headerFooter }) {
 
   return (
     <>
-      <Header header={headerFooter} />
-
-      <div className="container mx-auto px-2 sm:px-4 lg:px-5 py-8">
-        <div className="border-r border-r-[#dddddd] md:pr-[60px] w-full md:w-[70%] my-4">
-          <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
-            {/* image part */}
-            <div className="flex flex-col">
-              <div className="mb-[15px]">
-                <InnerImageZoom
-                  src={selectedImage}
-                  hasSpacer={true}
-                  zoomSrc={selectedImage}
-                  zoomType="hover"
-                  zoomPreload={true}
-                  fullscreenOnMobile={true}
-                />
-              </div>
-              {/* other image */}
-              <div className="flex items-center flex-wrap gap-[15px]">
-                {product &&
-                  product?.images.map((item) => (
-                    <img
-                      src={item.src}
-                      onClick={() => handleImageClick(item.src)}
-                      className="w-[calc(25%-0.75em)] h-[87px] cursor-pointer"
-                      style={{
-                        opacity: selectedImage === item.src ? "1" : ".4",
-                      }}
-                    />
-                  ))}
-              </div>
-            </div>
-            {/* form part */}
-            <div>
-              <h1 className="my-[15px] text-[2rem] leading-[1.2] text-[#3a3a3a]">
-                {product?.name}
-              </h1>
-              <p className="text-[#4B4F58] text-[1.5rem] font-bold">
-                ${product != null ? product.price : "Loading.."}
-              </p>
-
-              {product?.attributes?.map((item, index) => (
-                <div className="mt-4" key={index}>
-                  <label
-                    htmlFor={item?.name}
-                    className="block font-bold !leading-[2em] text-gray-600"
-                  >
-                    {item?.name}
-                  </label>
-                  <select
-                    id={item?.name}
-                    name={item?.name}
-                    className="mt-2 block w-full rounded-md border-0 py-4 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-gray-300 text-[1rem]"
-                    value={selectedAttributes[item?.name] || ""}
-                    onChange={(e) => handleAttributeChange(e, item?.name)}
-                  >
-                    <option>Choose an option</option>
-                    {item.options.map((option, index) => (
-                      <option key={index} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              ))}
-
-              <button
-                type="button"
-                className={`py-[10px] px-[20px] border border-[#323232] font-semibold bg-[#000000] hover:bg-[#3a3a3a] mt-4 text-white  ${
-                  Object.keys(selectedAttributes).length === 0 ||
-                  product?.stock_status !== "instock"
-                    ? "cursor-not-allowed"
-                    : ""
-                }`}
-                disabled={
-                  Object.keys(selectedAttributes).length === 0 ||
-                  product?.stock_status !== "instock"
-                }
-                onClick={() => handleAddingtoCart(product)}
-              >
-                Add to Cart
-              </button>
-
-              {/* avbail */}
-              <p className="font-bold text-[1em] mt-4">
-                Availability:{" "}
-                <span
-                  className={`${
-                    product?.stock_status === "instock"
-                      ? "text-[#77a464]"
-                      : "text-red-400"
-                  } font-normal`}
-                >
-                  {product?.stock_status === "instock"
-                    ? "In Stock"
-                    : "Out Of Stock"}
-                </span>
-              </p>
-
-              {/* divider */}
-            </div>
-          </div>
-
-          {/* below */}
-          <div className="tabs- mt-24">
-            <div className="">
-              <div className="border-t border-gray-200">
-                <nav className="-mt-px flex space-x-8" aria-label="Tabs">
-                  {tabs.map((tab) => (
-                    <a
-                      key={tab.name}
-                      href={tab.href}
-                      className={classNames(
-                        tab.current
-                          ? "border-black"
-                          : "border-transparent hover:border-gray-300",
-                        "whitespace-nowrap border-t-4 py-4 px-1 text-sm cursor-pointer font-bold text-[#515151]"
-                      )}
-                      onClick={() => handleTabClick(tab.name)}
-                    >
-                      {tab.name}
-                    </a>
-                  ))}
-                </nav>
-              </div>
-            </div>
-            {/* tab content */}
-            {activeTab === "Description" && (
-              <p
-                className="text-gray-500 space-y-5 mt-3"
-                dangerouslySetInnerHTML={{ __html: product?.description ?? "" }}
-              />
-            )}
-            {activeTab === "SIZE CHART" && (
-              <div>
-                {isBikni && (
-                  <>
-                    <div className="flex items-center border border-gray-300">
-                      <p className="border-r p-3 w-32">BRA</p>
-                      <p className="p-3">
-                        {" "}
-                        {product?.attributes?.[0]?.options.map(
-                          (item, index) => (
-                            <span key={index}>
-                              {item}
-                              {index <
-                                product.attributes[0].options.length - 1 &&
-                                ", "}
-                            </span>
-                          )
-                        )}
-                      </p>
-                    </div>
-                    <div className="flex items-center border-r border-l border-b border-gray-300">
-                      <p className="border-r p-3 w-32">BOTTOM</p>
-                      <p className="p-3">
-                        {" "}
-                        {product?.attributes?.[0]?.options.map(
-                          (item, index) => (
-                            <span key={index}>
-                              {item}
-                              {index <
-                                product.attributes[0].options.length - 1 &&
-                                ", "}
-                            </span>
-                          )
-                        )}
-                      </p>
-                    </div>
-                    {isSizeChart && (
-                      <div className="flex items-center border-l border-r border-b border-gray-300">
-                        <p className="border-r p-3 w-32">SIZE CHART</p>
-                        <p className="p-3">
-                          {isSizeChart.options.map((item, index) => (
-                            <span key={index}>
-                              {item}
-                              {index < isSizeChart.options.length - 1 && <br />}
-                            </span>
-                          ))}
-                        </p>
-                      </div>
-                    )}
-                  </>
-                )}
-
-                {isShirt && (
-                  <>
-                    <div className="flex items-center border border-gray-300">
-                      <p className="border-r p-3 w-32">size</p>
-                      <p className="p-3">
-                        {product?.attributes?.[0]?.options.map(
-                          (item, index) => (
-                            <span key={index}>
-                              {item}
-                              {index <
-                                product.attributes[0].options.length - 1 &&
-                                ", "}
-                            </span>
-                          )
-                        )}
-                      </p>
-                    </div>
-                    {isSizeChart && (
-                      <div className="flex items-center border-l border-r border-b border-gray-300">
-                        <p className="border-r p-3 w-32">SIZE CHART</p>
-                        <p className="p-3">
-                          {isSizeChart.options.map((item, index) => (
-                            <span key={index}>
-                              {item}
-                              {index < isSizeChart.options.length - 1 && <br />}
-                            </span>
-                          ))}
-                        </p>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* related products */}
-          <h2 className="text-[1.5rem] mt-6">Related Products</h2>
-          <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-12 pb-12">
-            {shopItems.map((shopItems) => {
-              return (
-                <button
-                  className="bg-white cursor-pointer border-2 border-transparent rounded-xl duration-300 hover:border-gray-800"
-                  key={shopItems.id}
-                >
-                  <Image
-                    src={shopItems.image}
-                    height={370}
-                    alt={shopItems.slug}
+      <Layout headerFooter={headerFooter || ""}>
+        <div className="container mx-auto px-2 sm:px-4 lg:px-5 py-8">
+          <div className="border-r border-r-[#dddddd] md:pr-[60px] w-full md:w-[70%] my-4">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
+              {/* image part */}
+              <div className="flex flex-col">
+                <div className="mb-[15px]">
+                  <InnerImageZoom
+                    src={selectedImage}
+                    hasSpacer={true}
+                    zoomSrc={selectedImage}
+                    zoomType="hover"
+                    zoomPreload={true}
+                    fullscreenOnMobile={true}
                   />
-                  <div className="flex items-center justify-center mt-3">
-                    <div>
-                      <p className="font-semibold text-center">
-                        {shopItems.title}
-                      </p>
-                      <p className="text-center font-semibold pb-3">
-                        ${shopItems.price}
-                      </p>
-                    </div>
+                </div>
+                {/* other image */}
+                <div className="flex items-center flex-wrap gap-[15px]">
+                  {product &&
+                    product?.images.map((item) => (
+                      <img
+                        src={item.src}
+                        onClick={() => handleImageClick(item.src)}
+                        className="w-[calc(25%-0.75em)] h-[87px] cursor-pointer"
+                        style={{
+                          opacity: selectedImage === item.src ? "1" : ".4",
+                        }}
+                      />
+                    ))}
+                </div>
+              </div>
+              {/* form part */}
+              <div>
+                <h1 className="my-[15px] text-[2rem] leading-[1.2] text-[#3a3a3a]">
+                  {product?.name}
+                </h1>
+                <p className="text-[#4B4F58] text-[1.5rem] font-bold">
+                  ${product != null ? product.price : "Loading.."}
+                </p>
+
+                {product?.attributes?.map((item, index) => (
+                  <div className="mt-4" key={index}>
+                    <label
+                      htmlFor={item?.name}
+                      className="block font-bold !leading-[2em] text-gray-600"
+                    >
+                      {item?.name}
+                    </label>
+                    <select
+                      id={item?.name}
+                      name={item?.name}
+                      className="mt-2 block w-full rounded-md border-0 py-4 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-gray-300 text-[1rem]"
+                      value={selectedAttributes[item?.name] || ""}
+                      onChange={(e) => handleAttributeChange(e, item?.name)}
+                    >
+                      <option>Choose an option</option>
+                      {item.options.map((option, index) => (
+                        <option key={index} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
                   </div>
+                ))}
+
+                <button
+                  type="button"
+                  className={`py-[10px] px-[20px] border border-[#323232] font-semibold bg-[#000000] hover:bg-[#3a3a3a] mt-4 text-white  ${
+                    Object.keys(selectedAttributes).length === 0 ||
+                    product?.stock_status !== "instock"
+                      ? "cursor-not-allowed"
+                      : ""
+                  }`}
+                  disabled={
+                    Object.keys(selectedAttributes).length === 0 ||
+                    product?.stock_status !== "instock"
+                  }
+                  onClick={() => handleAddingtoCart(product)}
+                >
+                  Add to Cart
                 </button>
-              );
-            })}
+
+                {/* avbail */}
+                <p className="font-bold text-[1em] mt-4">
+                  Availability:{" "}
+                  <span
+                    className={`${
+                      product?.stock_status === "instock"
+                        ? "text-[#77a464]"
+                        : "text-red-400"
+                    } font-normal`}
+                  >
+                    {product?.stock_status === "instock"
+                      ? "In Stock"
+                      : "Out Of Stock"}
+                  </span>
+                </p>
+
+                {/* divider */}
+              </div>
+            </div>
+
+            {/* below */}
+            <div className="tabs- mt-24">
+              <div className="">
+                <div className="border-t border-gray-200">
+                  <nav className="-mt-px flex space-x-8" aria-label="Tabs">
+                    {tabs.map((tab) => (
+                      <a
+                        key={tab.name}
+                        href={tab.href}
+                        className={classNames(
+                          tab.current
+                            ? "border-black"
+                            : "border-transparent hover:border-gray-300",
+                          "whitespace-nowrap border-t-4 py-4 px-1 text-sm cursor-pointer font-bold text-[#515151]"
+                        )}
+                        onClick={() => handleTabClick(tab.name)}
+                      >
+                        {tab.name}
+                      </a>
+                    ))}
+                  </nav>
+                </div>
+              </div>
+              {/* tab content */}
+              {activeTab === "Description" && (
+                <p
+                  className="text-gray-500 space-y-5 mt-3"
+                  dangerouslySetInnerHTML={{
+                    __html: product?.description ?? "",
+                  }}
+                />
+              )}
+              {activeTab === "SIZE CHART" && (
+                <div>
+                  {isBikni && (
+                    <>
+                      <div className="flex items-center border border-gray-300">
+                        <p className="border-r p-3 w-32">BRA</p>
+                        <p className="p-3">
+                          {" "}
+                          {product?.attributes?.[0]?.options.map(
+                            (item, index) => (
+                              <span key={index}>
+                                {item}
+                                {index <
+                                  product.attributes[0].options.length - 1 &&
+                                  ", "}
+                              </span>
+                            )
+                          )}
+                        </p>
+                      </div>
+                      <div className="flex items-center border-r border-l border-b border-gray-300">
+                        <p className="border-r p-3 w-32">BOTTOM</p>
+                        <p className="p-3">
+                          {" "}
+                          {product?.attributes?.[0]?.options.map(
+                            (item, index) => (
+                              <span key={index}>
+                                {item}
+                                {index <
+                                  product.attributes[0].options.length - 1 &&
+                                  ", "}
+                              </span>
+                            )
+                          )}
+                        </p>
+                      </div>
+                      {isSizeChart && (
+                        <div className="flex items-center border-l border-r border-b border-gray-300">
+                          <p className="border-r p-3 w-32">SIZE CHART</p>
+                          <p className="p-3">
+                            {isSizeChart.options.map((item, index) => (
+                              <span key={index}>
+                                {item}
+                                {index < isSizeChart.options.length - 1 && (
+                                  <br />
+                                )}
+                              </span>
+                            ))}
+                          </p>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {isShirt && (
+                    <>
+                      <div className="flex items-center border border-gray-300">
+                        <p className="border-r p-3 w-32">size</p>
+                        <p className="p-3">
+                          {product?.attributes?.[0]?.options.map(
+                            (item, index) => (
+                              <span key={index}>
+                                {item}
+                                {index <
+                                  product.attributes[0].options.length - 1 &&
+                                  ", "}
+                              </span>
+                            )
+                          )}
+                        </p>
+                      </div>
+                      {isSizeChart && (
+                        <div className="flex items-center border-l border-r border-b border-gray-300">
+                          <p className="border-r p-3 w-32">SIZE CHART</p>
+                          <p className="p-3">
+                            {isSizeChart.options.map((item, index) => (
+                              <span key={index}>
+                                {item}
+                                {index < isSizeChart.options.length - 1 && (
+                                  <br />
+                                )}
+                              </span>
+                            ))}
+                          </p>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* related products */}
+            <h2 className="text-[1.5rem] mt-6">Related Products</h2>
+            <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-12 pb-12">
+              {shopItems.map((shopItems) => {
+                return (
+                  <button
+                    className="bg-white cursor-pointer border-2 border-transparent rounded-xl duration-300 hover:border-gray-800"
+                    key={shopItems.id}
+                  >
+                    <Image
+                      src={shopItems.image}
+                      height={370}
+                      alt={shopItems.slug}
+                    />
+                    <div className="flex items-center justify-center mt-3">
+                      <div>
+                        <p className="font-semibold text-center">
+                          {shopItems.title}
+                        </p>
+                        <p className="text-center font-semibold pb-3">
+                          ${shopItems.price}
+                        </p>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
 
-      <Subscribekinki />
-      <Footer />
+        <Subscribekinki />
+      </Layout>
     </>
   );
 }

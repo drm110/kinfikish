@@ -1,3 +1,4 @@
+import Layout from "@/componentss/layouts";
 import React from "react";
 import Image from "next/image";
 import Header from "@/MyComponents/Header";
@@ -51,56 +52,68 @@ const Archive = ({ headerFooter }) => {
 
   return (
     <>
-      <Header header={headerFooter || ""} />
-      <div className="w-full px-3 py-32 overflow-hidden">
-        <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[40rem] lg:h-[30rem] h-[30rem] relative overflow-hidden pb-1">
-          {/* <div className='bg-black w-full h-full opacity-30 bg-bgVideoPlayImg bg-no-repeat'>
-            </div> */}
-          {/* autoPlay muted loop */}
-          <video
-            autoPlay
-            muted
-            loop
-            className="mx-auto w-full  object-fill h-full"
-            src="../assets/kinki.mp4"
-          ></video>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div>
-            <p className="uppercase text-3xl font-bold text-center pt-14">
-              Summer Arrival
-            </p>
+      <Layout headerFooter={headerFooter || ""}>
+        <div className="w-full px-3 py-32 overflow-hidden">
+          <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[40rem] lg:h-[30rem] h-[30rem] relative overflow-hidden mb-3">
+            <video
+              muted
+              controls
+              className="mx-auto w-full object-fill h-full"
+              src="https://www.dropbox.com/scl/fi/fsa46utrmakyoi20bbhu2/kink-fish_Animation-Final.mp4?rlkey=nvm0bxtw8dl1p0h58bia9ufor&raw=1"
+            ></video>
           </div>
-          <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-12 pb-12">
-            {shopItems.map((shopItems) => {
-              return (
-                <button
-                  className="bg-white cursor-pointer border-2 border-transparent rounded-xl duration-300 hover:border-gray-800"
-                  key={shopItems.id}
-                >
-                  <Image
-                    src={shopItems.image}
-                    height={370}
-                    alt={shopItems.slug}
-                  />
-                  <div className="flex items-center justify-center mt-3">
-                    <div>
-                      <p className="font-semibold text-center">
-                        {shopItems.title}
-                      </p>
-                      <p className="text-center font-semibold pb-3">
-                        ${shopItems.price}
-                      </p>
+          <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[40rem] lg:h-[30rem] h-[30rem] relative overflow-hidden mb-3">
+            <video
+              muted
+              controls
+              className="mx-auto w-full object-fill h-full"
+              src="https://www.dropbox.com/scl/fi/n7l8m2rvuzupqghj3j7cg/bikini-video-main-2.MOV?rlkey=wvln60b3glohg25rcf8d9bg2d&raw=1"
+            ></video>
+          </div>
+          <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[40rem] lg:h-[30rem] h-[30rem] relative overflow-hidden mb-3">
+            <video
+              muted
+              controls
+              className="mx-auto w-full object-fill h-full"
+              src="https://www.dropbox.com/scl/fi/fp2zeyybjfubby1rzilo1/Baby-tee-collection-campaign-video.mp4?rlkey=xtmevwkf7dwsyr5o87cwhke5p&raw=1"
+            ></video>
+          </div>
+          {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div>
+              <p className="uppercase text-3xl font-bold text-center pt-14">
+                Summer Arrival
+              </p>
+            </div>
+            <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-12 pb-12">
+              {shopItems.map((shopItems) => {
+                return (
+                  <button
+                    className="bg-white cursor-pointer border-2 border-transparent rounded-xl duration-300 hover:border-gray-800"
+                    key={shopItems.id}
+                  >
+                    <Image
+                      src={shopItems.image}
+                      height={370}
+                      alt={shopItems.slug}
+                    />
+                    <div className="flex items-center justify-center mt-3">
+                      <div>
+                        <p className="font-semibold text-center">
+                          {shopItems.title}
+                        </p>
+                        <p className="text-center font-semibold pb-3">
+                          ${shopItems.price}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div> */}
         </div>
-      </div>
-      <Subscribekinki />
-      <Footer />
+        <Subscribekinki />
+      </Layout>
     </>
   );
 };

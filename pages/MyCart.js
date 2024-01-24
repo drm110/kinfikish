@@ -11,6 +11,8 @@ import { AppContext } from "@/componentss/context";
 
 import { toast } from "react-toastify";
 
+import { isEmpty } from "lodash";
+
 const MyCart = ({ headerFooter }) => {
   const [myCart, setMyCart] = useState([]);
   const [finalCost, setFinalCost] = useState(0);
@@ -99,8 +101,13 @@ const MyCart = ({ headerFooter }) => {
       localStorage.setItem("forCart", JSON.stringify(myCart));
     } else {
       removeItemFromCart(itemIndex);
+      let newCartObj = {
+        cartItems: updatedCart.filter((item, index) => index !== itemIndex),
+        totalQty: updatedCart.length - 1 || 0,
+        totalPrice: 0,
+      };
+      setCart(newCartObj);
       toast.success("Item has been removed from the cart!");
-      window.location.href = "/MyCart";
     }
 
     // Update the cart in state and local storage
@@ -135,11 +142,11 @@ const MyCart = ({ headerFooter }) => {
     setFinalCost(calculateTotalCost());
   }, [myCart]);
 
-  useEffect(() => {
-    if (MyProducts?.length < 1) {
-      setCart(null);
-    }
-  }, [MyProducts]);
+  // useEffect(() => {
+  //   if (MyProducts?.length < 1) {
+  //     setCart(null);
+  //   }
+  // }, [MyProducts]);
 
   return (
     <>
@@ -153,7 +160,7 @@ const MyCart = ({ headerFooter }) => {
                     Shopping Cart
                   </p>
                   <p className="font-semibold text-lg lg:text-2xl">
-                    {MyProducts.length} Items
+                    {!isEmpty(MyProducts) ? MyProducts.length : 0} Items
                   </p>
                 </div>
                 <table className="w-full text-left mt-8 min-w-[350px]">
@@ -182,71 +189,75 @@ const MyCart = ({ headerFooter }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {MyProducts.map((shopItems, index) => (
-                      <tr className="hover:bg-gray-100 rounded-xl" key={index}>
-                        <td className="pr-3">
-                          {" "}
-                          <div className="flex">
-                            <div className="w-20">
-                              <MyImage
-                                className="h-24"
-                                sourceUrl={shopItems.images[0].src}
-                                altText="Empty Image"
-                                width={61}
-                                height={96}
+                    {!isEmpty(MyProducts) &&
+                      MyProducts.map((shopItems, index) => (
+                        <tr
+                          className="hover:bg-gray-100 rounded-xl"
+                          key={index}
+                        >
+                          <td className="pr-3">
+                            {" "}
+                            <div className="flex">
+                              <div className="w-20 flex-none">
+                                <MyImage
+                                  className="h-24"
+                                  sourceUrl={shopItems.images[0].src}
+                                  altText="Empty Image"
+                                  width={96}
+                                  height={96}
+                                />
+                              </div>
+                              <div className="flex flex-col justify-center items-start ml-4 flex-grow">
+                                <span className="font-bold text-sm pb-3">
+                                  {shopItems.name}
+                                </span>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="pr-3">
+                            {" "}
+                            <div className="flex justify-center">
+                              {/* Substract quantity icon */}
+                              <svg
+                                className="fill-current text-gray-600 w-3 cursor-pointer"
+                                viewBox="0 0 448 512"
+                                onClick={() => subtractQuantity(index)}
+                              >
+                                <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                              </svg>
+
+                              <input
+                                className="mx-2 border text-center w-12"
+                                type="text"
+                                readOnly
+                                value={shopItems.stock_quantity}
                               />
-                            </div>
-                            <div className="flex flex-col justify-center items-start ml-4 flex-grow">
-                              <span className="font-bold text-sm pb-3">
-                                {shopItems.name}
-                              </span>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="pr-3">
-                          {" "}
-                          <div className="flex justify-center">
-                            {/* Substract quantity icon */}
-                            <svg
-                              className="fill-current text-gray-600 w-3 cursor-pointer"
-                              viewBox="0 0 448 512"
-                              onClick={() => subtractQuantity(index)}
-                            >
-                              <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                            </svg>
 
-                            <input
-                              className="mx-2 border text-center w-12"
-                              type="text"
-                              readOnly
-                              value={shopItems.stock_quantity}
-                            />
-
-                            {/* Add Quantity Icon */}
-                            <svg
-                              className="fill-current text-gray-600 w-3 cursor-pointer"
-                              viewBox="0 0 448 512"
-                              onClick={() => addQuantity(index)}
-                            >
-                              <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                            </svg>
-                          </div>
-                        </td>
-                        <td className="pr-3">
-                          {" "}
-                          <span className="font-semibold text-sm">
-                            {shopItems.price}
-                          </span>
-                        </td>
-                        <td>
-                          <span className="font-semibold text-sm">
-                            {shopItems.totalPrice
-                              ? shopItems.totalPrice
-                              : shopItems.price}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
+                              {/* Add Quantity Icon */}
+                              <svg
+                                className="fill-current text-gray-600 w-3 cursor-pointer"
+                                viewBox="0 0 448 512"
+                                onClick={() => addQuantity(index)}
+                              >
+                                <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                              </svg>
+                            </div>
+                          </td>
+                          <td className="pr-3">
+                            {" "}
+                            <span className="font-semibold text-sm">
+                              {shopItems.price}
+                            </span>
+                          </td>
+                          <td>
+                            <span className="font-semibold text-sm">
+                              {shopItems.totalPrice
+                                ? shopItems.totalPrice
+                                : shopItems.price}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
 
@@ -272,7 +283,7 @@ const MyCart = ({ headerFooter }) => {
                     Items: {myCart.length}
                   </span>
                   <span className="font-semibold text-sm">
-                    {MyProducts.length}
+                    {!isEmpty(MyProducts) ? MyProducts.length : 0}
                   </span>
                 </div>
                 {/* <div>

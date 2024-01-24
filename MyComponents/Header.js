@@ -9,8 +9,8 @@ import Head from "next/head";
 import { AppContext } from "@/componentss/context";
 
 const Header = ({ header }) => {
-  const [loading, setLoading] = useState(false)
-  console.log(header, "header")
+  const [loading, setLoading] = useState(false);
+  console.log(header, "header");
   const [cart, setCart] = useContext(AppContext);
   const { headerMenuItems, siteDescription, siteLogoUrl, siteTitle, favicon } =
     header?.header || header || "";
@@ -19,8 +19,8 @@ const Header = ({ header }) => {
   console.warn("Header COMPONENT", header);
 
   useEffect(() => {
-  setLoading(true)
-}, [cart])
+    setLoading(true);
+  }, [cart]);
 
   return (
     <>
