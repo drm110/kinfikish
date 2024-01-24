@@ -211,7 +211,7 @@ const CheckoutForm = ({ countriesData }) => {
           className="woo-next-checkout-form"
         >
           <div className="grid sm:px-10 lg:grid-cols-1 lg:px-20 xl:px-32">
-            <div className="mt-10 shadow-md px-4 pt-8 lg:mt-0">
+            <div className="max-w-3xl justify-self-center mt-10 shadow-md px-4 pt-8 lg:mt-0">
               <p className="text-2xl font-medium pb-4">Payment Details</p>
               <p className="text-gray-400">
                 Complete your order by providing your payment details.
