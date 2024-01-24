@@ -59,7 +59,7 @@ const Archive = ({ headerFooter }) => {
               muted
               controls
               className="mx-auto w-full object-fill h-full"
-              src="https://www.dropbox.com/scl/fi/fsa46utrmakyoi20bbhu2/kink-fish_Animation-Final.mp4?rlkey=nvm0bxtw8dl1p0h58bia9ufor&raw=1"
+              src="https://www.dropbox.com/scl/fi/fp2zeyybjfubby1rzilo1/Baby-tee-collection-campaign-video.mp4?rlkey=xtmevwkf7dwsyr5o87cwhke5p&raw=1"
             ></video>
           </div>
           <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[40rem] lg:h-[30rem] h-[30rem] relative overflow-hidden mb-3">
@@ -75,7 +75,7 @@ const Archive = ({ headerFooter }) => {
               muted
               controls
               className="mx-auto w-full object-fill h-full"
-              src="https://www.dropbox.com/scl/fi/fp2zeyybjfubby1rzilo1/Baby-tee-collection-campaign-video.mp4?rlkey=xtmevwkf7dwsyr5o87cwhke5p&raw=1"
+              src="https://www.dropbox.com/scl/fi/fsa46utrmakyoi20bbhu2/kink-fish_Animation-Final.mp4?rlkey=nvm0bxtw8dl1p0h58bia9ufor&raw=1"
             ></video>
           </div>
           {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
