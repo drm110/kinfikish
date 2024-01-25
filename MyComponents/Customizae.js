@@ -24,7 +24,7 @@ const Customizae = () => {
           muted
           loop
           className="mx-auto w-full object-fill lg:h-full"
-          src="https://www.dropbox.com/scl/fi/p0ygudq1e2urnyi80u5x8/swing-video-final.mp4?rlkey=qhc0kl30tz39hm8na6v2gt5rt&raw=1"
+          src="https://www.dropbox.com/scl/fi/9b0bg6n7udn5rpq0zu62y/Homepage-swing-vid-no-video.mp4?rlkey=rfslcw1x29jlvrlpp4puyo9ly&raw=1"
         ></video>
       </div>
     </div>
