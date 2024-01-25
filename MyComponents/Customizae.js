@@ -22,6 +22,7 @@ const Customizae = () => {
           autoPlay
           muted
           loop
+          controls
           className="mx-auto w-full object-fill lg:h-full"
           src="https://www.dropbox.com/scl/fi/p0ygudq1e2urnyi80u5x8/swing-video-final.mp4?rlkey=qhc0kl30tz39hm8na6v2gt5rt&raw=1"
         ></video>
