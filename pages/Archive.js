@@ -54,27 +54,27 @@ const Archive = ({ headerFooter }) => {
     <>
       <Layout headerFooter={headerFooter || ""}>
         <div className="w-full px-3 py-32 overflow-hidden">
-          <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[40rem] lg:h-[30rem] h-[30rem] relative overflow-hidden mb-3">
+          <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[45rem] lg:h-[40rem] max-h-screen relative overflow-hidden mb-3">
             <video
               muted
               controls
-              className="mx-auto w-full object-fill h-full"
+              className="mx-auto w-full object-fill lg:h-full"
               src="https://www.dropbox.com/scl/fi/fp2zeyybjfubby1rzilo1/Baby-tee-collection-campaign-video.mp4?rlkey=xtmevwkf7dwsyr5o87cwhke5p&raw=1"
             ></video>
           </div>
-          <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[40rem] lg:h-[30rem] h-[30rem] relative overflow-hidden mb-3">
+          <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[45rem] lg:h-[40rem] max-h-screen relative overflow-hidden mb-3">
             <video
               muted
               controls
-              className="mx-auto w-full object-fill h-full"
+              className="mx-auto w-full object-fill lg:h-full"
               src="https://www.dropbox.com/scl/fi/n7l8m2rvuzupqghj3j7cg/bikini-video-main-2.MOV?rlkey=wvln60b3glohg25rcf8d9bg2d&raw=1"
             ></video>
           </div>
-          <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[40rem] lg:h-[30rem] h-[30rem] relative overflow-hidden mb-3">
+          <div className="bg-cover bg-center bg-fixed w-full 2xl:h-[50rem] xl:h-[45rem] lg:h-[40rem] max-h-screen relative overflow-hidden mb-3">
             <video
               muted
               controls
-              className="mx-auto w-full object-fill h-full"
+              className="mx-auto w-full object-fill lg:h-full"
               src="https://www.dropbox.com/scl/fi/fsa46utrmakyoi20bbhu2/kink-fish_Animation-Final.mp4?rlkey=nvm0bxtw8dl1p0h58bia9ufor&raw=1"
             ></video>
           </div>
