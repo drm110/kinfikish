@@ -40,8 +40,10 @@ export default function Home({ headerFooter, products }) {
           }
         />
         <Customizae />
-        <Followinstagram />
-        <Followtiktok />
+        <div className="pt-24 pb-12 flex justify-evenly">
+          <Followinstagram />
+          <Followtiktok />
+        </div>
         <Subscribekinki />
         {/* <Footer/> */}
       </DndProvider>

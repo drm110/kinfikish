@@ -9,37 +9,40 @@ import {
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
-
 const Followinstagram = () => {
   const [media, setMedia] = useState(null);
 
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
-  
+
     const fetchData = async () => {
       try {
-        const res = await fetch(`https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=${process.env.NEXT_PUBLIC_AGAIN_TOKEN}`, {
-          signal: signal // Pass the signal to the fetch request
-        });
-  
+        const res = await fetch(
+          `https://graph.instagram.com/me/media/?fields=id,caption,media_url,timestamp,media_type,permalink&access_token=${process.env.NEXT_PUBLIC_AGAIN_TOKEN}`,
+          {
+            signal: signal, // Pass the signal to the fetch request
+          }
+        );
+
         const data = await res.json();
+
         setMedia(data?.data);
       } catch (error) {
         // Handle fetch errors
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchData();
-  
+
     // Cleanup function
     return () => {
       abortController.abort(); // Abort the fetch request if the component unmounts
     };
   }, []);
   return (
-    <div className="mt-12">
+    <div>
       <div>
         <p className="uppercase text-3xl font-bold text-center">instagram</p>
         <a href="https://www.instagram.com/kinki.fish/">
