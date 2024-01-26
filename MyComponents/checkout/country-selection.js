@@ -4,7 +4,7 @@ import Abbr from "./form-elements/abbr";
 // import ArrowDown from "../icons/ArrowDown";
 
 const CountrySelection = ({ input, handleOnChange, countries, isShipping }) => {
-  const { country = "US", errors } = input || {};
+  const { country, errors } = input || {};
 
   const inputId = `country-${isShipping ? "shipping" : "billing"}`;
 
