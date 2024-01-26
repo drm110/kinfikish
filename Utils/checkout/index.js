@@ -143,7 +143,6 @@ const createCheckoutSessionAndRedirect = async (products, input, orderId) => {
  * @return {*[]|*}
  */
 const getStripeLineItems = (products) => {
-  debugger;
   if (isEmpty(products) && !isArray(products)) {
     return [];
   }

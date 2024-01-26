@@ -23,7 +23,7 @@ import { AppContext } from "@/componentss/context";
 
 // import { useScreenshot } from 'use-react-screenshot'
 
-const Productsbadgecustomizer = () => {
+const Productsbadgecustomizer = ({ customizedProduct }) => {
   const router = useRouter();
 
   const [cart, setCart] = useContext(AppContext);
@@ -123,88 +123,57 @@ const Productsbadgecustomizer = () => {
     }),
   }));
 
-  const [product, setProduct] = useState({
-    name: "SMOKING GIRL BABY TEE",
-    price: 100,
-    description: "lorem lorem lorem",
-    images: [{ src: finalImage }],
-    slug: "customized_shirt",
-    stock_quantity: 1,
-    totalPrice: 100,
-    is_customized: true,
-  });
+  const [product, setProduct] = useState(customizedProduct);
 
   const addImageToBoard = (id) => {
     const pictureList = PictureList.filter((picture) => id === picture.id);
     setBoard((board) => [...board, pictureList[0]]);
   };
 
-  const captureFinalImage = () => {
-    return html2canvas(containerRef.current).then((canvas) => {
-      const imageSrc = canvas.toDataURL("image/png");
-      setFinalImage(imageSrc);
-      return imageSrc; // Return the image source
-    });
-  };
+  // const captureFinalImage = () => {
+  //   return html2canvas(containerRef.current).then((canvas) => {
+  //     const imageSrc = canvas.toDataURL("image/png");
+  //     setFinalImage(imageSrc);
+  //     return imageSrc; // Return the image source
+  //   });
+  // };
 
   const handleAddingtoCart = async (product) => {
-    const capturedImage = await captureFinalImage(); // Wait for the image capture
+    // const capturedImage = await captureFinalImage(); // Wait for the image capture
 
-    if (capturedImage) {
-      // Update the product with the captured image source
-      product.images = [{ src: capturedImage }];
-      // Include selected sizes in the product object
-      const existingCart = JSON.parse(localStorage.getItem("forCart") || null);
+    // if (capturedImage) {
+    // Update the product with the captured image source
+    // product.images = [{ src: capturedImage }];
+    // Include selected sizes in the product object
+    const existingCart = JSON.parse(localStorage.getItem("forCart") || null);
 
-      if (existingCart) {
-        let existingCartItem;
+    if (existingCart) {
+      let existingCartItem;
 
-        const updatedCart = existingCart.cartItems;
+      const updatedCart = existingCart.cartItems;
 
-        if (updatedCart.length === 1 || updatedCart.length === undefined) {
-          if (updatedCart.length === undefined) {
-            updatedCart.push(product);
-            let newCartObj = {
-              cartItems: updatedCart,
-              totalQty: updatedCart.length || 1,
-              totalPrice: updatedCart.length * product.price,
-            };
+      if (updatedCart.length === 1 || updatedCart.length === undefined) {
+        if (updatedCart.length === undefined) {
+          updatedCart.push(product);
+          let newCartObj = {
+            cartItems: updatedCart,
+            totalQty: updatedCart.length || 1,
+            totalPrice: updatedCart.length * product.price,
+          };
 
-            localStorage.setItem("forCart", JSON.stringify(newCartObj));
-            setCart(newCartObj);
+          localStorage.setItem("forCart", JSON.stringify(newCartObj));
+          setCart(newCartObj);
 
-            toast.success("Item has been added to your cart!");
-          } else {
-            existingCartItem = updatedCart[0].slug === product.slug;
-            if (existingCartItem === true) {
-              toast.error("This Product is already added to your cart");
-            } else {
-              product.stock_quantity = 1;
-              product.totalPrice = parseInt(product.price);
-              updatedCart.push(product);
-
-              let newCartObj = {
-                cartItems: updatedCart,
-                totalQty: updatedCart.length || 1,
-                totalPrice: updatedCart.length * product.price,
-              };
-              localStorage.setItem("forCart", JSON.stringify(newCartObj));
-              setCart(newCartObj);
-
-              toast.success("Item has been added to your cart!");
-            }
-          }
+          toast.success("Item has been added to your cart!");
         } else {
-          existingCartItem = updatedCart.find(
-            (item) => item.slug === product.slug
-          );
-
-          if (existingCartItem) {
+          existingCartItem = updatedCart[0].slug === product.slug;
+          if (existingCartItem === true) {
             toast.error("This Product is already added to your cart");
           } else {
             product.stock_quantity = 1;
             product.totalPrice = parseInt(product.price);
             updatedCart.push(product);
+
             let newCartObj = {
               cartItems: updatedCart,
               totalQty: updatedCart.length || 1,
@@ -214,24 +183,46 @@ const Productsbadgecustomizer = () => {
             setCart(newCartObj);
 
             toast.success("Item has been added to your cart!");
-            // router.push(`/MyCart`);
           }
         }
       } else {
-        product.stock_quantity = 1;
-        product.totalPrice = parseInt(product.price);
-        console.log("CHECKING PRODUCT leNgth:> ", product, product.length);
-        let newCartObj = {
-          cartItems: [product],
-          totalQty: product.length || 1,
-          totalPrice: product.stock_quantity * product.price,
-        };
-        localStorage.setItem("forCart", JSON.stringify(newCartObj));
-        setCart(newCartObj);
+        existingCartItem = updatedCart.find(
+          (item) => item.slug === product.slug
+        );
 
-        toast.success("Item has been added to your cart!");
+        if (existingCartItem) {
+          toast.error("This Product is already added to your cart");
+        } else {
+          product.stock_quantity = 1;
+          product.totalPrice = parseInt(product.price);
+          updatedCart.push(product);
+          let newCartObj = {
+            cartItems: updatedCart,
+            totalQty: updatedCart.length || 1,
+            totalPrice: updatedCart.length * product.price,
+          };
+          localStorage.setItem("forCart", JSON.stringify(newCartObj));
+          setCart(newCartObj);
+
+          toast.success("Item has been added to your cart!");
+          // router.push(`/MyCart`);
+        }
       }
+    } else {
+      product.stock_quantity = 1;
+      product.totalPrice = parseInt(product.price);
+      console.log("CHECKING PRODUCT leNgth:> ", product, product.length);
+      let newCartObj = {
+        cartItems: [product],
+        totalQty: product.length || 1,
+        totalPrice: product.stock_quantity * product.price,
+      };
+      localStorage.setItem("forCart", JSON.stringify(newCartObj));
+      setCart(newCartObj);
+
+      toast.success("Item has been added to your cart!");
     }
+    // }
   };
 
   return (

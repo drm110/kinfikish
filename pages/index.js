@@ -11,9 +11,10 @@ import { MultiBackend } from "react-dnd-multi-backend";
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import Layout from "@/componentss/layouts";
 import axios from "axios";
+import { isEmpty } from "lodash";
 
 // {headerFooter}
-export default function Home({ headerFooter }) {
+export default function Home({ headerFooter, products }) {
   let reload = false;
   useEffect(() => {
     reload = true;
@@ -31,7 +32,13 @@ export default function Home({ headerFooter }) {
         {/* <Header header={headerFooter}/> */}
         {/* <NewTshirts products={products} /> */}
         <NewTshirts />
-        <Productsbadgecustomizer />
+        <Productsbadgecustomizer
+          customizedProduct={
+            !isEmpty(products)
+              ? products.find((item) => item.slug === "customized-shirt")
+              : {}
+          }
+        />
         <Customizae />
         <Followinstagram />
         <Followtiktok />
@@ -47,10 +54,14 @@ export async function getStaticProps() {
     const { data: headerFooterData } = await axios.get(
       `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
     );
+    const { data: productsData } = await axios.get(
+      `https://kinkifish-new.vercel.app/api/get-products`
+    );
 
     return {
       props: {
         headerFooter: headerFooterData.data ?? {},
+        products: productsData.products ?? {},
       },
       revalidate: 1,
     };
@@ -59,6 +70,7 @@ export async function getStaticProps() {
     return {
       props: {
         headerFooter: "Not found",
+        products: 0,
       },
     };
   }
