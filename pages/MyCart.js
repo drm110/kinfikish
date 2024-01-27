@@ -13,6 +13,24 @@ import { toast } from "react-toastify";
 
 import { isEmpty } from "lodash";
 
+const validateCurrentCart = (currentCart) => {
+  const updatedCartItems = [];
+  let updatedTotalPrice = 0;
+  let updatedTotalQty = 0;
+  currentCart.cartItems.map((item) => {
+    if (item.id) {
+      updatedCartItems.push(item);
+      updatedTotalPrice += item.stock_quantity * item.totalPrice;
+      updatedTotalQty += 1;
+    }
+  });
+  return {
+    cartItems: updatedCartItems,
+    totalPrice: updatedTotalPrice,
+    totalQty: updatedTotalQty,
+  };
+};
+
 const MyCart = ({ headerFooter }) => {
   const [myCart, setMyCart] = useState([]);
   const [finalCost, setFinalCost] = useState(0);
@@ -25,9 +43,11 @@ const MyCart = ({ headerFooter }) => {
 
     if (existingCart) {
       const existingCartItems = JSON.parse(existingCart);
-      setMyCart(existingCartItems);
-      setMyProducts(existingCartItems.cartItems);
-      console.log("CHcEking mY :> ", existingCartItems.cartItems);
+      const validCartItems = validateCurrentCart(existingCartItems);
+      localStorage.setItem("forCart", JSON.stringify(validCartItems));
+      setMyCart(validCartItems);
+      setMyProducts(validCartItems.cartItems);
+      console.log("CHcEking mY :> ", validCartItems.cartItems);
     } else {
       setMyCart([]);
     }
