@@ -1,24 +1,30 @@
-const axios = require("axios");
+const fetch = require("node-fetch");
 
-const LIST_ID = "VhVTgV";
+const PRIVATE_API_KEY = "pk_ee8525bbae98f9214103c4c089ec57270d";
+const LIST_ID = "UKy6ZG";
 
 export default async (req, res) => {
   if (req.method === "POST") {
     const { email } = req.body;
 
-    const data = {
-      profiles: [{ email }],
+    const url = `https://a.klaviyo.com/api/v2/list/${LIST_ID}/subscribe?api_key=${PRIVATE_API_KEY}`;
+    const options = {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        profiles: [{ email: email }],
+      }),
     };
 
-    try {
-      const response = await axios.post(
-        `https://a.klaviyo.com/api/v2/list/${LIST_ID}/subscribe`,
-        data
-      );
-      res.status(200).json({ message: "Successfully subscribed!" });
-    } catch (error) {
-      res.status(500).json({ message: "An error occurred." });
-    }
+    fetch(url, options)
+      .then((response) => res.json(response))
+      .catch((err) => {
+        console.error("error:", err);
+        res.json(err);
+      });
   } else {
     res.status(405).json({ message: "Method Not Allowed" });
   }

@@ -13,19 +13,21 @@ const Subscribekinki = () => {
 
   const onClickSend = () => {
     if (validateEmail(email)) {
-      setEmail("");
-      toast.success("Succeed!");
-      // axios
-      //   .post("/api/subscribe", { email: email })
-      //   .then((res) => {
-      //     console.log(res);
-      //     setEmail("");
-      //     toast.success(res.message);
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //     toast.error(error.message);
-      //   });
+      axios
+        .post("/api/subscribe", { email: email })
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            setEmail("");
+            toast.success("Please confirm your subscription with email.");
+          } else {
+            toast.error("Failed");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          toast.error("Failed");
+        });
     } else {
       setIsValid(false);
     }
