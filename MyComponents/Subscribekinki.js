@@ -16,7 +16,6 @@ const Subscribekinki = () => {
       axios
         .post("/api/subscribe", { email: email })
         .then((res) => {
-          console.log(res);
           if (res.status === 200) {
             setEmail("");
             toast.success("Please confirm your subscription with email.");
