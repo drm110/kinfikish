@@ -18,7 +18,8 @@ const Subscribekinki = () => {
         .then((res) => {
           if (res.status === 200) {
             setEmail("");
-            toast.success("Please confirm your subscription with email.");
+            // toast.success("Please confirm your subscription with email."); // case of Double opt-in
+            toast.success("Subscribed!"); // case of Single opt-in
           } else {
             toast.error("Failed");
           }
