@@ -255,7 +255,6 @@ const defaultCutomerInfo = {
   address2: "",
   city: "",
   countries: "",
-  states: defaultState,
   country: "US",
   state: "",
   postcode: "",
@@ -649,7 +648,7 @@ const CheckoutForm = ({ countriesData }) => {
 
               {/* Order & Payments*/}
               <div className="your-orders">
-                {/*	Order*/}
+                {/* Order*/}
                 <h2 className="text-xl font-medium mb-4">Your Order</h2>
                 <YourOrder cart={cart} />
                 {/* <YourOrder/> */}
