@@ -2,7 +2,7 @@ const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 import { isEmpty } from "lodash";
 
 const api = new WooCommerceRestApi({
-	url: "https://cms.kinkifish.com",
+  url: "https://cms.kinkifish.com",
   consumerKey: "ck_0ed3103a7fbb4a62554f92237b5016ab79c51700",
   consumerSecret: "cs_ea78625e562eb856abf7ba6e5f336e2a18afe8e7",
   version: "wc/v3", // API version

@@ -17,6 +17,8 @@ import axios from "axios";
 import { AppContext } from "@/componentss/context";
 import { isEmpty } from "lodash";
 
+const CHOOSE_AN_OPTION = "Choose an option";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -27,18 +29,37 @@ export default function Page({ headerFooter }) {
   const [cart, setCart] = useContext(AppContext);
 
   const [activeTab, setActiveTab] = useState("Description");
-  const [selectedBra, setSelectedBra] = useState("Choose an option");
-  const [selectedBottom, setSelectedBottom] = useState("Choose an option");
-  const [selectedSize, setSelectedSize] = useState("Choose an option");
+  const [selectedBra, setSelectedBra] = useState(CHOOSE_AN_OPTION);
+  const [selectedBottom, setSelectedBottom] = useState(CHOOSE_AN_OPTION);
+  const [selectedSize, setSelectedSize] = useState(CHOOSE_AN_OPTION);
   const [selectedAttributes, setSelectedAttributes] = useState({});
+
+  const [attributeOption, setAttributeOption] = useState([]);
+  const [attributeIndex, setAttributeIndex] = useState([]);
 
   console.log(selectedAttributes, "at");
 
-  const handleAttributeChange = (e, attributeName) => {
-    setSelectedAttributes({
-      ...selectedAttributes,
-      [attributeName]: e.target.value,
-    });
+  const handleAttributeChange = (e, attributeName, propIndex) => {
+    if (e.target.value === CHOOSE_AN_OPTION) {
+      setSelectedAttributes((prevState) => {
+        const newState = { ...prevState };
+        delete newState[attributeName];
+        return newState;
+      });
+      setAttributeIndex((prevState) =>
+        prevState.map((item, index) => (index === propIndex ? -1 : item))
+      );
+    } else {
+      setSelectedAttributes({
+        ...selectedAttributes,
+        [attributeName]: e.target.value,
+      });
+      setAttributeIndex((prevState) =>
+        prevState.map((item, index) =>
+          index === propIndex ? e.target.selectedIndex - 1 : item
+        )
+      );
+    }
   };
 
   const tabs = [
@@ -58,9 +79,31 @@ export default function Page({ headerFooter }) {
     const fetchData = async () => {
       const cartData = JSON.parse(localStorage.getItem("forAddToCart") || "[]");
 
-      await setProduct(cartData);
+      await setProduct({ ...cartData, original_name: cartData.name });
       if (cartData && cartData.images && cartData.images.length > 0) {
         setSelectedImage(cartData.images[0].src);
+      }
+
+      if (cartData.attributes) {
+        const tempOption = [];
+        const tempIndex = [];
+        cartData.attributes.map((item, index) => {
+          tempOption.push(item.options.length);
+          tempIndex.push(-1);
+        });
+
+        let i = 1;
+
+        setAttributeOption(
+          tempOption
+            .reverse()
+            .map((item) => {
+              i *= item;
+              return i / item;
+            })
+            .reverse()
+        );
+        setAttributeIndex(tempIndex);
       }
     };
 
@@ -70,6 +113,23 @@ export default function Page({ headerFooter }) {
   console.log(product);
 
   const handleAddingtoCart = async (product) => {
+    let variableIndex = 0;
+    let productAttr = " (";
+    product.attributes.map((item, index) => {
+      variableIndex += attributeIndex[index] * attributeOption[index];
+      if (product.attributes.length <= 1) {
+        productAttr += `${item.options[attributeIndex[index]]}`;
+      } else {
+        productAttr += `${item.name}-${item.options[attributeIndex[index]]}`;
+        if (index < product.attributes.length - 1) {
+          productAttr += ", ";
+        }
+      }
+    });
+    productAttr += ")";
+    product.id = product.variations[variableIndex];
+    product.name += productAttr;
+
     // Include selected sizes in the product object
     product.selectedBra = selectedAttributes?.BRA;
     product.selectedBottom = selectedAttributes?.BOTTOM;
@@ -93,10 +153,12 @@ export default function Page({ headerFooter }) {
           setCart(newCartObj);
 
           toast.success("Item has been added to your cart!");
+          product.name = product.original_name;
         } else {
-          existingCartItem = updatedCart[0].slug === product.slug;
+          existingCartItem = updatedCart[0].id === product.id;
           if (existingCartItem === true) {
             toast.error("This Product is already added to your cart");
+            product.name = product.original_name;
           } else {
             product.stock_quantity = 1;
             product.totalPrice = parseInt(product.price);
@@ -113,15 +175,15 @@ export default function Page({ headerFooter }) {
             setCart(newCartObj);
 
             toast.success("Item has been added to your cart!");
+            product.name = product.original_name;
           }
         }
       } else {
-        existingCartItem = updatedCart.find(
-          (item) => item.slug === product.slug
-        );
+        existingCartItem = updatedCart.find((item) => item.id === product.id);
 
         if (existingCartItem) {
           toast.error("This Product is already added to your cart");
+          product.name = product.original_name;
         } else {
           product.stock_quantity = 1;
           product.totalPrice = parseInt(product.price);
@@ -137,6 +199,7 @@ export default function Page({ headerFooter }) {
           setCart(newCartObj);
 
           toast.success("Item has been added to your cart!");
+          product.name = product.original_name;
           // router.push(`/MyCart`);
         }
       }
@@ -206,7 +269,7 @@ export default function Page({ headerFooter }) {
               {/* form part */}
               <div>
                 <h1 className="my-[15px] text-[2rem] leading-[1.2] text-[#3a3a3a]">
-                  {product?.name}
+                  {product?.original_name}
                 </h1>
                 <p className="text-[#4B4F58] text-[1.5rem] font-bold">
                   ${product != null ? product.price : "Loading.."}
@@ -225,9 +288,11 @@ export default function Page({ headerFooter }) {
                       name={item?.name}
                       className="mt-2 block w-full rounded-md border-0 py-4 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-gray-300 text-[1rem]"
                       value={selectedAttributes[item?.name] || ""}
-                      onChange={(e) => handleAttributeChange(e, item?.name)}
+                      onChange={(e) =>
+                        handleAttributeChange(e, item?.name, index)
+                      }
                     >
-                      <option>Choose an option</option>
+                      <option>{CHOOSE_AN_OPTION}</option>
                       {item.options.map((option, index) => (
                         <option key={index} value={option}>
                           {option}
@@ -240,13 +305,15 @@ export default function Page({ headerFooter }) {
                 <button
                   type="button"
                   className={`py-[10px] px-[20px] border border-[#323232] font-semibold bg-[#000000] hover:bg-[#3a3a3a] mt-4 text-white  ${
-                    Object.keys(selectedAttributes).length === 0 ||
+                    Object.keys(selectedAttributes).length <
+                      (product ? product.attributes.length : 0) ||
                     product?.stock_status !== "instock"
                       ? "cursor-not-allowed"
                       : ""
                   }`}
                   disabled={
-                    Object.keys(selectedAttributes).length === 0 ||
+                    Object.keys(selectedAttributes).length <
+                      (product ? product.attributes.length : 0) ||
                     product?.stock_status !== "instock"
                   }
                   onClick={() => handleAddingtoCart(product)}

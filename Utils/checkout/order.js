@@ -15,7 +15,7 @@ export const getCreateOrderLineItems = (products) => {
   return products?.map(({ id, stock_quantity }) => {
     return {
       quantity: stock_quantity,
-      product_id: id
+      product_id: id,
       // variation_id: '', // @TODO to be added.
     };
   });
