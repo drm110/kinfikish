@@ -250,9 +250,16 @@ export const getStates = async (countryCode = "") => {
     return [];
   }
 
-  const { data } = await axios.get(WOOCOMMERCE_STATES_ENDPOINT, {
-    params: { countryCode },
-  });
+  const { data } = await axios
+    .get(WOOCOMMERCE_STATES_ENDPOINT, {
+      params: { countryCode },
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return [];
+    });
 
   return data?.states ?? [];
 };

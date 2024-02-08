@@ -293,7 +293,7 @@ const CheckoutForm = ({ countriesData }) => {
   const [input, setInput] = useState(initialState);
   const [requestError, setRequestError] = useState(null);
   const [theShippingStates, setTheShippingStates] = useState(defaultState);
-  const [theBillingStates, setTheBillingStates] = useState([]);
+  const [theBillingStates, setTheBillingStates] = useState(defaultState);
   const [isFetchingShippingStates, setIsFetchingShippingStates] =
     useState(false);
   const [isFetchingBillingStates, setIsFetchingBillingStates] = useState(false);
