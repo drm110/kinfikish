@@ -127,7 +127,11 @@ export default function Page({ headerFooter }) {
       }
     });
     productAttr += ")";
-    product.id = product.variations[variableIndex];
+    if (product.slug === "customized-shirt") {
+      product.id = product.variations[attributeIndex[0]];
+    } else {
+      product.id = product.variations[variableIndex];
+    }
     product.name += productAttr;
 
     // Include selected sizes in the product object
