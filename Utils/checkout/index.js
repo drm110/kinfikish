@@ -68,7 +68,8 @@ export const handleStripeCheckout = async (
   setRequestError,
   setCart,
   setIsProcessing,
-  setCreatedOrderData
+  setCreatedOrderData,
+  shippingRateId
 ) => {
   setIsProcessing(true);
   const orderData = getCreateOrderData(input, products);
@@ -90,7 +91,8 @@ export const handleStripeCheckout = async (
   await createCheckoutSessionAndRedirect(
     products,
     input,
-    customerOrderData?.orderId
+    customerOrderData?.orderId,
+    shippingRateId
   );
 
   return customerOrderData;
@@ -103,7 +105,12 @@ export const handleStripeCheckout = async (
  * @param orderId
  * @return {Promise<void>}
  */
-const createCheckoutSessionAndRedirect = async (products, input, orderId) => {
+const createCheckoutSessionAndRedirect = async (
+  products,
+  input,
+  orderId,
+  shippingRateId
+) => {
   const sessionData = {
     success_url:
       window.location.origin +
@@ -116,6 +123,11 @@ const createCheckoutSessionAndRedirect = async (products, input, orderId) => {
     metadata: getMetaData(input, orderId),
     payment_method_types: ["card"],
     mode: "payment",
+    shipping_options: [
+      {
+        shipping_rate: shippingRateId,
+      },
+    ],
   };
   console.log("sessionData", sessionData);
   let session = {};

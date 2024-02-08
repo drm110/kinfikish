@@ -29,6 +29,21 @@ import PaymentModes from "./payment-modes";
 //   errors: null,
 // };
 
+const shippingMethod = [
+  {
+    key: 0,
+    name: "Standard (3-6 business days)",
+    cost: 0,
+    shipping_rate_key: "shr_1OhU3yECzMeyksLqvsWQNatz",
+  },
+  {
+    key: 1,
+    name: "Priority (1-3 business days)",
+    cost: 1000,
+    shipping_rate_key: "shr_1OhU4kECzMeyksLqwPsygPER",
+  },
+];
+
 const defaultState = [
   {
     stateCode: "AL",
@@ -300,6 +315,10 @@ const CheckoutForm = ({ countriesData }) => {
   const [isOrderProcessing, setIsOrderProcessing] = useState(false);
   const [createdOrderData, setCreatedOrderData] = useState({});
 
+  const [selectedShippingOption, setSelectedShippingOption] = useState(
+    shippingMethod[0]
+  );
+
   const handleFormSubmit = async (event) => {
     event?.preventDefault();
 
@@ -344,7 +363,8 @@ const CheckoutForm = ({ countriesData }) => {
         setRequestError,
         setCart,
         setIsOrderProcessing,
-        setCreatedOrderData
+        setCreatedOrderData,
+        selectedShippingOption.shipping_rate_key
       );
       return null;
     }
@@ -378,6 +398,10 @@ const CheckoutForm = ({ countriesData }) => {
       handleCreateAccount(input, setInput, target);
     } else if ("billingDifferentThanShipping" === target.name) {
       handleBillingDifferentThanShipping(input, setInput, target);
+    } else if ("shippingOption" === target.name) {
+      setSelectedShippingOption(
+        shippingMethod.find((item) => Number(item.key) === Number(target.value))
+      );
     } else if (isBillingOrShipping) {
       if (isShipping) {
         await handleShippingChange(target);
@@ -613,6 +637,33 @@ const CheckoutForm = ({ countriesData }) => {
                   isShipping
                 />
               </div>
+
+              {/* Shipping Method */}
+              <div className="py-4">
+                <p className="text-base font-medium pb-4">Shipping Method</p>
+                <div className="flex flex-col gap-2">
+                  {shippingMethod.map((item, index) => (
+                    <label className="cursor-pointer flex justify-between">
+                      <div className="flex items-center">
+                        <input
+                          onChange={handleOnChange}
+                          type="radio"
+                          checked={selectedShippingOption.key === item.key}
+                          value={item.key}
+                          name="shippingOption"
+                        ></input>
+                        <span className="ml-2">{item.name || ""}</span>
+                      </div>
+                      <span className="font-medium">
+                        {item.cost <= 0
+                          ? "Free"
+                          : `$${(item.cost / 100).toFixed(2)}`}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
               <div>
                 <CheckboxField
                   name="billingDifferentThanShipping"
@@ -647,10 +698,13 @@ const CheckoutForm = ({ countriesData }) => {
               ) : null}
 
               {/* Order & Payments*/}
-              <div className="your-orders">
+              <div className="your-orders pt-4">
                 {/* Order*/}
                 <h2 className="text-xl font-medium mb-4">Your Order</h2>
-                <YourOrder cart={cart} />
+                <YourOrder
+                  cart={cart}
+                  shippingCost={(selectedShippingOption.cost / 100).toFixed(2)}
+                />
                 {/* <YourOrder/> */}
 
                 {/*Payment*/}

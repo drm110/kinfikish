@@ -276,7 +276,10 @@ export default function Page({ headerFooter }) {
                   {product?.original_name}
                 </h1>
                 <p className="text-[#4B4F58] text-[1.5rem] font-bold">
-                  ${product != null ? product.price : "Loading.."}
+                  $
+                  {product != null
+                    ? Number(product.price).toFixed(2)
+                    : "Loading.."}
                 </p>
 
                 {product?.attributes?.map((item, index) => (

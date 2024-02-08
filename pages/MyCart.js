@@ -266,14 +266,17 @@ const MyCart = ({ headerFooter }) => {
                           <td className="pr-3">
                             {" "}
                             <span className="font-semibold text-sm">
-                              {shopItems.price}
+                              ${Number(shopItems.price).toFixed(2)}
                             </span>
                           </td>
                           <td>
                             <span className="font-semibold text-sm">
-                              {shopItems.totalPrice
-                                ? shopItems.totalPrice
-                                : shopItems.price}
+                              $
+                              {Number(
+                                shopItems.totalPrice
+                                  ? shopItems.totalPrice
+                                  : shopItems.price
+                              ).toFixed(2)}
                             </span>
                           </td>
                         </tr>
@@ -318,7 +321,7 @@ const MyCart = ({ headerFooter }) => {
                 <div className="border-t mt-8">
                   <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                     <span>Total cost</span>
-                    <span>${finalCost != 0 ? finalCost : ""}</span>
+                    <span>${finalCost != 0 ? finalCost.toFixed(2) : ""}</span>
                   </div>
                   <button className="bg-gray-900 font-semibold hover:bg-black py-3 text-sm text-white uppercase w-full">
                     <Link className="text-sm" href="/Checkout">
