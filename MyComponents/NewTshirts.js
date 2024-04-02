@@ -31,9 +31,7 @@ const NewTshirts = () => {
   return (
     <div className="mt-16">
       <div>
-        <p className="uppercase text-3xl font-bold text-center">
-          NEW
-        </p>
+        <p className="uppercase text-3xl font-bold text-center">NEW</p>
       </div>
       <div className="mt-16">
         <Carousel
@@ -43,6 +41,48 @@ const NewTshirts = () => {
           autoPlaySpeed={2000}
         >
           <div className="px-4">
+            <img
+              src="../assets/new/blackhoodforsite.png"
+              alt="black chair and white table"
+              className="relative w-full object-cover h-full"
+            />
+          </div>
+          <div className="px-4">
+            <img
+              src="../assets/new/greenhoodforsite.png"
+              alt="black chair and white table"
+              className="relative w-full object-cover h-full"
+            />
+          </div>
+          <div className="px-4">
+            <img
+              src="../assets/new/redhoodforsite.png"
+              alt="black chair and white table"
+              className="relative w-full object-cover h-full"
+            />
+          </div>
+          <div className="px-4">
+            <img
+              src="../assets/new/slatehoodforsite.png"
+              alt="black chair and white table"
+              className="relative w-full object-cover h-full"
+            />
+          </div>
+          <div className="px-4">
+            <img
+              src="../assets/new/stonehoodforsite.png"
+              alt="black chair and white table"
+              className="relative w-full object-cover h-full"
+            />
+          </div>
+          <div className="px-4">
+            <img
+              src="../assets/new/taupehoodforsite.png"
+              alt="black chair and white table"
+              className="relative w-full object-cover h-full"
+            />
+          </div>
+          {/* <div className="px-4">
             {" "}
             <img
               src="../assets/images/1212ce490381edbb8c59b6db1235dd9d.png"
@@ -128,7 +168,7 @@ const NewTshirts = () => {
               alt="black chair and white table"
               className="relative w-full object-cover"
             />
-          </div>
+          </div> */}
         </Carousel>
       </div>
     </div>
