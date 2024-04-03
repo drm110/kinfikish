@@ -3,9 +3,10 @@ import React, { useContext, useState, useRef } from "react";
 const crochetcapsule1 = "../assets/new/crochetcapsule1.png";
 const crochetcapsule2 = "../assets/new/crochetcapsule2.png";
 
-const newcro1 = "../assets/new/newcro1.jpg";
+const newcro1 = "../assets/new/newcro1.png";
 const newcro2 = "../assets/new/newcro2.jpg";
 const newcro3 = "../assets/new/newcro3.jpg";
+const newcro4 = "../assets/new/newcro4.jpg";
 
 const Crochetcapsule = () => {
   return (
@@ -25,12 +26,17 @@ const Crochetcapsule = () => {
           <img
             src={newcro2}
             alt="newcro2"
-            className="lg:w-[50%] w-full h-full"
+            className="lg:w-[33%] w-full h-full"
           />
           <img
             src={newcro3}
             alt="newcro3"
-            className="lg:w-[50%] w-full h-full"
+            className="lg:w-[33%] w-full h-full"
+          />
+          <img
+            src={newcro4}
+            alt="newcro4"
+            className="lg:w-[33%] w-full h-full"
           />
         </div>
       </div>
