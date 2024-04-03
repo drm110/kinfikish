@@ -11,7 +11,7 @@ const Crochetcapsule = () => {
           THE CROCHET CAPSULE
         </p>
       </div>
-      <div className="flex lg:flex-row md:flex-col sm:flex-col flex-col w-full h-full">
+      <div className="flex gap-2 lg:flex-row md:flex-col sm:flex-col flex-col w-full h-full">
         <img
           src={crochetcapsule1}
           alt="crochetcapsule1"
