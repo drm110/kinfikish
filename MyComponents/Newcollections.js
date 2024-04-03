@@ -1,8 +1,8 @@
 import React, { useContext, useState, useRef } from "react";
 
 const newcro1 = "../assets/new/newcro1.png";
-const newcro2 = "../assets/new/newcro2.jpg";
-const newcro3 = "../assets/new/newcro3.jpg";
+const newcro2 = "../assets/new/newcro2.png";
+const newcro3 = "../assets/new/newcro3.png";
 
 const top1 = "../assets/new/top1.png";
 const top2 = "../assets/new/top2.jpg";
@@ -18,16 +18,12 @@ const Newcollections = () => {
       <div className="mt-10 w-full py-16 flex flex-col items-center overflow-hidden">
         <div>
           <p className="uppercase text-3xl font-bold text-center pb-16">
-            THE CROCHET CAPSULE
+            CROCHET CAPSULE
           </p>
         </div>
-        <div className="flex flex-col gap-8 items-center w-[90%] h-full">
-          <img
-            src={top1}
-            alt="top1"
-            className="relative lg:w-4/5 w-full h-full"
-          />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
+        <div className="flex flex-col gap-8 items-center h-full">
+          <img src={top1} alt="top1" className="relative w-full h-full" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8 w-full">
             <img src={top2} alt="top2" className="w-full col-span-1" />
             <img src={top3} alt="top3" className="w-full col-span-1" />
           </div>
