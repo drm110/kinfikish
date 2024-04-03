@@ -1,5 +1,6 @@
 import NewTshirts from "@/MyComponents/NewTshirts";
 import Customizae from "@/MyComponents/Customizae";
+import Crochetcapsule from "@/MyComponents/Crochetcapsule";
 import Collections from "@/MyComponents/Collections";
 import Followinstagram from "@/MyComponents/Followinstagram";
 import Followtiktok from "@/MyComponents/Followtiktok";
@@ -32,6 +33,7 @@ export default function Home({ headerFooter, products }) {
         {/* <Header header={headerFooter}/> */}
         {/* <NewTshirts products={products} /> */}
         <NewTshirts />
+        <Crochetcapsule />
         <Productsbadgecustomizer
           customizedProduct={
             !isEmpty(products)
