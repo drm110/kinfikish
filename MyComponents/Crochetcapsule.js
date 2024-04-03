@@ -15,7 +15,7 @@ const Crochetcapsule = () => {
           THE CROCHET CAPSULE
         </p>
       </div>
-      <div className="flex flex-col gap-2 align-middle w-full h-full">
+      <div className="flex flex-col gap-2 items-center w-full h-full">
         <img
           src={newcro1}
           alt="newcro1"
