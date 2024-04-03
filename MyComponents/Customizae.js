@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import mainBg from "../public/assets/images/1536.png";
+import mainBg from "../public/assets/new/kitchen2.png";
 
 const Customizae = () => {
   return (
