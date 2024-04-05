@@ -39,15 +39,17 @@ const Newcollections = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-[90%]">
           <div className="w-full col-span-1">
             <img src={snc1} alt="snc1" />
-            <p className="text-2xl font-bold text-center pt-4">Hoods</p>
+            <p className="text-2xl font-bold text-center pt-4">Slate</p>
           </div>
           <div className="w-full col-span-1">
             <img src={snc2} alt="snc2" />
-            <p className="text-2xl font-bold text-center pt-4">Tops</p>
+            <p className="text-2xl font-bold text-center pt-4">
+              Cowl Neck in Natural
+            </p>
           </div>
           <div className="lw-full col-span-1">
             <img src={snc3} alt="snc3" />
-            <p className="text-2xl font-bold text-center pt-4">T-shirts</p>
+            <p className="text-2xl font-bold text-center pt-4">Vintage Tee</p>
           </div>
         </div>
       </div>
