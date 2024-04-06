@@ -129,6 +129,8 @@ export default function Page({ headerFooter }) {
     productAttr += ")";
     if (product.slug === "customized-shirt") {
       product.id = product.variations[attributeIndex[0]];
+    } else if (variableIndex === 0) {
+      productAttr = "";
     } else {
       product.id = product.variations[variableIndex];
     }
