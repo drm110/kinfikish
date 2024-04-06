@@ -1,4 +1,5 @@
 import React, { useContext, useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 const newcro1 = "../assets/new/newcro1.png";
 const newcro2 = "../assets/new/newcro2.png";
@@ -12,7 +13,9 @@ const snc1 = "../assets/new/snc1.jpg";
 const snc2 = "../assets/new/snc2.jpg";
 const snc3 = "../assets/new/snc3.jpg";
 
-const Newcollections = () => {
+const Newcollections = ({ products }) => {
+  const router = useRouter();
+
   return (
     <>
       <div className="mt-10 w-full py-16 flex flex-col items-center overflow-hidden">
@@ -37,19 +40,66 @@ const Newcollections = () => {
           </p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-[90%]">
-          <div className="w-full col-span-1">
+          <div className="w-full col-span-1 text-center">
             <img src={snc1} alt="snc1" />
-            <p className="text-2xl font-bold text-center pt-4">Slate</p>
+            <p
+              className="text-2xl font-bold text-center pt-4 cursor-pointer"
+              onClick={() => {
+                localStorage.setItem(
+                  "forAddToCart",
+                  JSON.stringify(
+                    products.find(
+                      (item) => item.slug === "crochet-hood-in-slate"
+                    )
+                  )
+                );
+
+                router.push(`/product/crochet-hood-in-slate`);
+              }}
+            >
+              Slate
+            </p>
           </div>
-          <div className="w-full col-span-1">
+          <div className="w-full col-span-1 text-center">
             <img src={snc2} alt="snc2" />
-            <p className="text-2xl font-bold text-center pt-4">
+            <p
+              className="text-2xl font-bold text-center pt-4 cursor-pointer"
+              onClick={() => {
+                localStorage.setItem(
+                  "forAddToCart",
+                  JSON.stringify(
+                    products.find(
+                      (item) => item.slug === "cowl-neck-in-natural"
+                    )
+                  )
+                );
+
+                router.push(`/product/cowl-neck-in-natural`);
+              }}
+            >
               Cowl Neck in Natural
             </p>
           </div>
-          <div className="lw-full col-span-1">
+          <div className="lw-full col-span-1 text-center">
             <img src={snc3} alt="snc3" />
-            <p className="text-2xl font-bold text-center pt-4">Vintage Tee</p>
+            <p
+              className="text-2xl font-bold text-center pt-4"
+              onClick={() => {
+                localStorage.setItem(
+                  "forAddToCart",
+                  JSON.stringify(
+                    products.find(
+                      (item) =>
+                        item.slug === "vintage-tee-with-kinki-japanese-logo"
+                    )
+                  )
+                );
+
+                router.push(`/product/vintage-tee-with-kinki-japanese-logo`);
+              }}
+            >
+              Vintage Tee
+            </p>
           </div>
         </div>
       </div>

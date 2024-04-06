@@ -33,7 +33,7 @@ export default function Home({ headerFooter, products }) {
         {/* <Header header={headerFooter}/> */}
         {/* <NewTshirts products={products} /> */}
         <NewTshirts />
-        <Newcollections />
+        <Newcollections products={products} />
         <Productsbadgecustomizer
           customizedProduct={
             !isEmpty(products)
