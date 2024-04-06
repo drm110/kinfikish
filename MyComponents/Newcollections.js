@@ -83,7 +83,7 @@ const Newcollections = ({ products }) => {
           <div className="lw-full col-span-1 text-center">
             <img src={snc3} alt="snc3" />
             <p
-              className="text-2xl font-bold text-center pt-4"
+              className="text-2xl font-bold text-center pt-4 cursor-pointer"
               onClick={() => {
                 localStorage.setItem(
                   "forAddToCart",
