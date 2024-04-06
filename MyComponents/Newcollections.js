@@ -4,11 +4,9 @@ import { useRouter } from "next/navigation";
 const newcro1 = "../assets/new/newcro1.png";
 const newcro2 = "../assets/new/newcro2.png";
 const newcro3 = "../assets/new/newcro3.png";
-
 const top1 = "../assets/new/top1.png";
 const top2 = "../assets/new/top2.jpg";
 const top3 = "../assets/new/top3.jpg";
-
 const snc1 = "../assets/new/snc1.jpg";
 const snc2 = "../assets/new/snc2.jpg";
 const snc3 = "../assets/new/snc3.jpg";
