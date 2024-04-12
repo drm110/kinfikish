@@ -145,83 +145,88 @@ const Productsbadgecustomizer = ({ customizedProduct }) => {
     // Update the product with the captured image source
     // product.images = [{ src: capturedImage }];
     // Include selected sizes in the product object
-    const existingCart = JSON.parse(localStorage.getItem("forCart") || null);
 
-    if (existingCart) {
-      let existingCartItem;
+    localStorage.setItem("forAddToCart", JSON.stringify(product));
 
-      const updatedCart = existingCart.cartItems;
+    router.push(`/product/${product?.slug}`);
 
-      if (updatedCart.length === 1 || updatedCart.length === undefined) {
-        if (updatedCart.length === undefined) {
-          updatedCart.push(product);
-          let newCartObj = {
-            cartItems: updatedCart,
-            totalQty: updatedCart.length || 1,
-            totalPrice: updatedCart.length * product.price,
-          };
+    // const existingCart = JSON.parse(localStorage.getItem("forCart") || null);
 
-          localStorage.setItem("forCart", JSON.stringify(newCartObj));
-          setCart(newCartObj);
+    // if (existingCart) {
+    //   let existingCartItem;
 
-          toast.success("Item has been added to your cart!");
-        } else {
-          existingCartItem = updatedCart[0].slug === product.slug;
-          if (existingCartItem === true) {
-            toast.error("This Product is already added to your cart");
-          } else {
-            product.stock_quantity = 1;
-            product.totalPrice = parseInt(product.price);
-            updatedCart.push(product);
+    //   const updatedCart = existingCart.cartItems;
 
-            let newCartObj = {
-              cartItems: updatedCart,
-              totalQty: updatedCart.length || 1,
-              totalPrice: updatedCart.length * product.price,
-            };
-            localStorage.setItem("forCart", JSON.stringify(newCartObj));
-            setCart(newCartObj);
+    //   if (updatedCart.length === 1 || updatedCart.length === undefined) {
+    //     if (updatedCart.length === undefined) {
+    //       updatedCart.push(product);
+    //       let newCartObj = {
+    //         cartItems: updatedCart,
+    //         totalQty: updatedCart.length || 1,
+    //         totalPrice: updatedCart.length * product.price,
+    //       };
 
-            toast.success("Item has been added to your cart!");
-          }
-        }
-      } else {
-        existingCartItem = updatedCart.find(
-          (item) => item.slug === product.slug
-        );
+    //       localStorage.setItem("forCart", JSON.stringify(newCartObj));
+    //       setCart(newCartObj);
 
-        if (existingCartItem) {
-          toast.error("This Product is already added to your cart");
-        } else {
-          product.stock_quantity = 1;
-          product.totalPrice = parseInt(product.price);
-          updatedCart.push(product);
-          let newCartObj = {
-            cartItems: updatedCart,
-            totalQty: updatedCart.length || 1,
-            totalPrice: updatedCart.length * product.price,
-          };
-          localStorage.setItem("forCart", JSON.stringify(newCartObj));
-          setCart(newCartObj);
+    //       toast.success("Item has been added to your cart!");
+    //     } else {
+    //       existingCartItem = updatedCart[0].slug === product.slug;
+    //       if (existingCartItem === true) {
+    //         toast.error("This Product is already added to your cart");
+    //       } else {
+    //         product.stock_quantity = 1;
+    //         product.totalPrice = parseInt(product.price);
+    //         updatedCart.push(product);
 
-          toast.success("Item has been added to your cart!");
-          // router.push(`/MyCart`);
-        }
-      }
-    } else {
-      product.stock_quantity = 1;
-      product.totalPrice = parseInt(product.price);
-      console.log("CHECKING PRODUCT leNgth:> ", product, product.length);
-      let newCartObj = {
-        cartItems: [product],
-        totalQty: product.length || 1,
-        totalPrice: product.stock_quantity * product.price,
-      };
-      localStorage.setItem("forCart", JSON.stringify(newCartObj));
-      setCart(newCartObj);
+    //         let newCartObj = {
+    //           cartItems: updatedCart,
+    //           totalQty: updatedCart.length || 1,
+    //           totalPrice: updatedCart.length * product.price,
+    //         };
+    //         localStorage.setItem("forCart", JSON.stringify(newCartObj));
+    //         setCart(newCartObj);
 
-      toast.success("Item has been added to your cart!");
-    }
+    //         toast.success("Item has been added to your cart!");
+    //       }
+    //     }
+    //   } else {
+    //     existingCartItem = updatedCart.find(
+    //       (item) => item.slug === product.slug
+    //     );
+
+    //     if (existingCartItem) {
+    //       toast.error("This Product is already added to your cart");
+    //     } else {
+    //       product.stock_quantity = 1;
+    //       product.totalPrice = parseInt(product.price);
+    //       updatedCart.push(product);
+    //       let newCartObj = {
+    //         cartItems: updatedCart,
+    //         totalQty: updatedCart.length || 1,
+    //         totalPrice: updatedCart.length * product.price,
+    //       };
+    //       localStorage.setItem("forCart", JSON.stringify(newCartObj));
+    //       setCart(newCartObj);
+
+    //       toast.success("Item has been added to your cart!");
+    //       // router.push(`/MyCart`);
+    //     }
+    //   }
+    // } else {
+    //   product.stock_quantity = 1;
+    //   product.totalPrice = parseInt(product.price);
+    //   console.log("CHECKING PRODUCT leNgth:> ", product, product.length);
+    //   let newCartObj = {
+    //     cartItems: [product],
+    //     totalQty: product.length || 1,
+    //     totalPrice: product.stock_quantity * product.price,
+    //   };
+    //   localStorage.setItem("forCart", JSON.stringify(newCartObj));
+    //   setCart(newCartObj);
+
+    //   toast.success("Item has been added to your cart!");
+    // }
     // }
   };
 
