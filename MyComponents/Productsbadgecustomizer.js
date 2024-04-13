@@ -147,7 +147,6 @@ const Productsbadgecustomizer = ({ customizedProduct }) => {
     // Include selected sizes in the product object
 
     localStorage.setItem("forAddToCart", JSON.stringify(product));
-
     router.push(`/product/${product?.slug}`);
 
     // const existingCart = JSON.parse(localStorage.getItem("forCart") || null);
