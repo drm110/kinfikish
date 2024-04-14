@@ -33,7 +33,6 @@ export default function Home({ headerFooter, products }) {
         {/* <Header header={headerFooter}/> */}
         {/* <NewTshirts products={products} /> */}
         <NewTshirts />
-        <Newcollections products={products} />
         <Productsbadgecustomizer
           customizedProduct={
             !isEmpty(products)
@@ -41,6 +40,7 @@ export default function Home({ headerFooter, products }) {
               : {}
           }
         />
+        <Newcollections products={products} />
         <Customizae />
         <div className="pt-24 pb-12 flex justify-evenly">
           <Followinstagram />
