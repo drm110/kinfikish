@@ -20,6 +20,7 @@ import html2canvas from "html2canvas";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { AppContext } from "@/componentss/context";
+import Image from "next/image";
 
 // import { useScreenshot } from 'use-react-screenshot'
 
@@ -32,79 +33,79 @@ const Productsbadgecustomizer = ({ customizedProduct }) => {
     {
       id: 1,
       url: badge1,
-      textDesc: "No Hopless,",
+      textDesc: "No Hopeless",
       textYear: "2007",
     },
     {
       id: 2,
       url: badge2,
-      textDesc: "Stop the Bombs,",
+      textDesc: "Stop the Bombs",
       textYear: "2019",
     },
     {
       id: 3,
       url: badge3,
-      textDesc: "Harmless Kitty,",
+      textDesc: "Harmless Kitty",
       textYear: "1994",
     },
     {
       id: 4,
       url: badge4,
-      textDesc: "Girl in Red,",
+      textDesc: "Girl in Red",
       textYear: "1995",
     },
     {
       id: 5,
       url: badge5,
-      textDesc: "Fuck Rotten World,",
+      textDesc: "Fuck the Rotten world",
       textYear: "2002",
     },
     {
       id: 6,
       url: badge6,
-      textDesc: "Yr. Childhood,",
+      textDesc: "Yr Childhood",
       textYear: "1995",
     },
     {
       id: 7,
       url: badge7,
-      textDesc: "Blue Sheep,",
+      textDesc: "Blue Sheep",
       textYear: "1999",
     },
     {
       id: 8,
       url: badge8,
-      textDesc: "Dont Waste Day,",
+      textDesc: "Don't Waste Another Day",
       textYear: "2009",
     },
     {
       id: 9,
       url: badge9,
-      textDesc: "Life is Only One!,",
+      textDesc: "Life is Only One!",
       textYear: "2007",
     },
     {
       id: 10,
       url: badge10,
-      textDesc: "Schalplatten,",
+      textDesc: "Schalplatten",
       textYear: "2012",
     },
     {
       id: 11,
       url: badge11,
-      textDesc: "No War,",
+      textDesc: "No War",
       textYear: "2019",
     },
     {
       id: 12,
       url: badge12,
-      textDesc: "Three stars,",
+      textDesc: "Three Stars",
       textYear: "2014",
     },
     {
       id: 13,
       url: badge13,
-      textDesc: "Rock You,",
+      textDesc: "Rock You",
       textYear: "2010",
     },
   ];
@@ -127,7 +128,11 @@ const Productsbadgecustomizer = ({ customizedProduct }) => {
 
   const addImageToBoard = (id) => {
     const pictureList = PictureList.filter((picture) => id === picture.id);
-    setBoard((board) => [...board, pictureList[0]]);
+    setBoard((board) =>
+      board.length < 3
+        ? [...board, pictureList[0]]
+        : [board[1], board[2], pictureList[0]]
+    );
   };
 
   // const captureFinalImage = () => {
@@ -146,6 +151,9 @@ const Productsbadgecustomizer = ({ customizedProduct }) => {
     // product.images = [{ src: capturedImage }];
     // Include selected sizes in the product object
 
+    const pinSet = board.map((item) => item.textDesc);
+
+    localStorage.setItem("selectedCustomizedPinSet", JSON.stringify(pinSet));
     localStorage.setItem("forAddToCart", JSON.stringify(product));
     router.push(`/product/${product?.slug}`);
 
@@ -244,7 +252,7 @@ const Productsbadgecustomizer = ({ customizedProduct }) => {
                 <div className="text-center w-28" key={index}>
                   <Dragpicstart url={picture.url} id={picture.id} />
                   <p className="w-full text-center overflow-x-auto mx-auto text-xs my-1 font-['Helvetica'] font-bold">
-                    {picture.textDesc}
+                    {picture.textDesc},
                   </p>
                   <p className="w-full text-center font-['Helvetica'] font-bold overflow-x-auto mx-auto text-xs italic">
                     {picture.textYear}
@@ -269,23 +277,37 @@ const Productsbadgecustomizer = ({ customizedProduct }) => {
 
           {board.map((picture, index) => {
             return (
-              <Draggable
-                key={index}
-                className="drag-react"
+              <div
+                className="absolute"
                 style={{
-                  position: "relative",
-                  width: "70%",
-                  height: "100%",
-                  cursor: "move",
-                  border: "2px solid pink",
-                  overflow: "hidden",
-                  margin: "auto",
+                  marginLeft: `${170 + 130 / (-index - 1)}px`,
+                  marginTop: `${-200 - 130 * Math.pow(index - 3, -1)}px`,
                 }}
               >
-                <div className="absolute">
-                  <Dragpicture url={picture.url} id={picture.id} />
-                </div>
-              </Draggable>
+                <Image
+                  src={picture.url}
+                  width={27}
+                  className="rounded-full"
+                  alt="Drag Image"
+                />
+              </div>
+              // <Draggable
+              //   key={index}
+              //   className="drag-react"
+              //   style={{
+              //     position: "relative",
+              //     width: "70%",
+              //     height: "100%",
+              //     cursor: "move",
+              //     border: "2px solid pink",
+              //     overflow: "hidden",
+              //     margin: "auto",
+              //   }}
+              // >
+              //   <div className="absolute">
+              //     <Dragpicture url={picture.url} id={picture.id} />
+              //   </div>
+              // </Draggable>
             );
           })}
         </div>
@@ -299,7 +321,7 @@ const Productsbadgecustomizer = ({ customizedProduct }) => {
                 <div className="text-center w-28" key={index}>
                   <Dragpicstart url={picture.url} id={picture.id} />
                   <p className="w-full text-center overflow-x-auto mx-auto text-xs my-1 font-['Helvetica'] font-bold">
-                    {picture.textDesc}
+                    {picture.textDesc},
                   </p>
                   <p className="w-full text-center font-['Helvetica'] font-bold overflow-x-auto mx-auto text-xs italic">
                     {picture.textYear}
@@ -316,7 +338,7 @@ const Productsbadgecustomizer = ({ customizedProduct }) => {
               <div className="text-center w-28" key={index}>
                 <Dragpicstart url={picture.url} id={picture.id} />
                 <p className="w-full text-center overflow-x-auto mx-auto text-xs my-1 font-['Helvetica'] font-bold">
-                  {picture.textDesc}
+                  {picture.textDesc},
                 </p>
                 <p className="w-full text-center font-['Helvetica'] font-bold overflow-x-auto mx-auto text-xs italic">
                   {picture.textYear}

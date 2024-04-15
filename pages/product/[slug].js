@@ -105,6 +105,23 @@ export default function Page({ headerFooter }) {
         );
         setAttributeIndex(tempIndex);
       }
+
+      if (router.query.slug === "customized-shirt") {
+        const pinSet = JSON.parse(
+          localStorage.getItem("selectedCustomizedPinSet")
+        );
+
+        if (Array.isArray(pinSet)) {
+          const selectedPins = pinSet.reduce((obj, value, index) => {
+            obj["Pin " + (index + 1)] = value;
+            return obj;
+          }, {});
+
+          setSelectedAttributes(selectedPins);
+        }
+
+        localStorage.removeItem("selectedCustomizedPinSet");
+      }
     };
 
     fetchData();
