@@ -46,7 +46,6 @@ const NewTshirts = () => {
               className="relative w-full object-cover h-full"
             />
           </div>
-
           <div className="px-4">
             <img
               src="../assets/new/greenhoodforsite.png"
