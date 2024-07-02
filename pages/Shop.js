@@ -21,7 +21,9 @@ const PUBLISHED_PRODUCTS_CNT = 27;
 
 const Shop = ({ headerFooter, products }) => {
   console.log("CHECking products:>> ", products);
-  const publishedProducts = products.slice(0, PUBLISHED_PRODUCTS_CNT);
+  const publishedProducts = products.slice(
+    products.length - PUBLISHED_PRODUCTS_CNT
+  );
   console.log("CHECking published products:>> ", publishedProducts);
   const router = useRouter();
   const shopItems = [
