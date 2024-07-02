@@ -17,8 +17,12 @@ import nightvelvetbikini from "../public/assets/images/shopitems/nightvelvetbiki
 import axios from "axios";
 import Product from "@/MyComponents/Product";
 
+const PUBLISHED_PRODUCTS_CNT = 27;
+
 const Shop = ({ headerFooter, products }) => {
   console.log("CHECking products:>> ", products);
+  const publishedProducts = products.slice(0, PUBLISHED_PRODUCTS_CNT);
+  console.log("CHECking published products:>> ", publishedProducts);
   const router = useRouter();
   const shopItems = [
     {
@@ -201,7 +205,7 @@ const Shop = ({ headerFooter, products }) => {
             <p className="uppercase text-3xl font-bold text-center py-6">
               Shop
             </p>
-            {products.length ? (
+            {publishedProducts.length ? (
               ""
             ) : (
               <p className="capitalize text-md font-semibold text-center px-5">
@@ -214,8 +218,8 @@ const Shop = ({ headerFooter, products }) => {
             <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-6 gap-y-12 w-full mt-6">
               {/* <!-- Product Tile Start --> */}
 
-              {products.length
-                ? products.map((product, index) => (
+              {publishedProducts.length
+                ? publishedProducts.map((product, index) => (
                     <Product key={product.id} product={product} i={index} />
                   ))
                 : shopItems.map((shopItems) => {
