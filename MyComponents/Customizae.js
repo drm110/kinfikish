@@ -4,8 +4,11 @@ import mainBg from "../public/assets/new/kitchen2.png";
 
 const Customizae = () => {
   return (
-    <div className="mt-11 overflow-hidden">
-      <div className=" w-[100%]">
+    <div className="mt-16 overflow-hidden">
+      <div>
+        <p className="uppercase text-3xl font-bold text-center">BABY TEES</p>
+      </div>
+      <div className="mt-8 w-[100%]">
         <Image
           src={mainBg}
           width={500}
