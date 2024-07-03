@@ -15,11 +15,13 @@ const NewTop = () => {
         <div className="flex flex-col gap-8 items-center h-full">
           <Link href="/Shop">
             <div className="relative w-full h-full">
-              <div className="absolute lg:p-8 p-4 uppercase lg:text-xl md:text-lg sm:text-base text-xs font-bold">
+              <div className="absolute p-4 uppercase lg:text-lg md:text-base sm:text-sm text-[10px] font-bold">
                 <p>SUMMER ‘24 DRESS COLLECTION</p>
                 <p>OUT NOW</p>
               </div>
-              <img src={top1} alt="top1" className="w-full h-full" />
+              <div className="pt-8 px-8 w-full h-full">
+                <img src={top1} alt="top1" className="w-full h-full" />
+              </div>
             </div>
           </Link>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 px-16 w-full">

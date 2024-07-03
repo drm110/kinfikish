@@ -19,6 +19,8 @@ import { isEmpty } from "lodash";
 export default function Home({ headerFooter, products }) {
   let reload = false;
   useEffect(() => {
+    document.body.style.overflowX = "hidden";
+
     reload = true;
 
     return () => {
