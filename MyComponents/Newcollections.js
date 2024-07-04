@@ -1,4 +1,5 @@
 import React, { useContext, useState, useRef } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import NewTshirts from "@/MyComponents/NewTshirts";
 
@@ -19,9 +20,11 @@ const Newcollections = ({ products }) => {
     <>
       <div className="mt-10 w-full py-16 flex flex-col items-center overflow-hidden">
         <div>
-          <p className="uppercase text-3xl font-bold text-center pb-16">
-            CROCHET CAPSULE
-          </p>
+          <Link href="/Shop">
+            <p className="uppercase text-3xl font-bold text-center pb-16">
+              CROCHET CAPSULE
+            </p>
+          </Link>
         </div>
         <div className="flex flex-col gap-8 items-center h-full">
           <img src={top1} alt="top1" className="relative w-full h-full" />
