@@ -22,7 +22,7 @@ const NewTop = () => {
                 </div>
                 <p>OUT NOW</p>
               </div>
-              <div className="pt-8 px-8 w-full h-full">
+              <div className="pt-8 sm:px-8 w-full h-full">
                 <img src={top1} alt="top1" className="w-full h-full" />
               </div>
             </div>
