@@ -131,11 +131,13 @@ const createCheckoutSessionAndRedirect = async (
   };
   console.log("sessionData", sessionData);
   let session = {};
+
   try {
     session = await createCheckoutSession(sessionData);
   } catch (err) {
     console.log("createCheckout session error", err);
   }
+
   try {
     const stripe = await loadStripe(
       process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
