@@ -1,11 +1,17 @@
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 import mainBg from "../public/assets/new/kitchen2.png";
 
 const Customizae = () => {
   return (
-    <div className="mt-11 overflow-hidden">
-      <div className=" w-[100%]">
+    <div className="mt-16 overflow-hidden">
+      <div>
+        <Link href="/Shop">
+          <p className="uppercase text-3xl font-bold text-center">BABY TEES</p>
+        </Link>
+      </div>
+      <div className="mt-8 w-[100%]">
         <Image
           src={mainBg}
           width={500}

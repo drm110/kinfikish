@@ -1,5 +1,7 @@
 import React, { useContext, useState, useRef } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import NewTshirts from "@/MyComponents/NewTshirts";
 
 const newcro1 = "../assets/new/newcro1.png";
 const newcro2 = "../assets/new/newcro2.png";
@@ -18,9 +20,11 @@ const Newcollections = ({ products }) => {
     <>
       <div className="mt-10 w-full py-16 flex flex-col items-center overflow-hidden">
         <div>
-          <p className="uppercase text-3xl font-bold text-center pb-16">
-            CROCHET CAPSULE
-          </p>
+          <Link href="/Shop">
+            <p className="uppercase text-3xl font-bold text-center pb-16">
+              CROCHET CAPSULE
+            </p>
+          </Link>
         </div>
         <div className="flex flex-col gap-8 items-center h-full">
           <img src={top1} alt="top1" className="relative w-full h-full" />
@@ -31,7 +35,9 @@ const Newcollections = ({ products }) => {
         </div>
       </div>
 
-      <div className="mt-10 w-full py-16 flex flex-col items-center overflow-hidden">
+      <NewTshirts />
+
+      {/* <div className="mt-10 w-full py-16 flex flex-col items-center overflow-hidden">
         <div>
           <p className="uppercase text-3xl font-bold text-center pb-16">
             SHOP NEW COLLECTION
@@ -100,7 +106,7 @@ const Newcollections = ({ products }) => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="mt-10 w-full py-16 flex flex-col items-center overflow-hidden">
         <div className="flex flex-col gap-8 items-center w-[90%] h-full">
@@ -109,10 +115,10 @@ const Newcollections = ({ products }) => {
             alt="newcro1"
             className="relative lg:w-4/5 w-full h-full"
           />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
+          {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
             <img src={newcro2} alt="newcro2" className="w-full col-span-1" />
             <img src={newcro3} alt="newcro3" className="w-full col-span-1" />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

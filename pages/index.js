@@ -1,4 +1,5 @@
 import NewTshirts from "@/MyComponents/NewTshirts";
+import NewTop from "@/MyComponents/NewTop";
 import Customizae from "@/MyComponents/Customizae";
 import Newcollections from "@/MyComponents/Newcollections";
 import Collections from "@/MyComponents/Collections";
@@ -18,6 +19,8 @@ import { isEmpty } from "lodash";
 export default function Home({ headerFooter, products }) {
   let reload = false;
   useEffect(() => {
+    document.body.style.overflowX = "hidden";
+
     reload = true;
 
     return () => {
@@ -32,7 +35,7 @@ export default function Home({ headerFooter, products }) {
         {/* <div className="myloadingBody"></div> */}
         {/* <Header header={headerFooter}/> */}
         {/* <NewTshirts products={products} /> */}
-        <NewTshirts />
+        <NewTop />
         <Productsbadgecustomizer
           customizedProduct={
             !isEmpty(products)

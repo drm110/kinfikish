@@ -17,7 +17,7 @@ import nightvelvetbikini from "../public/assets/images/shopitems/nightvelvetbiki
 import axios from "axios";
 import Product from "@/MyComponents/Product";
 
-const PUBLISHED_PRODUCTS_CNT = 27;
+const PUBLISHED_PRODUCTS_CNT = 30;
 
 const Shop = ({ headerFooter, products }) => {
   console.log("CHECking products:>> ", products);

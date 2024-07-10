@@ -29,60 +29,55 @@ const NewTshirts = () => {
 
   return (
     <div className="mt-16">
-      <div>
-        <p className="uppercase text-3xl font-bold text-center">NEW</p>
-      </div>
-      <div className="mt-16">
-        <Carousel
-          responsive={responsive}
-          infinite={true}
-          autoPlay={true}
-          autoPlaySpeed={2000}
-        >
-          <div className="px-4">
-            <img
-              src="../assets/new/blackhoodforsite.png"
-              alt="black chair and white table"
-              className="relative w-full object-cover h-full"
-            />
-          </div>
-          <div className="px-4">
-            <img
-              src="../assets/new/greenhoodforsite.png"
-              alt="black chair and white table"
-              className="relative w-full object-cover h-full"
-            />
-          </div>
-          <div className="px-4">
-            <img
-              src="../assets/new/redhoodforsite.png"
-              alt="black chair and white table"
-              className="relative w-full object-cover h-full"
-            />
-          </div>
-          <div className="px-4">
-            <img
-              src="../assets/new/slatehoodforsite.png"
-              alt="black chair and white table"
-              className="relative w-full object-cover h-full"
-            />
-          </div>
-          <div className="px-4">
-            <img
-              src="../assets/new/stonehoodforsite.png"
-              alt="black chair and white table"
-              className="relative w-full object-cover h-full"
-            />
-          </div>
-          <div className="px-4">
-            <img
-              src="../assets/new/taupehoodforsite.png"
-              alt="black chair and white table"
-              className="relative w-full object-cover h-full"
-            />
-          </div>
-        </Carousel>
-      </div>
+      <Carousel
+        responsive={responsive}
+        infinite={true}
+        autoPlay={true}
+        autoPlaySpeed={2000}
+      >
+        <div className="px-4">
+          <img
+            src="../assets/new/blackhoodforsite.png"
+            alt="black chair and white table"
+            className="relative w-full object-cover h-full"
+          />
+        </div>
+        <div className="px-4">
+          <img
+            src="../assets/new/greenhoodforsite.png"
+            alt="black chair and white table"
+            className="relative w-full object-cover h-full"
+          />
+        </div>
+        <div className="px-4">
+          <img
+            src="../assets/new/redhoodforsite.png"
+            alt="black chair and white table"
+            className="relative w-full object-cover h-full"
+          />
+        </div>
+        <div className="px-4">
+          <img
+            src="../assets/new/slatehoodforsite.png"
+            alt="black chair and white table"
+            className="relative w-full object-cover h-full"
+          />
+        </div>
+        <div className="px-4">
+          <img
+            src="../assets/new/stonehoodforsite.png"
+            alt="black chair and white table"
+            className="relative w-full object-cover h-full"
+          />
+        </div>
+        <div className="px-4">
+          <img
+            src="../assets/new/taupehoodforsite.png"
+            alt="black chair and white table"
+            className="relative w-full object-cover h-full"
+          />
+        </div>
+      </Carousel>
     </div>
   );
 };
