@@ -130,6 +130,7 @@ export default function Page({ headerFooter }) {
   console.log(product);
 
   const handleAddingtoCart = async (product) => {
+    console.log(product);
     let variableIndex = 0;
     let productAttr = " (";
     product.attributes.map((item, index) => {
@@ -152,6 +153,8 @@ export default function Page({ headerFooter }) {
       product.id = product.variations[variableIndex];
     }
     product.name += productAttr;
+
+    console.log(product);
 
     // Include selected sizes in the product object
     product.selectedBra = selectedAttributes?.BRA;
