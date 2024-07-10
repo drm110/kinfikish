@@ -19,7 +19,7 @@ const NewTop = () => {
           <div className="relative w-full h-full">
             <div className="absolute flex justify-between w-full p-4 uppercase lg:text-lg md:text-base sm:text-sm text-[10px] font-bold">
               <div>
-                <p>SUMMER ‘24</p>
+                <p>IN THE GARDEN</p>
                 <p>DRESS COLLECTION</p>
               </div>
               <p>OUT NOW</p>
