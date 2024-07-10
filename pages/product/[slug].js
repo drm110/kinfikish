@@ -130,7 +130,6 @@ export default function Page({ headerFooter }) {
   console.log(product);
 
   const handleAddingtoCart = async (product) => {
-    console.log(product);
     let variableIndex = 0;
     let productAttr = " (";
     product.attributes.map((item, index) => {
@@ -147,14 +146,12 @@ export default function Page({ headerFooter }) {
     productAttr += ")";
     if (product.slug === "customized-shirt") {
       product.id = product.variations[attributeIndex[0]];
-    } else if (variableIndex === 0) {
+    } else if (productAttr === " ()") {
       productAttr = "";
     } else {
       product.id = product.variations[variableIndex];
     }
     product.name += productAttr;
-
-    console.log(product);
 
     // Include selected sizes in the product object
     product.selectedBra = selectedAttributes?.BRA;
