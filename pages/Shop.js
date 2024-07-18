@@ -25,6 +25,7 @@ const Shop = ({ headerFooter, products }) => {
     products.length - PUBLISHED_PRODUCTS_CNT
   );
   console.log("CHECking published products:>> ", publishedProducts);
+
   const router = useRouter();
   const shopItems = [
     {
