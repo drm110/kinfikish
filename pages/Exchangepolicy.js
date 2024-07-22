@@ -10,13 +10,6 @@ const Exchangepolicy = ({ headerFooter }) => {
       <Header header={headerFooter} />
       <div className="w-full py-16">
         <div className="mt-12">
-          <div className="flex flex-col justify-center items-center">
-            <p className="uppercase text-3xl font-normal pb-4">
-              Privacy Policy
-            </p>
-            <div className="w-20 border-t-2 border-t-gray-800"></div>
-          </div>
-
           <div className="text-center flex flex-col justify-center items-center mt-12">
             <p className="w-2/4 mx-auto text-black underline font-bold tracking-wider text-2xl text-center mb-4">
               RETURNS & REFUND
