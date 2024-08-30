@@ -46,10 +46,18 @@ const Product = ({ product, i }) => {
               </p>
               {/* <p className="text-center font-semibold pb-3"> */}
               {/* ${product.price ?? ''} */}
-              <div
-                dangerouslySetInnerHTML={{ __html: product?.price_html ?? "" }}
-                className="text-center font-semibold pb-3"
-              />
+              {product.stock_status === "instock" ? (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: product?.price_html ?? "",
+                  }}
+                  className="text-center font-semibold pb-3"
+                />
+              ) : (
+                <p className="font-semibold text-center text-red-500 pb-3">
+                  OUT OF STOCK
+                </p>
+              )}
 
               {/* </p> */}
             </div>
