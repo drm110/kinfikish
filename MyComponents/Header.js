@@ -68,6 +68,23 @@ const Header = ({ header }) => {
       <Head>
         <title>{title || "KinkiFish | CONTEMPORARY MEETS COUTURE"}</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="title"
+          property="og:title"
+          content="KinkiFish | CONTEMPORARY MEETS COUTURE"
+        />
+        <meta name="type" property="og:type" content="website" />
+        <meta
+          name="image"
+          property="og:image"
+          content="https://kinkifish.com/favicon.ico"
+        />
+        <meta name="url" property="og:url" content="https://kinkifish.com" />
+        <meta
+          name="description"
+          property="og:description"
+          content="Eclectic. Inspired. Kinki. Shop now."
+        />
       </Head>
       <header>
         <nav className="bg-white relative w-full z-20 top-0 left-0 border-b border-gray-100 dark:border-gray-600">
