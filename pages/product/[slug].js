@@ -566,3 +566,42 @@ export const shopItems = [
     totalprice: 60,
   },
 ];
+
+export async function getStaticPaths() {
+  try {
+    const { data: products } = await axios.get(
+      `https://kinkifish.com/api/get-products`
+    );
+
+    const paths = products.map((product) => ({
+      params: { slug: product.slug },
+    }));
+
+    return { paths, fallback: "blocking" };
+  } catch (error) {
+    console.log("An error occured while fetching products", error);
+    return { paths: [], fallback: "blocking" };
+  }
+}
+
+export async function getStaticProps({ params }) {
+  try {
+    const { data: headerFooterData } = await axios.get(
+      `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
+    );
+
+    return {
+      props: {
+        headerFooter: headerFooterData.data ?? {},
+      },
+      revalidate: 1,
+    };
+  } catch (error) {
+    console.log("An error occured while fetching data from server", error);
+    return {
+      props: {
+        headerFooter: "Not found",
+      },
+    };
+  }
+}

@@ -6,11 +6,30 @@ import discountImg from "../public/assets/images/b8f12cd57f6510b368200966f67b526
 import { BiMenu } from "react-icons/bi";
 import Link from "next/link";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { AppContext } from "@/componentss/context";
 
+const pageData = [
+  { path: "/", name: "" },
+  { path: "/Archive", name: "Archive" },
+  { path: "/Checkout", name: "Checkout" },
+  { path: "/Contact", name: "Contact" },
+  { path: "/Exchangepolicy", name: "Exchange Policy" },
+  { path: "/MyCart", name: "My Cart" },
+  { path: "/PrivacyPolicy", name: "Privacy Policy" },
+  { path: "/Shippingpolicy", name: "Shipping Policy" },
+  { path: "/Shop", name: "Shop" },
+  { path: "/product", name: "Product" },
+  { path: "/Terms", name: "Terms" },
+  { path: "/thank-you", name: "Thank you" },
+];
+
 const Header = ({ header }) => {
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
   console.log(header, "header");
+  const [title, setTitle] = useState("");
   const [cart, setCart] = useContext(AppContext);
   const { headerMenuItems, siteDescription, siteLogoUrl, siteTitle, favicon } =
     header?.header || header || "";
@@ -19,14 +38,36 @@ const Header = ({ header }) => {
   console.warn("Header COMPONENT", header);
 
   useEffect(() => {
+    const currentUrl = router.asPath;
+    const curPath = "/" + currentUrl.split("/")[1];
+    const curPage = pageData.find((item) => item.path === curPath);
+
+    if (curPage) {
+      switch (curPath) {
+        case "/":
+          setTitle("");
+          break;
+        case "/product":
+          const cartData = JSON.parse(
+            localStorage.getItem("forAddToCart") || "[]"
+          );
+          setTitle(`${cartData.name} | ${siteTitle || "KinkiFish"}`);
+          break;
+        default:
+          setTitle(`${curPage.name} | ${siteTitle || "KinkiFish"}`);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     setLoading(true);
   }, [cart]);
 
   return (
     <>
       <Head>
-        <title>{siteTitle || "Kinkifish WoCommerce App"}</title>
-        <link rel="icon" href={favicon || "/favicon.ico"} />
+        <title>{title || "KinkiFish | CONTEMPORARY MEETS COUTURE"}</title>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
         <nav className="bg-white relative w-full z-20 top-0 left-0 border-b border-gray-100 dark:border-gray-600">
