@@ -26,7 +26,7 @@ const Product = ({ product, i }) => {
         className="bg-white cursor-pointer border-2 border-transparent rounded-xl duration-300 hover:border-gray-800 text-center"
         onClick={() => handleAddingtoCart(product)}
       >
-        <div className="min-h-[330px] flex flex-col justify-between">
+        <div className="min-h-[330px] flex flex-col">
           {/* <img src={product.images[0].src ?? ''} className="h[23.125rem]" alt={product.slug ?? ''} /> */}
           <MyImage
             sourceUrl={product?.images[0].src ?? ""}
@@ -35,25 +35,22 @@ const Product = ({ product, i }) => {
             height={370}
             className="mx-auto min-h-[225px]"
           />
-          <div
-            className={`flex items-center justify-center ${
-              i === 0 ? "mb-6" : "mt-3"
-            }`}
-          >
+          <div className={`flex items-center justify-center mt-4`}>
             <div>
               <p className="font-semibold text-center">
                 {product?.name ?? "Product name here..."}
               </p>
               {/* <p className="text-center font-semibold pb-3"> */}
               {/* ${product.price ?? ''} */}
-              {product.stock_status === "instock" ? (
+              {(product.stock_status === "instock" || i < 20) && (
                 <div
                   dangerouslySetInnerHTML={{
                     __html: product?.price_html ?? "",
                   }}
                   className="text-center font-semibold pb-3"
                 />
-              ) : (
+              )}
+              {product.stock_status === "outofstock" && (
                 <p className="font-semibold text-center text-red-500 pb-3">
                   OUT OF STOCK
                 </p>
