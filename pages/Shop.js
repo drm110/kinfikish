@@ -17,7 +17,7 @@ import nightvelvetbikini from "../public/assets/images/shopitems/nightvelvetbiki
 import axios from "axios";
 import Product from "@/MyComponents/Product";
 
-const PUBLISHED_PRODUCTS_CNT = 30;
+const PUBLISHED_PRODUCTS_CNT = 27;
 
 const Shop = ({ headerFooter, products }) => {
   console.log("CHECking products:>> ", products);
@@ -223,7 +223,12 @@ const Shop = ({ headerFooter, products }) => {
 
               {publishedProducts.length
                 ? publishedProducts.map((product, index) => (
-                    <Product key={product.id} product={product} i={index} />
+                    <Product
+                      key={product.id}
+                      product={product}
+                      i={index}
+                      publishedCnt={PUBLISHED_PRODUCTS_CNT}
+                    />
                   ))
                 : shopItems.map((shopItems) => {
                     return (

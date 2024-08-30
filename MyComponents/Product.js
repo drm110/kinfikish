@@ -4,7 +4,7 @@ import MyImage from "@/MyComponents/MyImage";
 import { addToCart } from "@/Utils";
 import { isEmpty } from "lodash";
 
-const Product = ({ product, i }) => {
+const Product = ({ product, i, publishedCnt }) => {
   console.log(i, "u gere");
 
   if (isEmpty(product)) {
@@ -42,7 +42,8 @@ const Product = ({ product, i }) => {
               </p>
               {/* <p className="text-center font-semibold pb-3"> */}
               {/* ${product.price ?? ''} */}
-              {(product.stock_status === "instock" || i < 17) && (
+              {(product.stock_status === "instock" ||
+                i < publishedCnt - 10) && (
                 <div
                   dangerouslySetInnerHTML={{
                     __html: product?.price_html ?? "",
