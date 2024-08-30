@@ -42,7 +42,7 @@ const Product = ({ product, i }) => {
               </p>
               {/* <p className="text-center font-semibold pb-3"> */}
               {/* ${product.price ?? ''} */}
-              {(product.stock_status === "instock" || i < 20) && (
+              {(product.stock_status === "instock" || i < 17) && (
                 <div
                   dangerouslySetInnerHTML={{
                     __html: product?.price_html ?? "",
