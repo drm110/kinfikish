@@ -30,6 +30,7 @@ const Header = ({ header }) => {
   const [loading, setLoading] = useState(false);
   console.log(header, "header");
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [cart, setCart] = useContext(AppContext);
   const { headerMenuItems, siteDescription, siteLogoUrl, siteTitle, favicon } =
     header?.header || header || "";
@@ -46,15 +47,19 @@ const Header = ({ header }) => {
       switch (curPath) {
         case "/":
           setTitle("");
+          setDescription("");
           break;
         case "/product":
           const cartData = JSON.parse(
             localStorage.getItem("forAddToCart") || "[]"
           );
           setTitle(`${cartData.name} | ${siteTitle || "KinkiFish"}`);
+          const plainText = cartData.description.replace(/<[^>]+>/g, "").trim();
+          setDescription(plainText);
           break;
         default:
           setTitle(`${curPage.name} | ${siteTitle || "KinkiFish"}`);
+          setDescription("");
       }
     }
   }, []);
@@ -71,7 +76,7 @@ const Header = ({ header }) => {
         <meta
           name="title"
           property="og:title"
-          content="KinkiFish | CONTEMPORARY MEETS COUTURE"
+          content={title || "KinkiFish | CONTEMPORARY MEETS COUTURE"}
         />
         <meta name="type" property="og:type" content="website" />
         <meta
@@ -83,7 +88,7 @@ const Header = ({ header }) => {
         <meta
           name="description"
           property="og:description"
-          content="Eclectic. Inspired. Kinki. Shop now."
+          content={description || "Eclectic. Inspired. Kinki. Shop now."}
         />
       </Head>
       <header>
