@@ -39,30 +39,35 @@ const Header = ({ header }) => {
   console.warn("Header COMPONENT", header);
 
   useEffect(() => {
-    const currentUrl = router.asPath;
-    const curPath = "/" + currentUrl.split("/")[1];
-    const curPage = pageData.find((item) => item.path === curPath);
+    const setData = async () => {
+      const currentUrl = router.asPath;
+      const curPath = "/" + currentUrl.split("/")[1];
+      const curPage = pageData.find((item) => item.path === curPath);
 
-    if (curPage) {
-      switch (curPath) {
-        case "/":
-          setTitle("");
-          setDescription("");
-          break;
-        case "/product":
-          const cartData = JSON.parse(
-            localStorage.getItem("forAddToCart") || "[]"
-          );
-          setTitle(`${cartData.name} | ${siteTitle || "KinkiFish"}`);
-          const plainText = cartData.description.replace(/<[^>]+>/g, "").trim();
-          setDescription(plainText);
-          break;
-        default:
-          setTitle(`${curPage.name} | ${siteTitle || "KinkiFish"}`);
-          setDescription("");
+      if (curPage) {
+        switch (curPath) {
+          case "/":
+            setTitle("");
+            setDescription("");
+            break;
+          case "/product":
+            const cartData = JSON.parse(
+              localStorage.getItem("forAddToCart") || "[]"
+            );
+            setTitle(`${cartData.name} | ${siteTitle || "KinkiFish"}`);
+            const plainText = cartData.description
+              .replace(/<[^>]+>/g, "")
+              .trim();
+            setDescription(plainText);
+            break;
+          default:
+            setTitle(`${curPage.name} | KinkiFish`);
+            setDescription("");
+        }
       }
-    }
-  }, []);
+    };
+    setData();
+  }, [router.asPath]);
 
   useEffect(() => {
     setLoading(true);
