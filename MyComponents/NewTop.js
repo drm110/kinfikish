@@ -28,10 +28,6 @@ const NewTop = () => {
               <img src={top1} alt="top1" className="w-full h-full" />
             </div>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 px-16 w-full">
-            <img src={top2} alt="top2" className="w-full col-span-1" />
-            <img src={top3} alt="top3" className="w-full col-span-1" />
-          </div>
           <div className="w-full h-full">
             <img src={top4} alt="top1" className="w-full h-full" />
           </div>
