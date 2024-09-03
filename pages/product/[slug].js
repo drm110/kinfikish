@@ -23,7 +23,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Page({ headerFooter, products }) {
+export default function Page({ headerFooter }) {
   const router = useRouter();
 
   const [cart, setCart] = useContext(AppContext);
@@ -77,6 +77,7 @@ export default function Page({ headerFooter, products }) {
 
   useEffect(() => {
     const fetchData = async () => {
+      const products = JSON.parse(localStorage.getItem("productsData") || "[]");
       console.log(">>>>>> fetch data >>>>>>>> products: ", products);
       if (products && products.length > 0) {
         const cartData = products.find(
@@ -134,7 +135,7 @@ export default function Page({ headerFooter, products }) {
     };
 
     fetchData();
-  }, [router.query.slug, products]);
+  }, [router.query.slug]);
 
   console.log(product);
 
@@ -598,15 +599,10 @@ export async function getStaticProps({}) {
     const { data: headerFooterData } = await axios.get(
       `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
     );
-    const { data: productsData } = await axios.get(
-      `https://kinkifish.com/api/get-products`
-      // `https://kinkifish-new.vercel.app/api/get-products`
-    );
 
     return {
       props: {
         headerFooter: headerFooterData.data ?? {},
-        products: productsData.products ?? {},
       },
       revalidate: 1,
     };
