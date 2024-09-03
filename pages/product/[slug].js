@@ -77,52 +77,56 @@ export default function Page({ headerFooter, products }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const cartData = products.find((item) => item.slug === router.query.slug);
-
-      localStorage.setItem("forAddToCart", JSON.stringify(cartData));
-
-      await setProduct({ ...cartData, original_name: cartData.name });
-      if (cartData && cartData.images && cartData.images.length > 0) {
-        setSelectedImage(cartData.images[0].src);
-      }
-
-      if (cartData.attributes) {
-        const tempOption = [];
-        const tempIndex = [];
-        cartData.attributes.map((item, index) => {
-          tempOption.push(item.options.length);
-          tempIndex.push(-1);
-        });
-
-        let i = 1;
-
-        setAttributeOption(
-          tempOption
-            .reverse()
-            .map((item) => {
-              i *= item;
-              return i / item;
-            })
-            .reverse()
-        );
-        setAttributeIndex(tempIndex);
-      }
-
-      if (router.query.slug === "customized-shirt") {
-        const pinSet = JSON.parse(
-          localStorage.getItem("selectedCustomizedPinSet")
+      if (products && products.length > 0) {
+        const cartData = products.find(
+          (item) => item.slug === router.query.slug
         );
 
-        if (Array.isArray(pinSet)) {
-          const selectedPins = pinSet.reduce((obj, value, index) => {
-            obj["Pin " + (index + 1)] = value;
-            return obj;
-          }, {});
+        localStorage.setItem("forAddToCart", JSON.stringify(cartData));
 
-          setSelectedAttributes(selectedPins);
+        await setProduct({ ...cartData, original_name: cartData.name });
+        if (cartData && cartData.images && cartData.images.length > 0) {
+          setSelectedImage(cartData.images[0].src);
         }
 
-        localStorage.removeItem("selectedCustomizedPinSet");
+        if (cartData.attributes) {
+          const tempOption = [];
+          const tempIndex = [];
+          cartData.attributes.map((item, index) => {
+            tempOption.push(item.options.length);
+            tempIndex.push(-1);
+          });
+
+          let i = 1;
+
+          setAttributeOption(
+            tempOption
+              .reverse()
+              .map((item) => {
+                i *= item;
+                return i / item;
+              })
+              .reverse()
+          );
+          setAttributeIndex(tempIndex);
+        }
+
+        if (router.query.slug === "customized-shirt") {
+          const pinSet = JSON.parse(
+            localStorage.getItem("selectedCustomizedPinSet")
+          );
+
+          if (Array.isArray(pinSet)) {
+            const selectedPins = pinSet.reduce((obj, value, index) => {
+              obj["Pin " + (index + 1)] = value;
+              return obj;
+            }, {});
+
+            setSelectedAttributes(selectedPins);
+          }
+
+          localStorage.removeItem("selectedCustomizedPinSet");
+        }
       }
     };
 
