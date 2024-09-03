@@ -82,6 +82,8 @@ export default function Page({ headerFooter, products }) {
           (item) => item.slug === router.query.slug
         );
 
+        console.log("cart data >>>>>> ", cartData);
+
         localStorage.setItem("forAddToCart", JSON.stringify(cartData));
 
         await setProduct({ ...cartData, original_name: cartData.name });
@@ -131,7 +133,7 @@ export default function Page({ headerFooter, products }) {
     };
 
     fetchData();
-  }, [router.query.slug]);
+  }, [router.query.slug, products]);
 
   console.log(product);
 
