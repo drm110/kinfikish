@@ -23,7 +23,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Page({ headerFooter }) {
+export default function Page({ headerFooter, products }) {
   const router = useRouter();
 
   const [cart, setCart] = useContext(AppContext);
@@ -77,7 +77,9 @@ export default function Page({ headerFooter }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const cartData = JSON.parse(localStorage.getItem("forAddToCart") || "[]");
+      const cartData = products.find((item) => item.slug === router.query.slug);
+
+      localStorage.setItem("forAddToCart", JSON.stringify(cartData));
 
       await setProduct({ ...cartData, original_name: cartData.name });
       if (cartData && cartData.images && cartData.images.length > 0) {
@@ -584,15 +586,20 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({}) {
   try {
     const { data: headerFooterData } = await axios.get(
       `${process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL}/wp-json/rae/v1/header-footer?header_location_id=hcms-menu-header&footer_location_id=hcms-menu-footer`
+    );
+    const { data: productsData } = await axios.get(
+      `https://kinkifish.com/api/get-products`
+      // `https://kinkifish-new.vercel.app/api/get-products`
     );
 
     return {
       props: {
         headerFooter: headerFooterData.data ?? {},
+        products: productsData.products ?? {},
       },
       revalidate: 1,
     };
