@@ -77,6 +77,7 @@ export default function Page({ headerFooter, products }) {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log(">>>>>> fetch data >>>>>>>> products: ", products);
       if (products && products.length > 0) {
         const cartData = products.find(
           (item) => item.slug === router.query.slug
