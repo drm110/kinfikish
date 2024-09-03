@@ -50,8 +50,11 @@ const Header = ({ header }) => {
           setDescription("");
           break;
         case "/product":
-          const cartData = JSON.parse(
-            localStorage.getItem("forAddToCart") || "[]"
+          const products = JSON.parse(
+            localStorage.getItem("productsData") || "[]"
+          );
+          const cartData = products.find(
+            (item) => item.slug === router.asPath.split("/product/")[1]
           );
           setTitle(`${cartData.name} | ${siteTitle || "KinkiFish"}`);
           const plainText = cartData.description.replace(/<[^>]+>/g, "").trim();

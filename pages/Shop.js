@@ -15,6 +15,7 @@ import blackstartcroptop from "../public/assets/images/shopitems/blackstartcropt
 import duskvelvetbikini from "../public/assets/images/shopitems/duskvelvetbikini.jpg";
 import nightvelvetbikini from "../public/assets/images/shopitems/nightvelvetbikini.jpg";
 import axios from "axios";
+import { useEffect } from "react";
 import Product from "@/MyComponents/Product";
 
 const PUBLISHED_PRODUCTS_CNT = 30;
@@ -179,6 +180,10 @@ const Shop = ({ headerFooter, products }) => {
   //     console.log("Item added to cart:", shopItem.title);
   //   }
   // }
+
+  useEffect(() => {
+    localStorage.setItem("productsData", JSON.stringify(products));
+  }, []);
 
   const handleAddingtoCart = (product) => {
     // If the item is not in the cart, add it to the cart
